@@ -10,9 +10,9 @@ main:
 
     push {r4,r5,r6,r7}
 
-    ldr r4, =W
+    ldr r4, =W // store address of label W in register 4
 
-    ldr r5, [r4]
+    ldr r5, [r4] // store data from the address in register 4 in register 5
 
     all_done: nop
 
