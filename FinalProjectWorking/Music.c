@@ -1,6 +1,6 @@
 #include "Music.h"
 
-void SongTick(Song *s) {
+void SongSystick(Song *s) {
     s->counter++;  // Increment note duration counter
     s->vibratoCount++; // Increment the note vibrato effect counter
 
