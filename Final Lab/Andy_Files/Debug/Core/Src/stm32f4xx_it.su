@@ -1,0 +1,12 @@
+../Core/Src/stm32f4xx_it.c:48:13:Refresh_One_Display_Digit	16	static
+../Core/Src/stm32f4xx_it.c:81:6:NMI_Handler	4	static
+../Core/Src/stm32f4xx_it.c:88:6:HardFault_Handler	4	static
+../Core/Src/stm32f4xx_it.c:95:6:MemManage_Handler	4	static
+../Core/Src/stm32f4xx_it.c:102:6:BusFault_Handler	4	static
+../Core/Src/stm32f4xx_it.c:109:6:UsageFault_Handler	4	static
+../Core/Src/stm32f4xx_it.c:116:6:SVC_Handler	4	static
+../Core/Src/stm32f4xx_it.c:120:6:DebugMon_Handler	4	static
+../Core/Src/stm32f4xx_it.c:124:6:PendSV_Handler	4	static
+../Core/Src/stm32f4xx_it.c:131:6:SysTick_Handler	8	static
+../Core/Src/stm32f4xx_it.c:204:6:TIM7_IRQHandler	8	static
+../Core/Src/stm32f4xx_it.c:290:6:OTG_FS_IRQHandler	8	static
