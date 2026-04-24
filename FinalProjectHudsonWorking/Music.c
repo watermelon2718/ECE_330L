@@ -1,51 +1,51 @@
 #include "Music.h"
 
-void SongSystick(Song *s) {
-    if (s->doPlay == 0) return;
+void MusicSystick(Music *m) {
+    if (m->doPlay == 0) return;
 
-    s->counter++; 
-    s->vibratoCount++; 
+    m->counter++; 
+    m->vibratoCount++; 
 
-    if (s->vibratoCount >= s->vibratoRate) {
-        s->vibratoCount = 0; 
+    if (m->vibratoCount >= m->vibratoRate) {
+        m->vibratoCount = 0; 
         
-        if (s->saveNote > 0) { // Don't apply vibrato to rests
+        if (m->saveNote > 0) { // Don't apply vibrato to rests
             // Move pitch in the current direction
-            s->currentNote += (s->vibratoDepth * s->vibratoDir);
+            m->currentNote += (m->vibratoDepth * m->vibratoDir);
 
             // Check boundaries and flip direction if reached
-            if (s->currentNote >= (s->saveNote + s->vibratoDepth)) {
-                s->vibratoDir = -1; // Start going down
+            if (m->currentNote >= (m->saveNote + m->vibratoDepth)) {
+                m->vibratoDir = -1; // Start going down
             } 
-            else if (s->currentNote <= (s->saveNote - s->vibratoDepth)) {
-                s->vibratoDir = 1;  // Start going up
+            else if (m->currentNote <= (m->saveNote - m->vibratoDepth)) {
+                m->vibratoDir = 1;  // Start going up
             }
         }
     }
 }
 
-void SongTIM7Tick(Song *s) {
+void MusicTIM7Tick(Music *m) {
 
-    s->tone++; // increment tone generator counter
+    m->tone++; // increment tone generator counter
 	
 	/* This code plays the song from the song array structure */
-	if ((s->doPlay > 0) && (s->currentNote > 0) && (((s->notes[s->index].tempo)/(s->notes[s->index].length) - s->notes[s->index].space) > s->counter)) {
-		if (s->tone >= s->currentNote) { // Toggle when tone counter hits the target){
+	if ((m->doPlay > 0) && (m->currentNote > 0) && (((m->notes[m->index].tempo)/(m->notes[m->index].length) - m->notes[m->index].space) > m->counter)) {
+		if (m->tone >= m->currentNote) { // Toggle when tone counter hits the target){
 			GPIOD->ODR ^= 1;
-			s->tone = 0;
+			m->tone = 0;
 		}
-	} else if ((s->doPlay > 0) && (s->notes[s->index].tempo)/(s->notes[s->index].length) > s->counter) {
-		s->tone = 0; // silence if playing time for note is over
-	} else if ((s->doPlay > 0) && (s->notes[s->index].tempo)/(s->notes[s->index].length) == s->counter) {
-		s->counter = 0; // zero out for a new note
-		s->tone = 0;
-		if (!(s->notes[s->index].end)) { //set to new note if present
-			s->index++;
-			s->saveNote = s->notes[s->index].pitch;
-			s->currentNote = s->notes[s->index].pitch;
+	} else if ((m->doPlay > 0) && (m->notes[m->index].tempo)/(m->notes[m->index].length) > m->counter) {
+		m->tone = 0; // silence if playing time for note is over
+	} else if ((m->doPlay > 0) && (m->notes[m->index].tempo)/(m->notes[m->index].length) == m->counter) {
+		m->counter = 0; // zero out for a new note
+		m->tone = 0;
+		if (!(m->notes[m->index].end)) { //set to new note if present
+			m->index++;
+			m->saveNote = m->notes[m->index].pitch;
+			m->currentNote = m->notes[m->index].pitch;
 		}
-	} else if (s->doPlay == 0) { 
-			s->tone = 0;
-			s->counter = 0;
+	} else if (m->doPlay == 0) { 
+			m->tone = 0;
+			m->counter = 0;
 	}
 }
