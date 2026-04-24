@@ -1,88 +1,51 @@
 #include "Music.h"
 
 void SongSystick(Song *s) {
-    s->counter++;  // Increment note duration counter
-    s->vibratoCount++; // Increment the note vibrato effect counter
+    if (s->doPlay == 0) return;
 
-    /* This code applies vibrato to the current note that is playing  */
+    s->counter++; 
+    s->vibratoCount++; 
+
     if (s->vibratoCount >= s->vibratoRate) {
-	    s->vibratoCount = 0; // reset vibrato counter
-	    if (s->notes[s->index].pitch > 0){ // check if the note pitch is greater than 0
-			s->notes[s->index].pitch += s->vibratoDepth; // if so, add vibrato
+        s->vibratoCount = 0; 
+        
+        if (s->saveNote > 0) { // Don't apply vibrato to rests
+            // Move pitch in the current direction
+            s->currentNote += (s->vibratoDepth * s->vibratoDir);
 
-            if (s->notes[s->index].pitch > (s->saveNote + s->vibratoDepth)) {
-                s->notes[s->index].note = s->saveNote - s->vibratoDepth;
+            // Check boundaries and flip direction if reached
+            if (s->currentNote >= (s->saveNote + s->vibratoDepth)) {
+                s->vibratoDir = -1; // Start going down
+            } 
+            else if (s->currentNote <= (s->saveNote - s->vibratoDepth)) {
+                s->vibratoDir = 1;  // Start going up
             }
-		}
+        }
     }
 }
 
 void SongTIM7Tick(Song *s) {
 
-    s->TONE++;
-	ramp++;
-
+    s->tone++; // increment tone generator counter
+	
 	/* This code plays the song from the song array structure */
-	if ((Music_ON > 0) && (Song[INDEX].note > 0) && ((Song[INDEX].tempo/Song[INDEX].size - Song[INDEX].space) > COUNT))
-	{
-
-		if (Song[INDEX].note <= TONE)
-		{
+	if ((s->doPlay > 0) && (s->currentNote > 0) && (((s->notes[s->index].tempo)/(s->notes[s->index].length) - s->notes[s->index].space) > s->counter)) {
+		if (s->tone >= s->currentNote) { // Toggle when tone counter hits the target){
 			GPIOD->ODR ^= 1;
-			TONE = 0;
+			s->tone = 0;
 		}
+	} else if ((s->doPlay > 0) && (s->notes[s->index].tempo)/(s->notes[s->index].length) > s->counter) {
+		s->tone = 0; // silence if playing time for note is over
+	} else if ((s->doPlay > 0) && (s->notes[s->index].tempo)/(s->notes[s->index].length) == s->counter) {
+		s->counter = 0; // zero out for a new note
+		s->tone = 0;
+		if (!(s->notes[s->index].end)) { //set to new note if present
+			s->index++;
+			s->saveNote = s->notes[s->index].pitch;
+			s->currentNote = s->notes[s->index].pitch;
+		}
+	} else if (s->doPlay == 0) { 
+			s->tone = 0;
+			s->counter = 0;
 	}
-	else if ((Music_ON > 0) && Song[INDEX].tempo/Song[INDEX].size > COUNT)
-	{
-		TONE = 0;
-	}
-	else if ((Music_ON > 0) && Song[INDEX].tempo/Song[INDEX].size == COUNT)
-	{
-		COUNT = 0;
-		TONE = 0;
-		if (!(Song[INDEX].end))
-				{
-					INDEX++;
-					Save_Note = Song[INDEX].note;
-				}
-	}
-	else if (Music_ON == 0)
-		{
-			TONE = 0;
-			COUNT = 0;
-		}
-
-
-	/* This code dims the RGB LEDs using PWM */
-	if (DIM_Enable > 0)
-	{
-		if (RED_BRT <= ramp)
-		{
-			GPIOD->ODR |= (1 << 15);
-		}
-		else
-		{
-			GPIOD->ODR &= ~(1 << 15);
-		}
-		if (BLUE_BRT <= ramp)
-		{
-			GPIOD->ODR |= (1 << 14);
-		}
-		else
-		{
-			GPIOD->ODR &= ~(1 << 14);
-		}
-		if (GREEN_BRT <= ramp)
-		{
-			GPIOD->ODR |= (1 << 13);
-		}
-		else
-		{
-			GPIOD->ODR &= ~(1 << 13);
-		}
-	}
-  /* USER CODE END TIM7_IRQn 0 */
-
-
-
 }
