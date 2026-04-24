@@ -1,0 +1,1 @@
+void mapArrayTranspose(Cursor *cursorToModify);
