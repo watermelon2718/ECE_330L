@@ -3,6 +3,12 @@
 
 //used by systick to update the representational array to be displayed
 //(based upon game phase and state)
+void RefreshDisplay(Game *game) {
+	UpdateDisplayArrays(game);
+	UpdateFrameArrays(game);
+	OutputFrame(&(game->display));
+}
+
 void UpdateDisplayArrays(Game *game) {
 	switch (game->gamePhase) {
 	case PHASE_TITLE:
@@ -93,7 +99,7 @@ void UpdateFrameArrays(Game *game) {
     // Process Vertical Array
     for (int i = 0; i < V_WIDTH; i++) {
         for (int j = 0; j < V_HEIGHT; j++) {
-            SquareState currentState = game->display.vertDisplayArray[i][j];
+            TileState currentState = game->display.vertDisplayArray[i][j];
             
             switch (currentState) {
                 case NONE:
