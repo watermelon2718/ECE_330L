@@ -6,6 +6,7 @@ extern char RED_STEP;
 extern char GREEN_STEP;
 extern char BLUE_STEP;
 extern char DIM_Enable;
+
 extern int TONE;
 extern int COUNT;
 extern int INDEX;
@@ -15,11 +16,14 @@ extern int Save_Note;
 extern int Vibrato_Depth;
 extern int Vibrato_Rate;
 extern int Vibrato_Count;
+
 extern char Animate_On;
 extern char Music_ON;
+
 extern char Message_Length;
 extern char *Save_Pointer;
 extern char *Message_Pointer;
+
 extern int Delay_msec;
 extern int Delay_counter;
 

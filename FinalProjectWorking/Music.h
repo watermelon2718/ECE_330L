@@ -2,13 +2,35 @@
 #ifndef MUSIC_H_
 #define MUSIC_H_
 
-typedef struct music {
-	int note;
+//structure for a note
+typedef struct Note {
+	int pitch;
 	int size;
 	int tempo;
 	int space;
 	char end;
-} Music;
+} Note;
+
+//structure for a song
+typedef struct Song {
+    
+    Note *notes; // pointer to notes array
+
+    int tone; // 
+    int counter; // counter for note timing
+    int index; // what note in the song we're on
+
+    //note pitch
+    int currentNote;
+    int saveNote;
+
+    //vibrato
+    int vibratoDepth;
+    int vibratoRate;
+    int vibratoCount;
+} Song;
+
+void SongTick(Song *s);
 
 
 /* music notes by name, 125Khz (250Khz/2) frequency will be divided by these constants for 1/2 period  *

@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Cursor.h"
 #include "Display.h"
+#include "Music.h"
 
 //Game structure -- stores each part of the game data
 typedef struct Game {

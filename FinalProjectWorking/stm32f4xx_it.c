@@ -188,20 +188,7 @@ void SysTick_Handler(void)
 
   /* USER CODE BEGIN SysTick_IRQn 0 */
 
-COUNT++;  // Increment note duration counter
-Vibrato_Count++; // Increment the note vibrato effect counter
 
-/* This code applies vibrato to the current note that is playing  */
-if (Vibrato_Count >= Vibrato_Rate)
-{
-	Vibrato_Count = 0;
-	if (Song[INDEX].note > 0)
-		{
-			Song[INDEX].note += Vibrato_Depth;
-			if (Song[INDEX].note > (Save_Note + Vibrato_Depth)) Song[INDEX].note = Save_Note - Vibrato_Depth;
-
-		}
-}
 
 
 if (Animate_On > 0)
