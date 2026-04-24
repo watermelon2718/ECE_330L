@@ -1,14 +1,5 @@
-typedef enum CursorMode {HORIZONTAL, VERTICAL} CursorMode; // horizontal or vertical mode
-typedef enum CursorLength {SINGLE_SEG, DOUBLE_SEG}; // single or double segment mode
-
-typedef struct Cursor {
-	int xPos; // cursor x position
-	int yPos; // cursor y position
-
-	CursorMode cursorMode; // cursor mode
-	CursorLength cursorLength; // cursor length
-
-} Cursor;
+#include "Cursor.h"
+#include "Game.h" // include constants from Game header
 
 //updates cursor to move from vertical to horizontal and vice versa
 void CursorHorizVertToggle(Cursor *c) {
@@ -37,8 +28,8 @@ void CursorHorizVertToggle(Cursor *c) {
 //switches cursor between single and double segment modes
 void CursorSingleDoubleToggle(Cursor *c) {
 	if(c->cursorLength == SINGLE_SEG){
-		c->cursorMode = DOUBLE_SEG; //toggle cursorLength value
+		c->cursorLength = DOUBLE_SEG; //toggle cursorLength value
 	} else if(c->cursorLength == DOUBLE_SEG) {
-		c->cursorMode = SINGLE_SEG; //toggle cursorLength value
+		c->cursorLength = SINGLE_SEG; //toggle cursorLength value
 	}
 }

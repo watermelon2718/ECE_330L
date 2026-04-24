@@ -1,14 +1,16 @@
 #ifndef DISPLAY_H_ // header guard
 #define DISPLAY_H_
 
-#include "Game.h" // include game struct
+#include "GameConstAndEnums.h" // include constants
+typedef struct Game Game; // inform compiler that Game is a struct
 
 //Display data structure
 typedef struct Display {
-	int frameMask; // bitmask that will be latched into the seven segment display each frame
-
 	SquareState horizDisplayArray[H_WIDTH][H_HEIGHT]; //arrays for display contents
 	SquareState vertDisplayArray[V_WIDTH][V_HEIGHT];
+
+	SquareState horizFrameArray[H_WIDTH][H_HEIGHT]; //arrays for individual frame contents
+	SquareState vertFrameArray[V_WIDTH][V_HEIGHT];
 
 } Display;
 
@@ -16,10 +18,10 @@ typedef struct Display {
 void UpdateDisplayArrays(Game *game);
 
 // generates current frame for display from display arrays
-void UpdateFrameArray();
+void UpdateFrameArrays(Game *game);
 
 // outputs frameArray through GPIO to the 7seg display
-void RefreshDisplay(Game *g);
+void OutputFrame(Display *d);
 
 // Utility function to convert array data into 7-segment bitmasks
 int Get7SegBitMask(Display *d, int displayIndex);
