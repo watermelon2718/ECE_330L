@@ -9,7 +9,7 @@
 #include <string.h> // strings for some reason
 #include "Junk.h" // other
 
-
+extern Game game; // make the main game visible globally
 
 void Error_Handler(void);
 

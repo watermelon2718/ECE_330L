@@ -21,6 +21,8 @@ typedef struct Game {
 	Cursor cursor;
 	//display
 	Display display;
+	//song
+	Song song;
 } Game;
 
 //game flow functions
