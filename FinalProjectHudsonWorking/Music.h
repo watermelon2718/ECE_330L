@@ -15,8 +15,7 @@ typedef struct Note {
 typedef struct Music {
     int doPlay; // init to true
     Note *notes; // pointer to notes array
-    int songLength;
-
+    
     int tone; // tone counter
     int counter; // counter for note timing
     int index; // what note in the song we're on
@@ -139,4 +138,14 @@ void MusicTIM7Tick(Music *s);
 #define _32nd 32
 #define rest 0
 
+
+
+
+
+
+
+
+
+
 #endif
+

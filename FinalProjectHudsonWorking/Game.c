@@ -22,8 +22,8 @@ void InitGame(Game *g) {
         // set to NONE (0) by the memset above.
     }
 
-    // Initialize song
-    g->music.notes = main_theme; 
+    // Initialize song to main theme
+    g->music.notes = main_theme; // music arrays from SoundArrays.h
     
     // Set play state and starting position
     g->music.doPlay = 1;       // Start playing immediately
@@ -44,6 +44,8 @@ void InitGame(Game *g) {
 
 }
 
-int PlaceShip(Game *g); // function to attempt to place ship, returns 0 for success, 1 for fail
+int PlacePhase(Game *g); // ship placing phase
+int GuessPhase(Game *g); // ship guessing phase
 
-int GuessTile(Game *g) // function for guessing at cursor location, returns 0 for success, 1 for fail
+int PlaceShip(Game *g); // function to attempt to place ship, returns 0 for success, 1 for fail
+int GuessTile(Game *g); // function for guessing at cursor location, returns 0 for success, 1 for fail
