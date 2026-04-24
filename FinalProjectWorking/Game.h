@@ -22,6 +22,8 @@ typedef struct Game {
 //game flow functions
 void InitGame(Game *g); // initialization function
 
-int PlaceShip(Game *g); // function to attempt to place ship, returns 0 for success, 1 for fail
+int PlacePhase(Game *g); // ship placing phase
+int GuessPhase(Game *g); // ship guessing phase
 
+int PlaceShip(Game *g); // function to attempt to place ship, returns 0 for success, 1 for fail
 int GuessTile(Game *g) // function for guessing at cursor location, returns 0 for success, 1 for fail

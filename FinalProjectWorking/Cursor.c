@@ -1,5 +1,5 @@
 #include "Cursor.h"
-#include "Game.h" // include constants from Game header
+#include "GameConstAndEnums.h" // include constants from Game header
 
 //updates cursor to move from vertical to horizontal and vice versa
 void CursorHorizVertToggle(Cursor *c) {
@@ -11,7 +11,7 @@ void CursorHorizVertToggle(Cursor *c) {
 			c->yPos = (V_HEIGHT -1);
 		}
 
-		c->xPos = (c->xPos)*2 -1; // map the x index to the appropriate location
+		c->xPos = (c->xPos)*2; // map the x index to the appropriate location
 
 
 
