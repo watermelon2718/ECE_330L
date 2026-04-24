@@ -4,19 +4,20 @@
 
 //structure for a note
 typedef struct Note {
-	int pitch;
-	int size;
-	int tempo;
-	int space;
-	char end;
+	int pitch; //freq
+	int length; //quarter, half
+	int tempo; // base speed 
+	int space; // silence between notes
+	char end; 
 } Note;
 
 //structure for a song
 typedef struct Song {
-    
+    int doPlay; // init to true
     Note *notes; // pointer to notes array
+    int songLength;
 
-    int tone; // 
+    int tone; // tone counter
     int counter; // counter for note timing
     int index; // what note in the song we're on
 
@@ -28,9 +29,11 @@ typedef struct Song {
     int vibratoDepth;
     int vibratoRate;
     int vibratoCount;
+    int vibratoDir; // init to 1
 } Song;
 
-void SongTick(Song *s);
+void SongSystick(Song *s);
+void SongTIM7Tick(Song *s);
 
 
 /* music notes by name, 125Khz (250Khz/2) frequency will be divided by these constants for 1/2 period  *
