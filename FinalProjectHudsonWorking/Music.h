@@ -12,11 +12,10 @@ typedef struct Note {
 } Note;
 
 //structure for a song
-typedef struct Song {
+typedef struct Music {
     int doPlay; // init to true
     Note *notes; // pointer to notes array
-    int songLength;
-
+    
     int tone; // tone counter
     int counter; // counter for note timing
     int index; // what note in the song we're on
@@ -30,10 +29,10 @@ typedef struct Song {
     int vibratoRate;
     int vibratoCount;
     int vibratoDir; // init to 1
-} Song;
+} Music;
 
-void SongSystick(Song *s);
-void SongTIM7Tick(Song *s);
+void MusicSystick(Music *m);
+void MusicTIM7Tick(Music *m);
 
 
 /* music notes by name, 125Khz (250Khz/2) frequency will be divided by these constants for 1/2 period  *
@@ -139,4 +138,14 @@ void SongTIM7Tick(Song *s);
 #define _32nd 32
 #define rest 0
 
+
+
+
+
+
+
+
+
+
 #endif
+

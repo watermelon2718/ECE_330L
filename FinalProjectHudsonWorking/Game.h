@@ -4,10 +4,13 @@
 #include <string.h> // for memset
 #include <stdlib.h> // for returning success, failure
 #include "GameConstAndEnums.h" // include constants and enums
-#include "Player.h"
-#include "Cursor.h"
-#include "Display.h"
-#include "Music.h"
+#include "Player.h" // player structures and data
+#include "Cursor.h" // cursor data 
+#include "Button.h" // button
+#include "Display.h" // display data
+#include "Music.h" // music
+#include "SoundArrays.h" // sound files
+#include "Button.h"
 
 //Game structure -- stores each part of the game data
 typedef struct Game {
@@ -22,7 +25,11 @@ typedef struct Game {
 	//display
 	Display display;
 	//song
-	Song song;
+	Music music;
+
+	Button modeButton; // for switching modes 
+
+	Button confirmButton; // for selecting/confirming an option
 } Game;
 
 //game flow functions
