@@ -121,7 +121,7 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-  SongTick(&game.song);
+  SongSystick(&(game.song));
 
 
 
@@ -158,73 +158,7 @@ if (Animate_On > 0)
 
 void TIM7_IRQHandler(void)
 {
-  TONE++;
-	ramp++;
-
-	/* This code plays the song from the song array structure */
-	if ((Music_ON > 0) && (Song[INDEX].note > 0) && ((Song[INDEX].tempo/Song[INDEX].size - Song[INDEX].space) > COUNT))
-	{
-
-		if (Song[INDEX].note <= TONE)
-		{
-			GPIOD->ODR ^= 1;
-			TONE = 0;
-		}
-	}
-	else if ((Music_ON > 0) && Song[INDEX].tempo/Song[INDEX].size > COUNT)
-	{
-		TONE = 0;
-	}
-	else if ((Music_ON > 0) && Song[INDEX].tempo/Song[INDEX].size == COUNT)
-	{
-		COUNT = 0;
-		TONE = 0;
-		if (!(Song[INDEX].end))
-				{
-					INDEX++;
-					Save_Note = Song[INDEX].note;
-				}
-	}
-	else if (Music_ON == 0)
-		{
-			TONE = 0;
-			COUNT = 0;
-		}
-
-
-	/* This code dims the RGB LEDs using PWM */
-	if (DIM_Enable > 0)
-	{
-		if (RED_BRT <= ramp)
-		{
-			GPIOD->ODR |= (1 << 15);
-		}
-		else
-		{
-			GPIOD->ODR &= ~(1 << 15);
-		}
-		if (BLUE_BRT <= ramp)
-		{
-			GPIOD->ODR |= (1 << 14);
-		}
-		else
-		{
-			GPIOD->ODR &= ~(1 << 14);
-		}
-		if (GREEN_BRT <= ramp)
-		{
-			GPIOD->ODR |= (1 << 13);
-		}
-		else
-		{
-			GPIOD->ODR &= ~(1 << 13);
-		}
-	}
-  /* USER CODE END TIM7_IRQn 0 */
   HAL_TIM_IRQHandler(&htim7);
-  /* USER CODE BEGIN TIM7_IRQn 1 */
-
-  /* USER CODE END TIM7_IRQn 1 */
 }
 
 /**
@@ -240,7 +174,3 @@ void OTG_FS_IRQHandler(void)
 
   /* USER CODE END OTG_FS_IRQn 1 */
 }
-
-/* USER CODE BEGIN 1 */
-
-/* USER CODE END 1 */
