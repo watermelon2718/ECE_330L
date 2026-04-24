@@ -31,8 +31,8 @@ typedef struct Music {
     int vibratoDir; // init to 1
 } Music;
 
-void MusicSystick(Music *s);
-void MusicTIM7Tick(Music *s);
+void MusicSystick(Music *m);
+void MusicTIM7Tick(Music *m);
 
 
 /* music notes by name, 125Khz (250Khz/2) frequency will be divided by these constants for 1/2 period  *

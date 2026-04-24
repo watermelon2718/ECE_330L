@@ -42,6 +42,8 @@ void InitGame(Game *g) {
     g->music.vibratoDepth = 1;  // Adjust this for intensity (how many frequency units it shifts)
     g->music.vibratoDir = 1;    // Start the oscillation moving 'up'
 
+    Button_Init(&startBtn, GPIOA, GPIO_PIN_0); // initialize buttons
+    
 }
 
 int PlacePhase(Game *g); // ship placing phase
