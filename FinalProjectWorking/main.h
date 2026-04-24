@@ -28,7 +28,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 //#include "stm32f4xx_hal.h"
-#include "Display.h"
+#include "Game.h"
 #include <string.h>
 
 /* Private includes ----------------------------------------------------------*/
@@ -40,71 +40,15 @@ extern "C" {
 /* USER CODE BEGIN ET */
 
 //Constants:
-#define H_WIDTH 8; // horizontal array dimensions
-#define H_HEIGHT 3;
-
-#define V_WIDTH 16; // vertical array dimensions
-#define V_HEIGHT 2;
-
-//Possible states for a square to be in
-typedef enum SquareState {NONE, HIT, MISS, CURSOR, PLACED} SquareState;
-
-//display data structure
-typedef struct Display {
-	int frameMask; // bitmask that will be latched into the seven segment display each frame
-
-	SquareState horizDisplayArray[H_WIDTH][H_HEIGHT]; //arrays for display contents
-	SquareState vertDisplayArray[V_WIDTH][V_HEIGHT];
-
-} Display;
 
 
-//player data structure
-typedef struct Player {
-	//maps
-	SquareState horizPlacementArray[H_WIDTH][H_HEIGHT]; // array for placement of horizontal ships, initialized to 0 for no ship placement
-	SquareState vertPlacementArray[V_WIDTH][V_HEIGHT]; // array for placement of horizontal ships, initialized to 0 for no ship placement
-
-	SquareState horizGuessArray[H_WIDTH][H_HEIGHT]; // array for horizontal guesses, initialize to 0
-	SquareState vertGuessArray[V_WIDTH][V_HEIGHT];
-
-	int singleSegmentShipsLeftToPlace; // tracks how many ships are left to place
-	int doubleSegmentShipsLeftToPlace;
-
-} Player;
-
-//cursor structures
-typedef enum CursorMode {HORIZONTAL, VERTICAL} CursorMode;
-typedef enum CursorLength {SINGLE_SEG, DOUBLE_SEG};
 
 
-typedef struct Cursor {
-	int xPos; // cursor x position
-	int yPos; // cursor y position
 
-	CursorMode cursorMode; // cursor mode
-	CursorLength cursorLength;
 
-} Cursor;
 
-//Game phase enumerations
-typedef enum GamePhase {PHASE_TITLE, PHASE_PLACE, PHASE_TURN, PHASE_END} GamePhase; //game phases enumeration
-typedef enum ActivePlayer {PLAYER1, PLAYER2} ActivePlayer; //active player enumeration
 
-//Game structure -- stores each part of the game data
-typedef struct Game {
-	//players for the game
-	Player players[2];
 
-	//game phase
-	GamePhase gamePhase;
-	//active player
-	ActivePlayer activePlayer;
-	//cursor
-	Cursor cursor;
-	//display
-	Display display;
-} Game;
 
 
 

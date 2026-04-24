@@ -1,4 +1,3 @@
-
 //used by systick to update the representational array to be displayed
 //(based upon game phase and state)
 void UpdateDisplayArrays(Game *game) {
