@@ -9,4 +9,6 @@ void PlayerInit(Player *p) {
 
     p->singleSegmentShipsLeftToPlace = 3; // tracks how many ships are left to place
     p->doubleSegmentShipsLeftToPlace = 2;
+
+    p->hitCount = 0;
 }

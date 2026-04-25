@@ -3,7 +3,7 @@
 
 #include "stm32f4xx_hal.h" // Replace with your specific HAL if different
 
-#define DEBOUNCE_THRESHOLD 50 // Number of consecutive polls required to confirm state
+#define DEBOUNCE_THRESHOLD 20 // Number of consecutive polls required to confirm state
 
 typedef struct Button {
     GPIO_TypeDef* port;     // e.g., GPIOA
@@ -18,18 +18,18 @@ typedef struct Button {
 /**
  * @brief Initializes the button struct.
  */
-void Button_Init(Button *b, GPIO_TypeDef* port, uint16_t pin);
+void ButtonInit(Button *b, GPIO_TypeDef* port, uint16_t pin);
 
 /**
  * @brief Polls the hardware and updates the button's internal state machine.
  * Call this in your main while(1) loop.
  */
-void Button_Update(Button *b);
+void ButtonUpdate(Button *b);
 
 /**
  * @brief Checks if the button was pressed. 
  * Returns 1 once per physical press, then resets itself.
  */
-int Button_WasPressed(Button *b);
+int WasPressed(Button *b);
 
 #endif
