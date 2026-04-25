@@ -15,7 +15,9 @@ typedef struct Note {
 typedef struct Music {
     int doPlay; // init to true
     const Note *notes; // pointer to notes array
-    
+    const Note *returnNotes; // pointer to store notes array to return to
+    int returnIndex; // index in last song to return to
+
     int tone; // tone counter
     int counter; // counter for note timing
     int index; // what note in the song we're on
@@ -32,6 +34,8 @@ typedef struct Music {
 } Music;
 
 void MusicInit(Music *m, const Note *n, int vibratoRate, int vibratoDepth); //init
+void PlayTrack (Music *m, const Note *t); // switch the track
+void PlayEffect(Music *m, const Note *effect);
 void MusicSystick(Music *m); // rhythm updater on systick
 void MusicTIM7Tick(Music *m); // tone generator on tim7
 

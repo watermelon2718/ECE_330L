@@ -21,6 +21,18 @@ void MusicInit(Music *m, const Note *n, int vibratoRate, int vibratoDepth) {
     m->vibratoDepth = vibratoDepth;  // Adjust this for intensity (how many frequency units it shifts)
     m->vibratoDir = 1;
 }
+//switches the track
+void PlayTrack (Music *m, const Note *t) {
+    MusicInit(m, t, m->vibratoRate, m->vibratoDepth);
+    m->returnIndex = m->index;
+    m->returnNotes = m->notes;
+}
+//puts on a temporary effect
+void PlayEffect(Music *m, const Note *effect) {
+    m->returnIndex = m->index;
+    m->returnNotes = m->notes;
+    MusicInit(m, effect, m->vibratoRate, m->vibratoDepth);
+}
 
 void MusicSystick(Music *m) {
     if (m->doPlay == 0) return;
@@ -73,6 +85,10 @@ void MusicTIM7Tick(Music *m) {
 
     //loop if on last note
     if(m->notes[m->index].end) {
+        //returns to the return song array, loops for songs, jumps back from effects
         MusicInit(m, m->notes, m->vibratoRate, m->vibratoDepth);
+        m->notes = m->returnNotes;
+        m->index = m->returnIndex;
+        m->returnIndex = 0;
     }
 }

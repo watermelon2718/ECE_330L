@@ -1,7 +1,25 @@
 #ifndef SOUND_ARRAYS_
 #define SOUND_ARRAYS_
 #include "Music.h"
-static const Note megalovania[] = {
+static const Note effect-miss[] = {
+    {E3,        _8th,  4000,  10,    0}, // 0
+    {C3,        _8th,  4000,  10,    0}, // 0
+    {E3,        _8th,  4000,  10,    0}, // 0
+    {C3,     quarter,  4000,  10,    0}, // 0
+
+    {rest,      _8th,  4000,  40,    1}
+};
+
+static const Note effect-miss[] = {
+    {E3,        _8th,  4000,  10,    0}, // 0
+    {C3,        _8th,  4000,  10,    0}, // 0
+    {E3,        _8th,  4000,  10,    0}, // 0
+    {C3,     quarter,  4000,  10,    0}, // 0
+
+    {rest,      _8th,  4000,  40,    1}
+};
+
+static const Note track-megalovania[] = {
     {D3,        _8th,  1000,  40,    0}, // 0
     {D3,        _8th,  1000,  40,    0}, // 0
     {D4,        _8th,  1000,  40,    0}, // 0
@@ -142,7 +160,7 @@ static const Note megalovania[] = {
     //end
     {rest,      _8th,  1400,  40,    1}
 };
-static const Note main_theme[] = {
+static const Note track-title[] = {
     // Pitch,   Length,   Tempo, Space, End
     {A4,        quarter,  1400,  10,    0}, // 0
     {D5,        quarter,  1400,  10,    0}, // 1

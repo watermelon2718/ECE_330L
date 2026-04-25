@@ -1,7 +1,7 @@
 #include "Potentiometer.h"
 #include "GameConstAndEnums.h"
 
-#define MAX_VALUE 4800
+#define MAX_VALUE 4000
 
 //init
 void InitPot(Potentiometer *p, Cursor *c, int channel, Axis a, ADC_TypeDef *adc) {
@@ -42,7 +42,7 @@ void UpdateCursor(Potentiometer *p) {
             }
             //bound cursor
             if(c->yPos > (V_HEIGHT-c->cursorLength-1)){c->yPos = V_HEIGHT-c->cursorLength;}
-            if(c->xPos > (V_WIDTH-1)){c->xPos = V_WIDTH;}
+            if(c->xPos > (V_WIDTH-1)){c->xPos = V_WIDTH-1;}
             break;
 
         case HORIZONTAL:
@@ -53,7 +53,7 @@ void UpdateCursor(Potentiometer *p) {
             }
             //bound cursor
             if(c->xPos > (H_WIDTH-c->cursorLength-1)){c->xPos = H_WIDTH-c->cursorLength;}
-            if(c->yPos > (H_HEIGHT-1)){c->yPos = H_HEIGHT;}
+            if(c->yPos > (H_HEIGHT-1)){c->yPos = H_HEIGHT-1;}
             break;    
     }
 
