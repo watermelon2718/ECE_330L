@@ -1,7 +1,13 @@
 #ifndef SOUND_ARRAYS_
 #define SOUND_ARRAYS_
 #include "Music.h"
-static const Note effect-miss[] = {
+static const Note effect_placed[] = {
+    {A2,        _8th,  4000,  10,    0}, // 0
+    {rest,      _8th,  2000,  40,    1},
+    {rest,      _8th,  4000,  40,    1}
+};
+
+static const Note effect_miss[] = {
     {E3,        _8th,  4000,  10,    0}, // 0
     {C3,        _8th,  4000,  10,    0}, // 0
     {E3,        _8th,  4000,  10,    0}, // 0
@@ -10,7 +16,7 @@ static const Note effect-miss[] = {
     {rest,      _8th,  4000,  40,    1}
 };
 
-static const Note effect-miss[] = {
+static const Note effect_win[] = {
     {E3,        _8th,  4000,  10,    0}, // 0
     {C3,        _8th,  4000,  10,    0}, // 0
     {E3,        _8th,  4000,  10,    0}, // 0
@@ -19,7 +25,16 @@ static const Note effect-miss[] = {
     {rest,      _8th,  4000,  40,    1}
 };
 
-static const Note track-megalovania[] = {
+static const Note effect_hit[] = {
+    {E3,        _8th,  4000,  10,    0}, // 0
+    {C3,        _8th,  4000,  10,    0}, // 0
+    {E3,        _8th,  4000,  10,    0}, // 0
+    {C3,     quarter,  4000,  10,    0}, // 0
+
+    {rest,      _8th,  4000,  40,    1}
+};
+
+static const Note track_megalovania[] = {
     {D3,        _8th,  1000,  40,    0}, // 0
     {D3,        _8th,  1000,  40,    0}, // 0
     {D4,        _8th,  1000,  40,    0}, // 0
@@ -160,7 +175,7 @@ static const Note track-megalovania[] = {
     //end
     {rest,      _8th,  1400,  40,    1}
 };
-static const Note track-title[] = {
+static const Note track_title[] = {
     // Pitch,   Length,   Tempo, Space, End
     {A4,        quarter,  1400,  10,    0}, // 0
     {D5,        quarter,  1400,  10,    0}, // 1
@@ -241,7 +256,7 @@ static const Note track-title[] = {
     {G4,        quarter,  1400,  100,   0}, // 76
     {rest,      quarter,  1400,  100,   0}, // 77
     {F4,        quarter,  1400,  100,   0}, // 78
-    {rest,      quarter,  1400,  10,    1}  // 79 - END FLAG SET TO 1
+    {rest,      quarter,  1400,  10,    1}  // 79 _ END FLAG SET TO 1
 };
 
 #endif

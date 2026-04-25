@@ -17,7 +17,7 @@ void InitGame(Game *g) {
     g->displayMode = MESSAGE;
 
     // Initialize song to main theme
-    MusicInit(&(g->music), track-title, 40, 1);
+    MusicInit(&(g->music), track_title, 40, 1);
     //init buttons
     ButtonInit(&(g->modeButton), GPIOC, GPIO_PIN_10);
     ButtonInit(&(g->confirmButton), GPIOC, GPIO_PIN_11);
@@ -38,7 +38,7 @@ void GameRun(Game *g) {
             g->gamePhase = PHASE_PLACE;
             //set message to placing phase banner
             Cutscene(g, "        PLAYER 1 PLACE SHIPS ");
-            PlayTrack(&g->music, track-megalovania);
+            PlayTrack(&g->music, track_megalovania);
         }
         break;
 
@@ -54,7 +54,7 @@ void GameRun(Game *g) {
             //if confirm pressed, place ship
             if(Confirm(g)) {
                 PlaceShip(g);
-                PlayEffect(effect-placed)
+                PlayEffect(&g->music, effect_placed);
             }
 
             //if mode placed, toggle vert/horiz
@@ -102,16 +102,16 @@ void GameRun(Game *g) {
                 if(guess == 0) { // miss
                     TogglePlayer(g);
                     Cutscene(g, (g->activePlayer == PLAYER1) ? "        PLAYER 1 GUESS TILE " : "        PLAYER 2 GUESS TILE ");
-                    PlayEffect(&g->music, effect-miss);
+                    PlayEffect(&g->music, effect_miss);
                 } else if (guess == 1) { // if guess is a hit, increase a player's hitcounter
                     Cutscene(g, (g->activePlayer == PLAYER1) ? "        HIT PLAYER 2 SHIP         GUESS AGAIN " : "        HIT PLAYER 1 SHIP         GUESS AGAIN ");
-                    PlayEffect(&(g->music), effect-hit);
+                    PlayEffect(&(g->music), effect_hit);
                     g->players[g->activePlayer].hitCount++;
                     //if all ships are sunk, active player wins
                     if(g->players[g->activePlayer].hitCount >= 7){
                         g->gamePhase = PHASE_END;
                         Cutscene(g, (g->activePlayer == PLAYER1) ? "        PLAYER 1 WINS        PRESS TO PLAY AGAIN " : "        PLAYER 2 WINS        PRESS TO PLAY AGAIN ");
-                        PlayEffect(&g->music, effect-win);
+                        PlayEffect(&g->music, effect_win);
                     } 
                 }
                 
