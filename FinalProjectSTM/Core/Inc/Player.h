@@ -2,6 +2,7 @@
 #define PLAYER_H_
 
 #include "GameConstAndEnums.h" // include constants and TileState enum
+#include <string.h>
 
 // player data structure
 typedef struct Player {
