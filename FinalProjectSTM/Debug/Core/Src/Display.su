@@ -1,7 +1,0 @@
-../Core/Src/Display.c:4:6:DisplayInit	16	static
-../Core/Src/Display.c:10:6:DisplayBoard	16	static
-../Core/Src/Display.c:16:6:UpdateDisplayArrays	48	static
-../Core/Src/Display.c:66:6:UpdateFrameArrays	56	static
-../Core/Src/Display.c:135:6:OutputFrame	24	static
-../Core/Src/Display.c:144:5:Get7SegBitMask	32	static
-../Core/Src/Display.c:158:6:AddCursor	16	static

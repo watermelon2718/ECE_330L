@@ -1,7 +1,0 @@
-../Core/Src/Display.c:4:6:DisplayInit	1
-../Core/Src/Display.c:10:6:DisplayBoard	1
-../Core/Src/Display.c:16:6:UpdateDisplayArrays	12
-../Core/Src/Display.c:66:6:UpdateFrameArrays	16
-../Core/Src/Display.c:135:6:OutputFrame	2
-../Core/Src/Display.c:144:5:Get7SegBitMask	1
-../Core/Src/Display.c:158:6:AddCursor	5

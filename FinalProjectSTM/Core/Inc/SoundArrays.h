@@ -1,6 +1,10 @@
 #ifndef SOUND_ARRAYS_
 #define SOUND_ARRAYS_
 #include "Music.h"
+
+//sound includes
+#include "SoundEffects.h"
+
 static const Note effect_switch[] = {
     {E3,        _8th,  4000,  10,    0}, // 0
     {C3,        _8th,  4000,  10,    0}, // 0

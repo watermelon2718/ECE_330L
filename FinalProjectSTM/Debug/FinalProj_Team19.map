@@ -7674,32 +7674,32 @@ LOAD /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide
 LOAD /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a
 LOAD /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/libgcc.a
 
-.debug_info     0x00000000    0x14345
+.debug_info     0x00000000    0x1433f
  .debug_info    0x00000000      0x28a ./Core/Src/Button.o
  .debug_info    0x0000028a      0x13b ./Core/Src/Cursor.o
- .debug_info    0x000003c5      0xc63 ./Core/Src/Display.o
- .debug_info    0x00001028      0xcb5 ./Core/Src/Game.o
- .debug_info    0x00001cdd      0x361 ./Core/Src/Music.o
- .debug_info    0x0000203e      0x196 ./Core/Src/Player.o
- .debug_info    0x000021d4      0x3c2 ./Core/Src/Potentiometer.o
- .debug_info    0x00002596      0x23d ./Core/Src/ScrollMessage.o
- .debug_info    0x000027d3     0x1c9e ./Core/Src/main.o
- .debug_info    0x00004471      0x25d ./Core/Src/seg7.o
- .debug_info    0x000046ce     0x1731 ./Core/Src/stm32f4xx_hal_msp.o
- .debug_info    0x00005dff     0x1518 ./Core/Src/stm32f4xx_it.o
- .debug_info    0x00007317      0x512 ./Core/Src/system_stm32f4xx.o
- .debug_info    0x00007829       0x30 ./Core/Startup/startup_stm32f407vgtx.o
- .debug_info    0x00007859      0x944 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
- .debug_info    0x0000819d      0xd8c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
- .debug_info    0x00008f29      0x6c3 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
- .debug_info    0x000095ec     0x114c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hcd.o
- .debug_info    0x0000a738      0x8c3 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
- .debug_info    0x0000affb     0x299d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
- .debug_info    0x0000d998     0x14db ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
- .debug_info    0x0000ee73     0x1993 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o
- .debug_info    0x00010806     0x10fe ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.o
- .debug_info    0x00011904      0xbf4 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.o
- .debug_info    0x000124f8     0x1e4d ./USB_HOST/Target/usbh_conf.o
+ .debug_info    0x000003c5      0xc5d ./Core/Src/Display.o
+ .debug_info    0x00001022      0xcb5 ./Core/Src/Game.o
+ .debug_info    0x00001cd7      0x361 ./Core/Src/Music.o
+ .debug_info    0x00002038      0x196 ./Core/Src/Player.o
+ .debug_info    0x000021ce      0x3c2 ./Core/Src/Potentiometer.o
+ .debug_info    0x00002590      0x23d ./Core/Src/ScrollMessage.o
+ .debug_info    0x000027cd     0x1c9e ./Core/Src/main.o
+ .debug_info    0x0000446b      0x25d ./Core/Src/seg7.o
+ .debug_info    0x000046c8     0x1731 ./Core/Src/stm32f4xx_hal_msp.o
+ .debug_info    0x00005df9     0x1518 ./Core/Src/stm32f4xx_it.o
+ .debug_info    0x00007311      0x512 ./Core/Src/system_stm32f4xx.o
+ .debug_info    0x00007823       0x30 ./Core/Startup/startup_stm32f407vgtx.o
+ .debug_info    0x00007853      0x944 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+ .debug_info    0x00008197      0xd8c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
+ .debug_info    0x00008f23      0x6c3 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
+ .debug_info    0x000095e6     0x114c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hcd.o
+ .debug_info    0x0000a732      0x8c3 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
+ .debug_info    0x0000aff5     0x299d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
+ .debug_info    0x0000d992     0x14db ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
+ .debug_info    0x0000ee6d     0x1993 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o
+ .debug_info    0x00010800     0x10fe ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.o
+ .debug_info    0x000118fe      0xbf4 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.o
+ .debug_info    0x000124f2     0x1e4d ./USB_HOST/Target/usbh_conf.o
 
 .debug_abbrev   0x00000000     0x32db
  .debug_abbrev  0x00000000      0x195 ./Core/Src/Button.o
@@ -7965,7 +7965,7 @@ LOAD /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide
  .debug_str     0x00000000    0xd2ab7 ./Core/Src/Button.o
                               0xc77bf (size before relaxing)
  .debug_str     0x000d2ab7     0x2fbc ./Core/Src/Cursor.o
- .debug_str     0x000d2ab7    0xcbad5 ./Core/Src/Display.o
+ .debug_str     0x000d2ab7    0xcbaca ./Core/Src/Display.o
  .debug_str     0x000d2ab7    0xcbb13 ./Core/Src/Game.o
  .debug_str     0x000d2ab7    0xc7b28 ./Core/Src/Music.o
  .debug_str     0x000d2ab7     0x6881 ./Core/Src/Player.o
