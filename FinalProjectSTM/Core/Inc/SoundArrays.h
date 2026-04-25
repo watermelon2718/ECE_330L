@@ -24,7 +24,7 @@ static const Note effect_miss[] = {
     {Gs4_Ab4,   _8th,  800,  10,    0}, // 0
     {G4,     quarter,  800,  10,    0},
 
-    {rest,      half,  3000,  40,    0},
+    {rest,      quarter,  3000,  40,    0},
     
     {E3,        _8th,  4000,  10,    0}, // 0
     {C3,        _8th,  4000,  10,    0}, // 0

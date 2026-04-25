@@ -74,7 +74,7 @@ void UpdateFrameArrays(Game *game) {
 	//determine duty cycles for each tileState
 	int noneBright = 1; // none will always be off
 	int hitBright = 0; //hit ships are at 100% brightness
-	int missBright = !(displayTimer % 5 == 0); // miss gets 20% duty cycle
+	int missBright = !(displayTimer % 10 == 0); // miss gets 20% duty cycle
     int placedBright = 0; // placed ships are displayed at 100% brightness
 	int cursorBright = !(displayTimer % 1500 < 750); //cursor blinks, toggle the blink state every 750 counts
 
