@@ -148,6 +148,8 @@ int PlaceShip(Game *g) {
             }
             break;        
     }
+
+    return -1;
 }
 int GuessTile(Game *g) {
     //guess a tile
@@ -208,8 +210,8 @@ void GamePoll(Game *g) {
     ButtonUpdate(&(g->modeButton));
     ButtonUpdate(&(g->confirmButton));
     //update potentiometers
-    PotUpdate(&(g->xPot));
-    PotUpdate(&(g->yPot));
+    UpdatePot(&(g->xPot));
+    UpdatePot(&(g->yPot));
 }
 
 //helper functions

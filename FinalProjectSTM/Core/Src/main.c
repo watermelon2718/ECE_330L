@@ -24,6 +24,7 @@ I2C_HandleTypeDef hi2c1;
 I2S_HandleTypeDef hi2s3;
 SPI_HandleTypeDef hspi1;
 TIM_HandleTypeDef htim7;
+volatile Game game;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -96,18 +97,15 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
-
-
-  volatile Game game; // initialize main game
-  InitGame(&game);
+  // initialize main game
+  InitGame((void *)&game);
 
   while (1)
   {
     //poll game
-    GamePoll(&game);
+    GamePoll((void *)&game);
 
-    GameRun(&game);
+    GameRun((void *)&game);
   }
 }
 

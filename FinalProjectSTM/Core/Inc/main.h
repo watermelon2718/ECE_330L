@@ -7,7 +7,7 @@
 #include "Game.h" // game structures
 #include <string.h> // strings for some reason
 
-extern Game game; // make the main game visible globally
+extern volatile Game game; // make the main game visible globally
 
 void Error_Handler(void);
 
