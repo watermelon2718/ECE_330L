@@ -70,4 +70,9 @@ void MusicTIM7Tick(Music *m) {
 			m->tone = 0;
 			m->counter = 0;
 	}
+
+    //loop if on last note
+    if(m->notes[m->index].end) {
+        MusicInit(m, m->notes, m->vibratoRate, m->vibratoDepth);
+    }
 }

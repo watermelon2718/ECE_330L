@@ -32,6 +32,7 @@ void GameRun(Game *g) {
     switch (g->gamePhase) {
 
     case PHASE_TITLE:
+        MusicInit(&(g->music), megalovania, 50, 0); //init
         //do not move on to the next phase until confirm button pressed
         if(Confirm(g)){
             //change to placing phase
