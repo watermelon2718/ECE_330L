@@ -11,3 +11,4 @@ typedef enum TileState {NONE, HIT, MISS, CURSOR, PLACED} TileState;
 //Game phase enumerations
 typedef enum GamePhase {PHASE_TITLE, PHASE_PLACE, PHASE_TURN, PHASE_END} GamePhase; //game phases enumeration
 typedef enum ActivePlayer {PLAYER1, PLAYER2} ActivePlayer; //active player enumeration
+typedef enum DisplayMode {MESSAGE, BOARD} DisplayMode;

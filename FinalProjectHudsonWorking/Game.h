@@ -8,9 +8,9 @@
 #include "Cursor.h" // cursor data 
 #include "Button.h" // button
 #include "Display.h" // display data
+#include "ScrollMessage.h"
 #include "Music.h" // music
 #include "SoundArrays.h" // sound files
-#include "Button.h"
 
 //Game structure -- stores each part of the game data
 typedef struct Game {
@@ -24,6 +24,10 @@ typedef struct Game {
 	Cursor cursor;
 	//display
 	Display display;
+	//scrollmessage
+	ScrollMessage scrollMessage;
+	//displaymode
+	DisplayMode displayMode;
 	//song
 	Music music;
 
@@ -32,9 +36,13 @@ typedef struct Game {
 	Button confirmButton; // for selecting/confirming an option
 } Game;
 
-//game flow functions
+//init
 void InitGame(Game *g); // initialization function
 
+//full display
+void DisplayOutput(Game *g);
+
+//game flow functions
 int PlacePhase(Game *g); // ship placing phase
 int GuessPhase(Game *g); // ship guessing phase
 

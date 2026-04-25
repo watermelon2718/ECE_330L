@@ -1,6 +1,13 @@
 #include "Cursor.h"
 #include "GameConstAndEnums.h" // include constants from Game header
 
+void CursorInit(Cursor *c) {
+	c->xPos = 0;
+	c->yPos = 0;
+	c->cursorMode = VERTICAL;
+	c->cursorLength = DOUBLE_SEG;
+}
+
 //updates cursor to move from vertical to horizontal and vice versa
 void CursorHorizVertToggle(Cursor *c) {
 
