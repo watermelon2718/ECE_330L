@@ -31,10 +31,10 @@ void DisplayScrollMessage(ScrollMessage *m) {
                 if (charOffset < m->length) {
                     // Current digit falls within string bounds; display character
                     // Digit 7 is leftmost, Digit 0 is rightmost
-                    Seven_Segment_Digit(7 - i, *(m->currentPtr + i), 0);
+                    Seven_Segment_ASCII(7 - i, *(m->currentPtr + i), 0);
                 } else {
                     // Past the end of string; "virtual padding" provides blank space
-                    Seven_Segment_Digit(7 - i, ' ', 0); 
+                    Seven_Segment_ASCII(7 - i, ' ', 0); 
                 }
             }
 
@@ -51,10 +51,10 @@ void DisplayScrollMessage(ScrollMessage *m) {
         // STATIC MODE: Display the first 8 characters without movement
         for (int i = 0; i < 8; i++) {
             if (i < m->length) {
-                Seven_Segment_Digit(7 - i, m->text[i], 0);
+                Seven_Segment_ASCII(7 - i, m->text[i], 0);
             } else {
                 // Pad with spaces if the static string is shorter than 8 chars
-                Seven_Segment_Digit(7 - i, ' ', 0);
+                Seven_Segment_ASCII(7 - i, ' ', 0);
             }
         }
     }

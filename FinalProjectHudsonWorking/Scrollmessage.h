@@ -1,5 +1,5 @@
-#ifndef SCROLLMESSAGE_
-#define SCROLLMESSAGE_
+#ifndef SCROLL_MESSAGE_H_
+#define SCROLL_MESSAGE_H_
 
 #include "seg7.h"
 
