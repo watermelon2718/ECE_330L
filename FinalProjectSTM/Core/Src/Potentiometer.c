@@ -1,6 +1,8 @@
 #include "Potentiometer.h"
 #include "GameConstAndEnums.h"
 
+#define MAX_VALUE 2000
+
 //init
 void InitPot(Potentiometer *p, Cursor *c, int channel, Axis a, ADC_TypeDef *adc) {
     p->adc = adc;
@@ -26,7 +28,7 @@ void ReadADC(Potentiometer *p) {
     while ((p->adc->SR & (1 << 1)) == 0){
         // wait until conversion is done
     }
-    p->raw = (uint8_t)(p->adc->DR & 0xFF); // return 8-bit result [betwe
+    p->raw = (p->adc->DR); // return 8-bit result [betwe
 }
 
 void UpdateCursor(Potentiometer *p) {
@@ -34,23 +36,23 @@ void UpdateCursor(Potentiometer *p) {
     switch(c->cursorMode) {
         case VERTICAL:
             if(p->axis == X_AXIS) {
-                c->xPos = ((p->raw)*(H_WIDTH))/256;
+                c->xPos = ((p->raw)*(H_WIDTH))/MAX_VALUE;
             } else if(p->axis == Y_AXIS) {
-                c->yPos = ((p->raw)*(H_HEIGHT))/256;
+                c->yPos = ((p->raw)*(H_HEIGHT))/MAX_VALUE;
             }
             //bound cursor
-            if(c->yPos > (V_HEIGHT-c->cursorLength-1)){c->yPos = V_HEIGHT-c->cursorLength;}
+            if(c->yPos > (V_HEIGHT-c->cursorLength-1)){c->yPos = V_HEIGHT-c->cursorLength-1;}
             
             break;
 
         case HORIZONTAL:
             if(p->axis == X_AXIS) {
-                c->xPos = ((p->raw)*(V_WIDTH))/256;
+                c->xPos = ((p->raw)*(V_WIDTH))/MAX_VALUE;
             } else if(p->axis == Y_AXIS) {
-                c->yPos = ((p->raw)*(V_HEIGHT))/256;
+                c->yPos = ((p->raw)*(V_HEIGHT))/MAX_VALUE;
             }
             //bound cursor
-            if(c->xPos > (H_WIDTH-c->cursorLength-1)){c->xPos = H_WIDTH-c->cursorLength;}
+            if(c->xPos > (H_WIDTH-c->cursorLength-1)){c->xPos = H_WIDTH-c->cursorLengh-1;}
             break;    
     }
 
