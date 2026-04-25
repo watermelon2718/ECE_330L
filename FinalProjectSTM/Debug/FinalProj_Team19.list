@@ -885,7 +885,7 @@ void UpdateDisplayArrays(Game *game) {
  8000802:	2300      	movs	r3, #0
  8000804:	60bb      	str	r3, [r7, #8]
  8000806:	e01d      	b.n	8000844 <UpdateDisplayArrays+0x198>
-				game->display.vertDisplayArray[i][j] = game->players[game->activePlayer].vertPlacementArray[i][j];
+				game->display.vertDisplayArray[i][j] = game->players[game->activePlayer].vertGuessArray[i][j];
  8000808:	687b      	ldr	r3, [r7, #4]
  800080a:	f893 30f1 	ldrb.w	r3, [r3, #241]	@ 0xf1
  800080e:	4618      	mov	r0, r3
@@ -900,7 +900,7 @@ void UpdateDisplayArrays(Game *game) {
  8000820:	441a      	add	r2, r3
  8000822:	68bb      	ldr	r3, [r7, #8]
  8000824:	4413      	add	r3, r2
- 8000826:	3318      	adds	r3, #24
+ 8000826:	3350      	adds	r3, #80	@ 0x50
  8000828:	7819      	ldrb	r1, [r3, #0]
  800082a:	687a      	ldr	r2, [r7, #4]
  800082c:	68fb      	ldr	r3, [r7, #12]
