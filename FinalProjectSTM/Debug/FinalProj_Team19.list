@@ -29,9 +29,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  12 .ARM.attributes 00000030  00000000  00000000  0000800c  2**0
                   CONTENTS, READONLY
- 13 .debug_info   00013bd2  00000000  00000000  0000803c  2**0
+ 13 .debug_info   00013bd4  00000000  00000000  0000803c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 000032bf  00000000  00000000  0001bc0e  2**0
+ 14 .debug_abbrev 000032bd  00000000  00000000  0001bc10  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  15 .debug_aranges 00001020  00000000  00000000  0001eed0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -39,15 +39,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_macro  000242b3  00000000  00000000  00020b46  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00015872  00000000  00000000  00044df9  2**0
+ 18 .debug_line   00015875  00000000  00000000  00044df9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000d2a11  00000000  00000000  0005a66b  2**0
+ 19 .debug_str    000d2a11  00000000  00000000  0005a66e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  0012d07c  2**0
+ 20 .comment      00000043  00000000  00000000  0012d07f  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00003ee8  00000000  00000000  0012d0c0  2**2
+ 21 .debug_frame  00003eec  00000000  00000000  0012d0c4  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 000000a8  00000000  00000000  00130fa8  2**0
+ 22 .debug_line_str 000000a8  00000000  00000000  00130fb0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -677,7 +677,7 @@ void DisplayBoard(Game *game) {
  8000698:	687b      	ldr	r3, [r7, #4]
  800069a:	f503 7380 	add.w	r3, r3, #256	@ 0x100
  800069e:	4618      	mov	r0, r3
- 80006a0:	f000 fa14 	bl	8000acc <OutputFrame>
+ 80006a0:	f000 fa1a 	bl	8000ad8 <OutputFrame>
 }
  80006a4:	bf00      	nop
  80006a6:	3708      	adds	r7, #8
@@ -953,510 +953,512 @@ void UpdateDisplayArrays(Game *game) {
 //used by the systick to get the data that will be output to the segments on a given 'frame'
 //(includes dimming and effects)
 void UpdateFrameArrays(Game *game) {
- 8000868:	b480      	push	{r7}
- 800086a:	b08d      	sub	sp, #52	@ 0x34
+ 8000868:	b580      	push	{r7, lr}
+ 800086a:	b08c      	sub	sp, #48	@ 0x30
  800086c:	af00      	add	r7, sp, #0
  800086e:	6078      	str	r0, [r7, #4]
+	//turn dots off
+	memset(game->display.dotsFrameArray, 1, sizeof(game->display.dotsFrameArray));
+ 8000870:	687b      	ldr	r3, [r7, #4]
+ 8000872:	f503 73b8 	add.w	r3, r3, #368	@ 0x170
+ 8000876:	2220      	movs	r2, #32
+ 8000878:	2101      	movs	r1, #1
+ 800087a:	4618      	mov	r0, r3
+ 800087c:	f005 f86c 	bl	8005958 <memset>
+	
     // Static counters persist between function calls
     static int displayTimer = 0;
     displayTimer++;
- 8000870:	4b93      	ldr	r3, [pc, #588]	@ (8000ac0 <UpdateFrameArrays+0x258>)
- 8000872:	681b      	ldr	r3, [r3, #0]
- 8000874:	3301      	adds	r3, #1
- 8000876:	4a92      	ldr	r2, [pc, #584]	@ (8000ac0 <UpdateFrameArrays+0x258>)
- 8000878:	6013      	str	r3, [r2, #0]
+ 8000880:	4b92      	ldr	r3, [pc, #584]	@ (8000acc <UpdateFrameArrays+0x264>)
+ 8000882:	681b      	ldr	r3, [r3, #0]
+ 8000884:	3301      	adds	r3, #1
+ 8000886:	4a91      	ldr	r2, [pc, #580]	@ (8000acc <UpdateFrameArrays+0x264>)
+ 8000888:	6013      	str	r3, [r2, #0]
 
 	//determine duty cycles for each tileState
 	int noneBright = 1; // none will always be off
- 800087a:	2301      	movs	r3, #1
- 800087c:	61fb      	str	r3, [r7, #28]
+ 800088a:	2301      	movs	r3, #1
+ 800088c:	61fb      	str	r3, [r7, #28]
 	int hitBright = 0; //hit ships are at 100% brightness
- 800087e:	2300      	movs	r3, #0
- 8000880:	61bb      	str	r3, [r7, #24]
+ 800088e:	2300      	movs	r3, #0
+ 8000890:	61bb      	str	r3, [r7, #24]
 	int missBright = !(displayTimer % 5 == 0); // miss gets 20% duty cycle
- 8000882:	4b8f      	ldr	r3, [pc, #572]	@ (8000ac0 <UpdateFrameArrays+0x258>)
- 8000884:	6819      	ldr	r1, [r3, #0]
- 8000886:	4b8f      	ldr	r3, [pc, #572]	@ (8000ac4 <UpdateFrameArrays+0x25c>)
- 8000888:	fb83 2301 	smull	r2, r3, r3, r1
- 800088c:	105a      	asrs	r2, r3, #1
- 800088e:	17cb      	asrs	r3, r1, #31
- 8000890:	1ad2      	subs	r2, r2, r3
- 8000892:	4613      	mov	r3, r2
- 8000894:	009b      	lsls	r3, r3, #2
- 8000896:	4413      	add	r3, r2
- 8000898:	1aca      	subs	r2, r1, r3
- 800089a:	2a00      	cmp	r2, #0
- 800089c:	bf14      	ite	ne
- 800089e:	2301      	movne	r3, #1
- 80008a0:	2300      	moveq	r3, #0
- 80008a2:	b2db      	uxtb	r3, r3
- 80008a4:	617b      	str	r3, [r7, #20]
+ 8000892:	4b8e      	ldr	r3, [pc, #568]	@ (8000acc <UpdateFrameArrays+0x264>)
+ 8000894:	6819      	ldr	r1, [r3, #0]
+ 8000896:	4b8e      	ldr	r3, [pc, #568]	@ (8000ad0 <UpdateFrameArrays+0x268>)
+ 8000898:	fb83 2301 	smull	r2, r3, r3, r1
+ 800089c:	105a      	asrs	r2, r3, #1
+ 800089e:	17cb      	asrs	r3, r1, #31
+ 80008a0:	1ad2      	subs	r2, r2, r3
+ 80008a2:	4613      	mov	r3, r2
+ 80008a4:	009b      	lsls	r3, r3, #2
+ 80008a6:	4413      	add	r3, r2
+ 80008a8:	1aca      	subs	r2, r1, r3
+ 80008aa:	2a00      	cmp	r2, #0
+ 80008ac:	bf14      	ite	ne
+ 80008ae:	2301      	movne	r3, #1
+ 80008b0:	2300      	moveq	r3, #0
+ 80008b2:	b2db      	uxtb	r3, r3
+ 80008b4:	617b      	str	r3, [r7, #20]
     int placedBright = 0; // placed ships are displayed at 100% brightness
- 80008a6:	2300      	movs	r3, #0
- 80008a8:	613b      	str	r3, [r7, #16]
+ 80008b6:	2300      	movs	r3, #0
+ 80008b8:	613b      	str	r3, [r7, #16]
 	int cursorBright = !(displayTimer % 1500 < 750); //cursor blinks, toggle the blink state every 750 counts
- 80008aa:	4b85      	ldr	r3, [pc, #532]	@ (8000ac0 <UpdateFrameArrays+0x258>)
- 80008ac:	681a      	ldr	r2, [r3, #0]
- 80008ae:	4b86      	ldr	r3, [pc, #536]	@ (8000ac8 <UpdateFrameArrays+0x260>)
- 80008b0:	fb83 1302 	smull	r1, r3, r3, r2
- 80008b4:	1159      	asrs	r1, r3, #5
- 80008b6:	17d3      	asrs	r3, r2, #31
- 80008b8:	1acb      	subs	r3, r1, r3
- 80008ba:	f240 51dc 	movw	r1, #1500	@ 0x5dc
- 80008be:	fb01 f303 	mul.w	r3, r1, r3
- 80008c2:	1ad3      	subs	r3, r2, r3
- 80008c4:	f240 22ed 	movw	r2, #749	@ 0x2ed
- 80008c8:	4293      	cmp	r3, r2
- 80008ca:	bfcc      	ite	gt
- 80008cc:	2301      	movgt	r3, #1
- 80008ce:	2300      	movle	r3, #0
- 80008d0:	b2db      	uxtb	r3, r3
- 80008d2:	60fb      	str	r3, [r7, #12]
+ 80008ba:	4b84      	ldr	r3, [pc, #528]	@ (8000acc <UpdateFrameArrays+0x264>)
+ 80008bc:	681a      	ldr	r2, [r3, #0]
+ 80008be:	4b85      	ldr	r3, [pc, #532]	@ (8000ad4 <UpdateFrameArrays+0x26c>)
+ 80008c0:	fb83 1302 	smull	r1, r3, r3, r2
+ 80008c4:	1159      	asrs	r1, r3, #5
+ 80008c6:	17d3      	asrs	r3, r2, #31
+ 80008c8:	1acb      	subs	r3, r1, r3
+ 80008ca:	f240 51dc 	movw	r1, #1500	@ 0x5dc
+ 80008ce:	fb01 f303 	mul.w	r3, r1, r3
+ 80008d2:	1ad3      	subs	r3, r2, r3
+ 80008d4:	f240 22ed 	movw	r2, #749	@ 0x2ed
+ 80008d8:	4293      	cmp	r3, r2
+ 80008da:	bfcc      	ite	gt
+ 80008dc:	2301      	movgt	r3, #1
+ 80008de:	2300      	movle	r3, #0
+ 80008e0:	b2db      	uxtb	r3, r3
+ 80008e2:	60fb      	str	r3, [r7, #12]
 
     //Process Horizontal Array
     for (int i = 0; i < H_WIDTH; i++) {
- 80008d4:	2300      	movs	r3, #0
- 80008d6:	62fb      	str	r3, [r7, #44]	@ 0x2c
- 80008d8:	e072      	b.n	80009c0 <UpdateFrameArrays+0x158>
+ 80008e4:	2300      	movs	r3, #0
+ 80008e6:	62fb      	str	r3, [r7, #44]	@ 0x2c
+ 80008e8:	e072      	b.n	80009d0 <UpdateFrameArrays+0x168>
         for (int j = 0; j < H_HEIGHT; j++) {
- 80008da:	2300      	movs	r3, #0
- 80008dc:	62bb      	str	r3, [r7, #40]	@ 0x28
- 80008de:	e069      	b.n	80009b4 <UpdateFrameArrays+0x14c>
+ 80008ea:	2300      	movs	r3, #0
+ 80008ec:	62bb      	str	r3, [r7, #40]	@ 0x28
+ 80008ee:	e069      	b.n	80009c4 <UpdateFrameArrays+0x15c>
             TileState tileState = game->display.horizDisplayArray[i][j];
- 80008e0:	6879      	ldr	r1, [r7, #4]
- 80008e2:	6afa      	ldr	r2, [r7, #44]	@ 0x2c
- 80008e4:	4613      	mov	r3, r2
- 80008e6:	005b      	lsls	r3, r3, #1
- 80008e8:	4413      	add	r3, r2
- 80008ea:	18ca      	adds	r2, r1, r3
- 80008ec:	6abb      	ldr	r3, [r7, #40]	@ 0x28
- 80008ee:	4413      	add	r3, r2
- 80008f0:	f503 7380 	add.w	r3, r3, #256	@ 0x100
- 80008f4:	781b      	ldrb	r3, [r3, #0]
- 80008f6:	72bb      	strb	r3, [r7, #10]
+ 80008f0:	6879      	ldr	r1, [r7, #4]
+ 80008f2:	6afa      	ldr	r2, [r7, #44]	@ 0x2c
+ 80008f4:	4613      	mov	r3, r2
+ 80008f6:	005b      	lsls	r3, r3, #1
+ 80008f8:	4413      	add	r3, r2
+ 80008fa:	18ca      	adds	r2, r1, r3
+ 80008fc:	6abb      	ldr	r3, [r7, #40]	@ 0x28
+ 80008fe:	4413      	add	r3, r2
+ 8000900:	f503 7380 	add.w	r3, r3, #256	@ 0x100
+ 8000904:	781b      	ldrb	r3, [r3, #0]
+ 8000906:	72bb      	strb	r3, [r7, #10]
             
             switch (tileState) {
- 80008f8:	7abb      	ldrb	r3, [r7, #10]
- 80008fa:	2b04      	cmp	r3, #4
- 80008fc:	d857      	bhi.n	80009ae <UpdateFrameArrays+0x146>
- 80008fe:	a201      	add	r2, pc, #4	@ (adr r2, 8000904 <UpdateFrameArrays+0x9c>)
- 8000900:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 8000904:	08000919 	.word	0x08000919
- 8000908:	08000937 	.word	0x08000937
- 800090c:	08000973 	.word	0x08000973
- 8000910:	08000991 	.word	0x08000991
- 8000914:	08000955 	.word	0x08000955
+ 8000908:	7abb      	ldrb	r3, [r7, #10]
+ 800090a:	2b04      	cmp	r3, #4
+ 800090c:	d857      	bhi.n	80009be <UpdateFrameArrays+0x156>
+ 800090e:	a201      	add	r2, pc, #4	@ (adr r2, 8000914 <UpdateFrameArrays+0xac>)
+ 8000910:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 8000914:	08000929 	.word	0x08000929
+ 8000918:	08000947 	.word	0x08000947
+ 800091c:	08000983 	.word	0x08000983
+ 8000920:	080009a1 	.word	0x080009a1
+ 8000924:	08000965 	.word	0x08000965
                 case NONE:
                     game->display.horizFrameArray[i][j] = noneBright;
- 8000918:	69fb      	ldr	r3, [r7, #28]
- 800091a:	b2d8      	uxtb	r0, r3
- 800091c:	6879      	ldr	r1, [r7, #4]
- 800091e:	6afa      	ldr	r2, [r7, #44]	@ 0x2c
- 8000920:	4613      	mov	r3, r2
- 8000922:	005b      	lsls	r3, r3, #1
- 8000924:	4413      	add	r3, r2
- 8000926:	18ca      	adds	r2, r1, r3
- 8000928:	6abb      	ldr	r3, [r7, #40]	@ 0x28
- 800092a:	4413      	add	r3, r2
- 800092c:	f503 739c 	add.w	r3, r3, #312	@ 0x138
- 8000930:	4602      	mov	r2, r0
- 8000932:	701a      	strb	r2, [r3, #0]
+ 8000928:	69fb      	ldr	r3, [r7, #28]
+ 800092a:	b2d8      	uxtb	r0, r3
+ 800092c:	6879      	ldr	r1, [r7, #4]
+ 800092e:	6afa      	ldr	r2, [r7, #44]	@ 0x2c
+ 8000930:	4613      	mov	r3, r2
+ 8000932:	005b      	lsls	r3, r3, #1
+ 8000934:	4413      	add	r3, r2
+ 8000936:	18ca      	adds	r2, r1, r3
+ 8000938:	6abb      	ldr	r3, [r7, #40]	@ 0x28
+ 800093a:	4413      	add	r3, r2
+ 800093c:	f503 739c 	add.w	r3, r3, #312	@ 0x138
+ 8000940:	4602      	mov	r2, r0
+ 8000942:	701a      	strb	r2, [r3, #0]
                     break;
- 8000934:	e03b      	b.n	80009ae <UpdateFrameArrays+0x146>
+ 8000944:	e03b      	b.n	80009be <UpdateFrameArrays+0x156>
                 case HIT:
 					game->display.horizFrameArray[i][j] = hitBright;
- 8000936:	69bb      	ldr	r3, [r7, #24]
- 8000938:	b2d8      	uxtb	r0, r3
- 800093a:	6879      	ldr	r1, [r7, #4]
- 800093c:	6afa      	ldr	r2, [r7, #44]	@ 0x2c
- 800093e:	4613      	mov	r3, r2
- 8000940:	005b      	lsls	r3, r3, #1
- 8000942:	4413      	add	r3, r2
- 8000944:	18ca      	adds	r2, r1, r3
- 8000946:	6abb      	ldr	r3, [r7, #40]	@ 0x28
- 8000948:	4413      	add	r3, r2
- 800094a:	f503 739c 	add.w	r3, r3, #312	@ 0x138
- 800094e:	4602      	mov	r2, r0
- 8000950:	701a      	strb	r2, [r3, #0]
+ 8000946:	69bb      	ldr	r3, [r7, #24]
+ 8000948:	b2d8      	uxtb	r0, r3
+ 800094a:	6879      	ldr	r1, [r7, #4]
+ 800094c:	6afa      	ldr	r2, [r7, #44]	@ 0x2c
+ 800094e:	4613      	mov	r3, r2
+ 8000950:	005b      	lsls	r3, r3, #1
+ 8000952:	4413      	add	r3, r2
+ 8000954:	18ca      	adds	r2, r1, r3
+ 8000956:	6abb      	ldr	r3, [r7, #40]	@ 0x28
+ 8000958:	4413      	add	r3, r2
+ 800095a:	f503 739c 	add.w	r3, r3, #312	@ 0x138
+ 800095e:	4602      	mov	r2, r0
+ 8000960:	701a      	strb	r2, [r3, #0]
                     break;
- 8000952:	e02c      	b.n	80009ae <UpdateFrameArrays+0x146>
+ 8000962:	e02c      	b.n	80009be <UpdateFrameArrays+0x156>
                 case PLACED:
                     game->display.horizFrameArray[i][j] = placedBright;
- 8000954:	693b      	ldr	r3, [r7, #16]
- 8000956:	b2d8      	uxtb	r0, r3
- 8000958:	6879      	ldr	r1, [r7, #4]
- 800095a:	6afa      	ldr	r2, [r7, #44]	@ 0x2c
- 800095c:	4613      	mov	r3, r2
- 800095e:	005b      	lsls	r3, r3, #1
- 8000960:	4413      	add	r3, r2
- 8000962:	18ca      	adds	r2, r1, r3
- 8000964:	6abb      	ldr	r3, [r7, #40]	@ 0x28
- 8000966:	4413      	add	r3, r2
- 8000968:	f503 739c 	add.w	r3, r3, #312	@ 0x138
- 800096c:	4602      	mov	r2, r0
- 800096e:	701a      	strb	r2, [r3, #0]
+ 8000964:	693b      	ldr	r3, [r7, #16]
+ 8000966:	b2d8      	uxtb	r0, r3
+ 8000968:	6879      	ldr	r1, [r7, #4]
+ 800096a:	6afa      	ldr	r2, [r7, #44]	@ 0x2c
+ 800096c:	4613      	mov	r3, r2
+ 800096e:	005b      	lsls	r3, r3, #1
+ 8000970:	4413      	add	r3, r2
+ 8000972:	18ca      	adds	r2, r1, r3
+ 8000974:	6abb      	ldr	r3, [r7, #40]	@ 0x28
+ 8000976:	4413      	add	r3, r2
+ 8000978:	f503 739c 	add.w	r3, r3, #312	@ 0x138
+ 800097c:	4602      	mov	r2, r0
+ 800097e:	701a      	strb	r2, [r3, #0]
                     break;
- 8000970:	e01d      	b.n	80009ae <UpdateFrameArrays+0x146>
+ 8000980:	e01d      	b.n	80009be <UpdateFrameArrays+0x156>
                 case MISS:
                     game->display.horizFrameArray[i][j] = missBright; 
- 8000972:	697b      	ldr	r3, [r7, #20]
- 8000974:	b2d8      	uxtb	r0, r3
- 8000976:	6879      	ldr	r1, [r7, #4]
- 8000978:	6afa      	ldr	r2, [r7, #44]	@ 0x2c
- 800097a:	4613      	mov	r3, r2
- 800097c:	005b      	lsls	r3, r3, #1
- 800097e:	4413      	add	r3, r2
- 8000980:	18ca      	adds	r2, r1, r3
- 8000982:	6abb      	ldr	r3, [r7, #40]	@ 0x28
- 8000984:	4413      	add	r3, r2
- 8000986:	f503 739c 	add.w	r3, r3, #312	@ 0x138
- 800098a:	4602      	mov	r2, r0
- 800098c:	701a      	strb	r2, [r3, #0]
+ 8000982:	697b      	ldr	r3, [r7, #20]
+ 8000984:	b2d8      	uxtb	r0, r3
+ 8000986:	6879      	ldr	r1, [r7, #4]
+ 8000988:	6afa      	ldr	r2, [r7, #44]	@ 0x2c
+ 800098a:	4613      	mov	r3, r2
+ 800098c:	005b      	lsls	r3, r3, #1
+ 800098e:	4413      	add	r3, r2
+ 8000990:	18ca      	adds	r2, r1, r3
+ 8000992:	6abb      	ldr	r3, [r7, #40]	@ 0x28
+ 8000994:	4413      	add	r3, r2
+ 8000996:	f503 739c 	add.w	r3, r3, #312	@ 0x138
+ 800099a:	4602      	mov	r2, r0
+ 800099c:	701a      	strb	r2, [r3, #0]
                     break;
- 800098e:	e00e      	b.n	80009ae <UpdateFrameArrays+0x146>
+ 800099e:	e00e      	b.n	80009be <UpdateFrameArrays+0x156>
                 case CURSOR:
                     game->display.horizFrameArray[i][j] = cursorBright;
- 8000990:	68fb      	ldr	r3, [r7, #12]
- 8000992:	b2d8      	uxtb	r0, r3
- 8000994:	6879      	ldr	r1, [r7, #4]
- 8000996:	6afa      	ldr	r2, [r7, #44]	@ 0x2c
- 8000998:	4613      	mov	r3, r2
- 800099a:	005b      	lsls	r3, r3, #1
- 800099c:	4413      	add	r3, r2
- 800099e:	18ca      	adds	r2, r1, r3
- 80009a0:	6abb      	ldr	r3, [r7, #40]	@ 0x28
- 80009a2:	4413      	add	r3, r2
- 80009a4:	f503 739c 	add.w	r3, r3, #312	@ 0x138
- 80009a8:	4602      	mov	r2, r0
- 80009aa:	701a      	strb	r2, [r3, #0]
+ 80009a0:	68fb      	ldr	r3, [r7, #12]
+ 80009a2:	b2d8      	uxtb	r0, r3
+ 80009a4:	6879      	ldr	r1, [r7, #4]
+ 80009a6:	6afa      	ldr	r2, [r7, #44]	@ 0x2c
+ 80009a8:	4613      	mov	r3, r2
+ 80009aa:	005b      	lsls	r3, r3, #1
+ 80009ac:	4413      	add	r3, r2
+ 80009ae:	18ca      	adds	r2, r1, r3
+ 80009b0:	6abb      	ldr	r3, [r7, #40]	@ 0x28
+ 80009b2:	4413      	add	r3, r2
+ 80009b4:	f503 739c 	add.w	r3, r3, #312	@ 0x138
+ 80009b8:	4602      	mov	r2, r0
+ 80009ba:	701a      	strb	r2, [r3, #0]
                     break;
- 80009ac:	bf00      	nop
+ 80009bc:	bf00      	nop
         for (int j = 0; j < H_HEIGHT; j++) {
- 80009ae:	6abb      	ldr	r3, [r7, #40]	@ 0x28
- 80009b0:	3301      	adds	r3, #1
- 80009b2:	62bb      	str	r3, [r7, #40]	@ 0x28
- 80009b4:	6abb      	ldr	r3, [r7, #40]	@ 0x28
- 80009b6:	2b02      	cmp	r3, #2
- 80009b8:	dd92      	ble.n	80008e0 <UpdateFrameArrays+0x78>
+ 80009be:	6abb      	ldr	r3, [r7, #40]	@ 0x28
+ 80009c0:	3301      	adds	r3, #1
+ 80009c2:	62bb      	str	r3, [r7, #40]	@ 0x28
+ 80009c4:	6abb      	ldr	r3, [r7, #40]	@ 0x28
+ 80009c6:	2b02      	cmp	r3, #2
+ 80009c8:	dd92      	ble.n	80008f0 <UpdateFrameArrays+0x88>
     for (int i = 0; i < H_WIDTH; i++) {
- 80009ba:	6afb      	ldr	r3, [r7, #44]	@ 0x2c
- 80009bc:	3301      	adds	r3, #1
- 80009be:	62fb      	str	r3, [r7, #44]	@ 0x2c
- 80009c0:	6afb      	ldr	r3, [r7, #44]	@ 0x2c
- 80009c2:	2b07      	cmp	r3, #7
- 80009c4:	dd89      	ble.n	80008da <UpdateFrameArrays+0x72>
+ 80009ca:	6afb      	ldr	r3, [r7, #44]	@ 0x2c
+ 80009cc:	3301      	adds	r3, #1
+ 80009ce:	62fb      	str	r3, [r7, #44]	@ 0x2c
+ 80009d0:	6afb      	ldr	r3, [r7, #44]	@ 0x2c
+ 80009d2:	2b07      	cmp	r3, #7
+ 80009d4:	dd89      	ble.n	80008ea <UpdateFrameArrays+0x82>
             }
         }
     }
 
     // Process Vertical Array
     for (int i = 0; i < V_WIDTH; i++) {
- 80009c6:	2300      	movs	r3, #0
- 80009c8:	627b      	str	r3, [r7, #36]	@ 0x24
- 80009ca:	e067      	b.n	8000a9c <UpdateFrameArrays+0x234>
+ 80009d6:	2300      	movs	r3, #0
+ 80009d8:	627b      	str	r3, [r7, #36]	@ 0x24
+ 80009da:	e067      	b.n	8000aac <UpdateFrameArrays+0x244>
         for (int j = 0; j < V_HEIGHT; j++) {
- 80009cc:	2300      	movs	r3, #0
- 80009ce:	623b      	str	r3, [r7, #32]
- 80009d0:	e05e      	b.n	8000a90 <UpdateFrameArrays+0x228>
+ 80009dc:	2300      	movs	r3, #0
+ 80009de:	623b      	str	r3, [r7, #32]
+ 80009e0:	e05e      	b.n	8000aa0 <UpdateFrameArrays+0x238>
             TileState currentState = game->display.vertDisplayArray[i][j];
- 80009d2:	687a      	ldr	r2, [r7, #4]
- 80009d4:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
- 80009d6:	005b      	lsls	r3, r3, #1
- 80009d8:	441a      	add	r2, r3
- 80009da:	6a3b      	ldr	r3, [r7, #32]
- 80009dc:	4413      	add	r3, r2
- 80009de:	f503 738c 	add.w	r3, r3, #280	@ 0x118
- 80009e2:	781b      	ldrb	r3, [r3, #0]
- 80009e4:	72fb      	strb	r3, [r7, #11]
+ 80009e2:	687a      	ldr	r2, [r7, #4]
+ 80009e4:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
+ 80009e6:	005b      	lsls	r3, r3, #1
+ 80009e8:	441a      	add	r2, r3
+ 80009ea:	6a3b      	ldr	r3, [r7, #32]
+ 80009ec:	4413      	add	r3, r2
+ 80009ee:	f503 738c 	add.w	r3, r3, #280	@ 0x118
+ 80009f2:	781b      	ldrb	r3, [r3, #0]
+ 80009f4:	72fb      	strb	r3, [r7, #11]
             
             switch (currentState) {
- 80009e6:	7afb      	ldrb	r3, [r7, #11]
- 80009e8:	2b04      	cmp	r3, #4
- 80009ea:	d84e      	bhi.n	8000a8a <UpdateFrameArrays+0x222>
- 80009ec:	a201      	add	r2, pc, #4	@ (adr r2, 80009f4 <UpdateFrameArrays+0x18c>)
- 80009ee:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 80009f2:	bf00      	nop
- 80009f4:	08000a09 	.word	0x08000a09
- 80009f8:	08000a23 	.word	0x08000a23
- 80009fc:	08000a57 	.word	0x08000a57
- 8000a00:	08000a71 	.word	0x08000a71
- 8000a04:	08000a3d 	.word	0x08000a3d
+ 80009f6:	7afb      	ldrb	r3, [r7, #11]
+ 80009f8:	2b04      	cmp	r3, #4
+ 80009fa:	d84e      	bhi.n	8000a9a <UpdateFrameArrays+0x232>
+ 80009fc:	a201      	add	r2, pc, #4	@ (adr r2, 8000a04 <UpdateFrameArrays+0x19c>)
+ 80009fe:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 8000a02:	bf00      	nop
+ 8000a04:	08000a19 	.word	0x08000a19
+ 8000a08:	08000a33 	.word	0x08000a33
+ 8000a0c:	08000a67 	.word	0x08000a67
+ 8000a10:	08000a81 	.word	0x08000a81
+ 8000a14:	08000a4d 	.word	0x08000a4d
                 case NONE:
                     game->display.vertFrameArray[i][j] = noneBright;
- 8000a08:	69fb      	ldr	r3, [r7, #28]
- 8000a0a:	b2d9      	uxtb	r1, r3
- 8000a0c:	687a      	ldr	r2, [r7, #4]
- 8000a0e:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
- 8000a10:	005b      	lsls	r3, r3, #1
- 8000a12:	441a      	add	r2, r3
- 8000a14:	6a3b      	ldr	r3, [r7, #32]
- 8000a16:	4413      	add	r3, r2
- 8000a18:	f503 73a8 	add.w	r3, r3, #336	@ 0x150
- 8000a1c:	460a      	mov	r2, r1
- 8000a1e:	701a      	strb	r2, [r3, #0]
+ 8000a18:	69fb      	ldr	r3, [r7, #28]
+ 8000a1a:	b2d9      	uxtb	r1, r3
+ 8000a1c:	687a      	ldr	r2, [r7, #4]
+ 8000a1e:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
+ 8000a20:	005b      	lsls	r3, r3, #1
+ 8000a22:	441a      	add	r2, r3
+ 8000a24:	6a3b      	ldr	r3, [r7, #32]
+ 8000a26:	4413      	add	r3, r2
+ 8000a28:	f503 73a8 	add.w	r3, r3, #336	@ 0x150
+ 8000a2c:	460a      	mov	r2, r1
+ 8000a2e:	701a      	strb	r2, [r3, #0]
                     break;
- 8000a20:	e033      	b.n	8000a8a <UpdateFrameArrays+0x222>
+ 8000a30:	e033      	b.n	8000a9a <UpdateFrameArrays+0x232>
                 case HIT:
 					game->display.vertFrameArray[i][j] = hitBright;
- 8000a22:	69bb      	ldr	r3, [r7, #24]
- 8000a24:	b2d9      	uxtb	r1, r3
- 8000a26:	687a      	ldr	r2, [r7, #4]
- 8000a28:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
- 8000a2a:	005b      	lsls	r3, r3, #1
- 8000a2c:	441a      	add	r2, r3
- 8000a2e:	6a3b      	ldr	r3, [r7, #32]
- 8000a30:	4413      	add	r3, r2
- 8000a32:	f503 73a8 	add.w	r3, r3, #336	@ 0x150
- 8000a36:	460a      	mov	r2, r1
- 8000a38:	701a      	strb	r2, [r3, #0]
+ 8000a32:	69bb      	ldr	r3, [r7, #24]
+ 8000a34:	b2d9      	uxtb	r1, r3
+ 8000a36:	687a      	ldr	r2, [r7, #4]
+ 8000a38:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
+ 8000a3a:	005b      	lsls	r3, r3, #1
+ 8000a3c:	441a      	add	r2, r3
+ 8000a3e:	6a3b      	ldr	r3, [r7, #32]
+ 8000a40:	4413      	add	r3, r2
+ 8000a42:	f503 73a8 	add.w	r3, r3, #336	@ 0x150
+ 8000a46:	460a      	mov	r2, r1
+ 8000a48:	701a      	strb	r2, [r3, #0]
                     break;
- 8000a3a:	e026      	b.n	8000a8a <UpdateFrameArrays+0x222>
+ 8000a4a:	e026      	b.n	8000a9a <UpdateFrameArrays+0x232>
                 case PLACED:
                     game->display.vertFrameArray[i][j] = placedBright;
- 8000a3c:	693b      	ldr	r3, [r7, #16]
- 8000a3e:	b2d9      	uxtb	r1, r3
- 8000a40:	687a      	ldr	r2, [r7, #4]
- 8000a42:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
- 8000a44:	005b      	lsls	r3, r3, #1
- 8000a46:	441a      	add	r2, r3
- 8000a48:	6a3b      	ldr	r3, [r7, #32]
- 8000a4a:	4413      	add	r3, r2
- 8000a4c:	f503 73a8 	add.w	r3, r3, #336	@ 0x150
- 8000a50:	460a      	mov	r2, r1
- 8000a52:	701a      	strb	r2, [r3, #0]
+ 8000a4c:	693b      	ldr	r3, [r7, #16]
+ 8000a4e:	b2d9      	uxtb	r1, r3
+ 8000a50:	687a      	ldr	r2, [r7, #4]
+ 8000a52:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
+ 8000a54:	005b      	lsls	r3, r3, #1
+ 8000a56:	441a      	add	r2, r3
+ 8000a58:	6a3b      	ldr	r3, [r7, #32]
+ 8000a5a:	4413      	add	r3, r2
+ 8000a5c:	f503 73a8 	add.w	r3, r3, #336	@ 0x150
+ 8000a60:	460a      	mov	r2, r1
+ 8000a62:	701a      	strb	r2, [r3, #0]
                     break;
- 8000a54:	e019      	b.n	8000a8a <UpdateFrameArrays+0x222>
+ 8000a64:	e019      	b.n	8000a9a <UpdateFrameArrays+0x232>
                 case MISS:
                     game->display.vertFrameArray[i][j] = missBright;
- 8000a56:	697b      	ldr	r3, [r7, #20]
- 8000a58:	b2d9      	uxtb	r1, r3
- 8000a5a:	687a      	ldr	r2, [r7, #4]
- 8000a5c:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
- 8000a5e:	005b      	lsls	r3, r3, #1
- 8000a60:	441a      	add	r2, r3
- 8000a62:	6a3b      	ldr	r3, [r7, #32]
- 8000a64:	4413      	add	r3, r2
- 8000a66:	f503 73a8 	add.w	r3, r3, #336	@ 0x150
- 8000a6a:	460a      	mov	r2, r1
- 8000a6c:	701a      	strb	r2, [r3, #0]
+ 8000a66:	697b      	ldr	r3, [r7, #20]
+ 8000a68:	b2d9      	uxtb	r1, r3
+ 8000a6a:	687a      	ldr	r2, [r7, #4]
+ 8000a6c:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
+ 8000a6e:	005b      	lsls	r3, r3, #1
+ 8000a70:	441a      	add	r2, r3
+ 8000a72:	6a3b      	ldr	r3, [r7, #32]
+ 8000a74:	4413      	add	r3, r2
+ 8000a76:	f503 73a8 	add.w	r3, r3, #336	@ 0x150
+ 8000a7a:	460a      	mov	r2, r1
+ 8000a7c:	701a      	strb	r2, [r3, #0]
                     break;
- 8000a6e:	e00c      	b.n	8000a8a <UpdateFrameArrays+0x222>
+ 8000a7e:	e00c      	b.n	8000a9a <UpdateFrameArrays+0x232>
                 case CURSOR:
                     game->display.vertFrameArray[i][j] = cursorBright;
- 8000a70:	68fb      	ldr	r3, [r7, #12]
- 8000a72:	b2d9      	uxtb	r1, r3
- 8000a74:	687a      	ldr	r2, [r7, #4]
- 8000a76:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
- 8000a78:	005b      	lsls	r3, r3, #1
- 8000a7a:	441a      	add	r2, r3
- 8000a7c:	6a3b      	ldr	r3, [r7, #32]
- 8000a7e:	4413      	add	r3, r2
- 8000a80:	f503 73a8 	add.w	r3, r3, #336	@ 0x150
- 8000a84:	460a      	mov	r2, r1
- 8000a86:	701a      	strb	r2, [r3, #0]
+ 8000a80:	68fb      	ldr	r3, [r7, #12]
+ 8000a82:	b2d9      	uxtb	r1, r3
+ 8000a84:	687a      	ldr	r2, [r7, #4]
+ 8000a86:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
+ 8000a88:	005b      	lsls	r3, r3, #1
+ 8000a8a:	441a      	add	r2, r3
+ 8000a8c:	6a3b      	ldr	r3, [r7, #32]
+ 8000a8e:	4413      	add	r3, r2
+ 8000a90:	f503 73a8 	add.w	r3, r3, #336	@ 0x150
+ 8000a94:	460a      	mov	r2, r1
+ 8000a96:	701a      	strb	r2, [r3, #0]
                     break;
- 8000a88:	bf00      	nop
+ 8000a98:	bf00      	nop
         for (int j = 0; j < V_HEIGHT; j++) {
- 8000a8a:	6a3b      	ldr	r3, [r7, #32]
- 8000a8c:	3301      	adds	r3, #1
- 8000a8e:	623b      	str	r3, [r7, #32]
- 8000a90:	6a3b      	ldr	r3, [r7, #32]
- 8000a92:	2b01      	cmp	r3, #1
- 8000a94:	dd9d      	ble.n	80009d2 <UpdateFrameArrays+0x16a>
+ 8000a9a:	6a3b      	ldr	r3, [r7, #32]
+ 8000a9c:	3301      	adds	r3, #1
+ 8000a9e:	623b      	str	r3, [r7, #32]
+ 8000aa0:	6a3b      	ldr	r3, [r7, #32]
+ 8000aa2:	2b01      	cmp	r3, #1
+ 8000aa4:	dd9d      	ble.n	80009e2 <UpdateFrameArrays+0x17a>
     for (int i = 0; i < V_WIDTH; i++) {
- 8000a96:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
- 8000a98:	3301      	adds	r3, #1
- 8000a9a:	627b      	str	r3, [r7, #36]	@ 0x24
- 8000a9c:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
- 8000a9e:	2b0f      	cmp	r3, #15
- 8000aa0:	dd94      	ble.n	80009cc <UpdateFrameArrays+0x164>
+ 8000aa6:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
+ 8000aa8:	3301      	adds	r3, #1
+ 8000aaa:	627b      	str	r3, [r7, #36]	@ 0x24
+ 8000aac:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
+ 8000aae:	2b0f      	cmp	r3, #15
+ 8000ab0:	dd94      	ble.n	80009dc <UpdateFrameArrays+0x174>
             }
         }
     }
     
     // Reset displayTimer eventually to prevent overflo
     if (displayTimer >= 15000) displayTimer = 0; 
- 8000aa2:	4b07      	ldr	r3, [pc, #28]	@ (8000ac0 <UpdateFrameArrays+0x258>)
- 8000aa4:	681b      	ldr	r3, [r3, #0]
- 8000aa6:	f643 2297 	movw	r2, #14999	@ 0x3a97
- 8000aaa:	4293      	cmp	r3, r2
- 8000aac:	dd02      	ble.n	8000ab4 <UpdateFrameArrays+0x24c>
- 8000aae:	4b04      	ldr	r3, [pc, #16]	@ (8000ac0 <UpdateFrameArrays+0x258>)
- 8000ab0:	2200      	movs	r2, #0
- 8000ab2:	601a      	str	r2, [r3, #0]
+ 8000ab2:	4b06      	ldr	r3, [pc, #24]	@ (8000acc <UpdateFrameArrays+0x264>)
+ 8000ab4:	681b      	ldr	r3, [r3, #0]
+ 8000ab6:	f643 2297 	movw	r2, #14999	@ 0x3a97
+ 8000aba:	4293      	cmp	r3, r2
+ 8000abc:	dd02      	ble.n	8000ac4 <UpdateFrameArrays+0x25c>
+ 8000abe:	4b03      	ldr	r3, [pc, #12]	@ (8000acc <UpdateFrameArrays+0x264>)
+ 8000ac0:	2200      	movs	r2, #0
+ 8000ac2:	601a      	str	r2, [r3, #0]
 }
- 8000ab4:	bf00      	nop
- 8000ab6:	3734      	adds	r7, #52	@ 0x34
- 8000ab8:	46bd      	mov	sp, r7
- 8000aba:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000abe:	4770      	bx	lr
- 8000ac0:	20000028 	.word	0x20000028
- 8000ac4:	66666667 	.word	0x66666667
- 8000ac8:	057619f1 	.word	0x057619f1
+ 8000ac4:	bf00      	nop
+ 8000ac6:	3730      	adds	r7, #48	@ 0x30
+ 8000ac8:	46bd      	mov	sp, r7
+ 8000aca:	bd80      	pop	{r7, pc}
+ 8000acc:	20000028 	.word	0x20000028
+ 8000ad0:	66666667 	.word	0x66666667
+ 8000ad4:	057619f1 	.word	0x057619f1
 
-08000acc <OutputFrame>:
+08000ad8 <OutputFrame>:
 
 void OutputFrame(Display *d) {
- 8000acc:	b580      	push	{r7, lr}
- 8000ace:	b084      	sub	sp, #16
- 8000ad0:	af00      	add	r7, sp, #0
- 8000ad2:	6078      	str	r0, [r7, #4]
+ 8000ad8:	b580      	push	{r7, lr}
+ 8000ada:	b084      	sub	sp, #16
+ 8000adc:	af00      	add	r7, sp, #0
+ 8000ade:	6078      	str	r0, [r7, #4]
 	for(int i = 0; i < H_WIDTH; i++) {
- 8000ad4:	2300      	movs	r3, #0
- 8000ad6:	60fb      	str	r3, [r7, #12]
- 8000ad8:	e019      	b.n	8000b0e <OutputFrame+0x42>
+ 8000ae0:	2300      	movs	r3, #0
+ 8000ae2:	60fb      	str	r3, [r7, #12]
+ 8000ae4:	e019      	b.n	8000b1a <OutputFrame+0x42>
 		int bitMask = Get7SegBitMask(d,i); // get the mask for the character
- 8000ada:	68f9      	ldr	r1, [r7, #12]
- 8000adc:	6878      	ldr	r0, [r7, #4]
- 8000ade:	f000 f821 	bl	8000b24 <Get7SegBitMask>
- 8000ae2:	60b8      	str	r0, [r7, #8]
+ 8000ae6:	68f9      	ldr	r1, [r7, #12]
+ 8000ae8:	6878      	ldr	r0, [r7, #4]
+ 8000aea:	f000 f821 	bl	8000b30 <Get7SegBitMask>
+ 8000aee:	60b8      	str	r0, [r7, #8]
 		GPIOE->ODR = (0xFF00 | bitMask) & ~(1<<(i+8));
- 8000ae4:	68bb      	ldr	r3, [r7, #8]
- 8000ae6:	f443 427f 	orr.w	r2, r3, #65280	@ 0xff00
- 8000aea:	68fb      	ldr	r3, [r7, #12]
- 8000aec:	3308      	adds	r3, #8
- 8000aee:	2101      	movs	r1, #1
- 8000af0:	fa01 f303 	lsl.w	r3, r1, r3
- 8000af4:	43db      	mvns	r3, r3
- 8000af6:	401a      	ands	r2, r3
- 8000af8:	4b09      	ldr	r3, [pc, #36]	@ (8000b20 <OutputFrame+0x54>)
- 8000afa:	615a      	str	r2, [r3, #20]
+ 8000af0:	68bb      	ldr	r3, [r7, #8]
+ 8000af2:	f443 427f 	orr.w	r2, r3, #65280	@ 0xff00
+ 8000af6:	68fb      	ldr	r3, [r7, #12]
+ 8000af8:	3308      	adds	r3, #8
+ 8000afa:	2101      	movs	r1, #1
+ 8000afc:	fa01 f303 	lsl.w	r3, r1, r3
+ 8000b00:	43db      	mvns	r3, r3
+ 8000b02:	401a      	ands	r2, r3
+ 8000b04:	4b09      	ldr	r3, [pc, #36]	@ (8000b2c <OutputFrame+0x54>)
+ 8000b06:	615a      	str	r2, [r3, #20]
 		// Set all selects high to latch-in character
 		GPIOE->ODR |= 0xFF00;
- 8000afc:	4b08      	ldr	r3, [pc, #32]	@ (8000b20 <OutputFrame+0x54>)
- 8000afe:	695b      	ldr	r3, [r3, #20]
- 8000b00:	4a07      	ldr	r2, [pc, #28]	@ (8000b20 <OutputFrame+0x54>)
- 8000b02:	f443 437f 	orr.w	r3, r3, #65280	@ 0xff00
- 8000b06:	6153      	str	r3, [r2, #20]
+ 8000b08:	4b08      	ldr	r3, [pc, #32]	@ (8000b2c <OutputFrame+0x54>)
+ 8000b0a:	695b      	ldr	r3, [r3, #20]
+ 8000b0c:	4a07      	ldr	r2, [pc, #28]	@ (8000b2c <OutputFrame+0x54>)
+ 8000b0e:	f443 437f 	orr.w	r3, r3, #65280	@ 0xff00
+ 8000b12:	6153      	str	r3, [r2, #20]
 	for(int i = 0; i < H_WIDTH; i++) {
- 8000b08:	68fb      	ldr	r3, [r7, #12]
- 8000b0a:	3301      	adds	r3, #1
- 8000b0c:	60fb      	str	r3, [r7, #12]
- 8000b0e:	68fb      	ldr	r3, [r7, #12]
- 8000b10:	2b07      	cmp	r3, #7
- 8000b12:	dde2      	ble.n	8000ada <OutputFrame+0xe>
+ 8000b14:	68fb      	ldr	r3, [r7, #12]
+ 8000b16:	3301      	adds	r3, #1
+ 8000b18:	60fb      	str	r3, [r7, #12]
+ 8000b1a:	68fb      	ldr	r3, [r7, #12]
+ 8000b1c:	2b07      	cmp	r3, #7
+ 8000b1e:	dde2      	ble.n	8000ae6 <OutputFrame+0xe>
 	}
 }
- 8000b14:	bf00      	nop
- 8000b16:	bf00      	nop
- 8000b18:	3710      	adds	r7, #16
- 8000b1a:	46bd      	mov	sp, r7
- 8000b1c:	bd80      	pop	{r7, pc}
- 8000b1e:	bf00      	nop
- 8000b20:	40021000 	.word	0x40021000
+ 8000b20:	bf00      	nop
+ 8000b22:	bf00      	nop
+ 8000b24:	3710      	adds	r7, #16
+ 8000b26:	46bd      	mov	sp, r7
+ 8000b28:	bd80      	pop	{r7, pc}
+ 8000b2a:	bf00      	nop
+ 8000b2c:	40021000 	.word	0x40021000
 
-08000b24 <Get7SegBitMask>:
+08000b30 <Get7SegBitMask>:
 
 int Get7SegBitMask(Display *d, int displayIndex) {
- 8000b24:	b480      	push	{r7}
- 8000b26:	b087      	sub	sp, #28
- 8000b28:	af00      	add	r7, sp, #0
- 8000b2a:	6078      	str	r0, [r7, #4]
- 8000b2c:	6039      	str	r1, [r7, #0]
+ 8000b30:	b480      	push	{r7}
+ 8000b32:	b087      	sub	sp, #28
+ 8000b34:	af00      	add	r7, sp, #0
+ 8000b36:	6078      	str	r0, [r7, #4]
+ 8000b38:	6039      	str	r1, [r7, #0]
 	    int bitMask = 0x0; // initialize seven segment code to 0
- 8000b2e:	2300      	movs	r3, #0
- 8000b30:	617b      	str	r3, [r7, #20]
+ 8000b3a:	2300      	movs	r3, #0
+ 8000b3c:	617b      	str	r3, [r7, #20]
 	    int horizontalXShift = (H_WIDTH-1)-displayIndex; // find offset for x value for indexing horizontal matrix
- 8000b32:	683b      	ldr	r3, [r7, #0]
- 8000b34:	f1c3 0307 	rsb	r3, r3, #7
- 8000b38:	613b      	str	r3, [r7, #16]
+ 8000b3e:	683b      	ldr	r3, [r7, #0]
+ 8000b40:	f1c3 0307 	rsb	r3, r3, #7
+ 8000b44:	613b      	str	r3, [r7, #16]
 	    int verticalXShift = ((H_WIDTH-1)-displayIndex)*2; // find offset for x value for indexing vertical matrix
- 8000b3a:	683b      	ldr	r3, [r7, #0]
- 8000b3c:	f1c3 0307 	rsb	r3, r3, #7
- 8000b40:	005b      	lsls	r3, r3, #1
- 8000b42:	60fb      	str	r3, [r7, #12]
+ 8000b46:	683b      	ldr	r3, [r7, #0]
+ 8000b48:	f1c3 0307 	rsb	r3, r3, #7
+ 8000b4c:	005b      	lsls	r3, r3, #1
+ 8000b4e:	60fb      	str	r3, [r7, #12]
 	    bitMask |= ((d->horizFrameArray[horizontalXShift][2]) << 0); //set segment A to the value in horizontal at 'a' position for the appropriate display
- 8000b44:	6879      	ldr	r1, [r7, #4]
- 8000b46:	693a      	ldr	r2, [r7, #16]
- 8000b48:	4613      	mov	r3, r2
- 8000b4a:	005b      	lsls	r3, r3, #1
- 8000b4c:	4413      	add	r3, r2
- 8000b4e:	440b      	add	r3, r1
- 8000b50:	333a      	adds	r3, #58	@ 0x3a
- 8000b52:	781b      	ldrb	r3, [r3, #0]
- 8000b54:	461a      	mov	r2, r3
- 8000b56:	697b      	ldr	r3, [r7, #20]
- 8000b58:	4313      	orrs	r3, r2
- 8000b5a:	617b      	str	r3, [r7, #20]
+ 8000b50:	6879      	ldr	r1, [r7, #4]
+ 8000b52:	693a      	ldr	r2, [r7, #16]
+ 8000b54:	4613      	mov	r3, r2
+ 8000b56:	005b      	lsls	r3, r3, #1
+ 8000b58:	4413      	add	r3, r2
+ 8000b5a:	440b      	add	r3, r1
+ 8000b5c:	333a      	adds	r3, #58	@ 0x3a
+ 8000b5e:	781b      	ldrb	r3, [r3, #0]
+ 8000b60:	461a      	mov	r2, r3
+ 8000b62:	697b      	ldr	r3, [r7, #20]
+ 8000b64:	4313      	orrs	r3, r2
+ 8000b66:	617b      	str	r3, [r7, #20]
 	    bitMask |= ((d->vertFrameArray[1 + verticalXShift][1]) << 1); //segment b
- 8000b5c:	68fb      	ldr	r3, [r7, #12]
- 8000b5e:	3301      	adds	r3, #1
- 8000b60:	687a      	ldr	r2, [r7, #4]
- 8000b62:	005b      	lsls	r3, r3, #1
- 8000b64:	4413      	add	r3, r2
- 8000b66:	f893 3051 	ldrb.w	r3, [r3, #81]	@ 0x51
- 8000b6a:	005b      	lsls	r3, r3, #1
- 8000b6c:	697a      	ldr	r2, [r7, #20]
- 8000b6e:	4313      	orrs	r3, r2
- 8000b70:	617b      	str	r3, [r7, #20]
+ 8000b68:	68fb      	ldr	r3, [r7, #12]
+ 8000b6a:	3301      	adds	r3, #1
+ 8000b6c:	687a      	ldr	r2, [r7, #4]
+ 8000b6e:	005b      	lsls	r3, r3, #1
+ 8000b70:	4413      	add	r3, r2
+ 8000b72:	f893 3051 	ldrb.w	r3, [r3, #81]	@ 0x51
+ 8000b76:	005b      	lsls	r3, r3, #1
+ 8000b78:	697a      	ldr	r2, [r7, #20]
+ 8000b7a:	4313      	orrs	r3, r2
+ 8000b7c:	617b      	str	r3, [r7, #20]
 	    bitMask |= ((d->vertFrameArray[1 + verticalXShift][0]) << 2); // segment c
- 8000b72:	68fb      	ldr	r3, [r7, #12]
- 8000b74:	1c5a      	adds	r2, r3, #1
- 8000b76:	687b      	ldr	r3, [r7, #4]
- 8000b78:	3228      	adds	r2, #40	@ 0x28
- 8000b7a:	f813 3012 	ldrb.w	r3, [r3, r2, lsl #1]
- 8000b7e:	009b      	lsls	r3, r3, #2
- 8000b80:	697a      	ldr	r2, [r7, #20]
- 8000b82:	4313      	orrs	r3, r2
- 8000b84:	617b      	str	r3, [r7, #20]
+ 8000b7e:	68fb      	ldr	r3, [r7, #12]
+ 8000b80:	1c5a      	adds	r2, r3, #1
+ 8000b82:	687b      	ldr	r3, [r7, #4]
+ 8000b84:	3228      	adds	r2, #40	@ 0x28
+ 8000b86:	f813 3012 	ldrb.w	r3, [r3, r2, lsl #1]
+ 8000b8a:	009b      	lsls	r3, r3, #2
+ 8000b8c:	697a      	ldr	r2, [r7, #20]
+ 8000b8e:	4313      	orrs	r3, r2
+ 8000b90:	617b      	str	r3, [r7, #20]
 	    bitMask |= ((d->horizFrameArray[horizontalXShift][0]) << 3); // segment d
- 8000b86:	6879      	ldr	r1, [r7, #4]
- 8000b88:	693a      	ldr	r2, [r7, #16]
- 8000b8a:	4613      	mov	r3, r2
- 8000b8c:	005b      	lsls	r3, r3, #1
- 8000b8e:	4413      	add	r3, r2
- 8000b90:	440b      	add	r3, r1
- 8000b92:	3338      	adds	r3, #56	@ 0x38
- 8000b94:	781b      	ldrb	r3, [r3, #0]
- 8000b96:	00db      	lsls	r3, r3, #3
- 8000b98:	697a      	ldr	r2, [r7, #20]
- 8000b9a:	4313      	orrs	r3, r2
- 8000b9c:	617b      	str	r3, [r7, #20]
+ 8000b92:	6879      	ldr	r1, [r7, #4]
+ 8000b94:	693a      	ldr	r2, [r7, #16]
+ 8000b96:	4613      	mov	r3, r2
+ 8000b98:	005b      	lsls	r3, r3, #1
+ 8000b9a:	4413      	add	r3, r2
+ 8000b9c:	440b      	add	r3, r1
+ 8000b9e:	3338      	adds	r3, #56	@ 0x38
+ 8000ba0:	781b      	ldrb	r3, [r3, #0]
+ 8000ba2:	00db      	lsls	r3, r3, #3
+ 8000ba4:	697a      	ldr	r2, [r7, #20]
+ 8000ba6:	4313      	orrs	r3, r2
+ 8000ba8:	617b      	str	r3, [r7, #20]
 	    bitMask |= ((d->vertFrameArray[verticalXShift][0]) << 4); // segment e
- 8000b9e:	687b      	ldr	r3, [r7, #4]
- 8000ba0:	68fa      	ldr	r2, [r7, #12]
- 8000ba2:	3228      	adds	r2, #40	@ 0x28
- 8000ba4:	f813 3012 	ldrb.w	r3, [r3, r2, lsl #1]
- 8000ba8:	011b      	lsls	r3, r3, #4
- 8000baa:	697a      	ldr	r2, [r7, #20]
- 8000bac:	4313      	orrs	r3, r2
- 8000bae:	617b      	str	r3, [r7, #20]
+ 8000baa:	687b      	ldr	r3, [r7, #4]
+ 8000bac:	68fa      	ldr	r2, [r7, #12]
+ 8000bae:	3228      	adds	r2, #40	@ 0x28
+ 8000bb0:	f813 3012 	ldrb.w	r3, [r3, r2, lsl #1]
+ 8000bb4:	011b      	lsls	r3, r3, #4
+ 8000bb6:	697a      	ldr	r2, [r7, #20]
+ 8000bb8:	4313      	orrs	r3, r2
+ 8000bba:	617b      	str	r3, [r7, #20]
 	    bitMask |= ((d->vertFrameArray[verticalXShift][1]) << 5); // segment f
- 8000bb0:	687a      	ldr	r2, [r7, #4]
- 8000bb2:	68fb      	ldr	r3, [r7, #12]
- 8000bb4:	005b      	lsls	r3, r3, #1
- 8000bb6:	4413      	add	r3, r2
- 8000bb8:	f893 3051 	ldrb.w	r3, [r3, #81]	@ 0x51
- 8000bbc:	015b      	lsls	r3, r3, #5
- 8000bbe:	697a      	ldr	r2, [r7, #20]
- 8000bc0:	4313      	orrs	r3, r2
- 8000bc2:	617b      	str	r3, [r7, #20]
+ 8000bbc:	687a      	ldr	r2, [r7, #4]
+ 8000bbe:	68fb      	ldr	r3, [r7, #12]
+ 8000bc0:	005b      	lsls	r3, r3, #1
+ 8000bc2:	4413      	add	r3, r2
+ 8000bc4:	f893 3051 	ldrb.w	r3, [r3, #81]	@ 0x51
+ 8000bc8:	015b      	lsls	r3, r3, #5
+ 8000bca:	697a      	ldr	r2, [r7, #20]
+ 8000bcc:	4313      	orrs	r3, r2
+ 8000bce:	617b      	str	r3, [r7, #20]
 	    bitMask |= ((d->horizFrameArray[horizontalXShift][1]) << 6);
- 8000bc4:	6879      	ldr	r1, [r7, #4]
- 8000bc6:	693a      	ldr	r2, [r7, #16]
- 8000bc8:	4613      	mov	r3, r2
- 8000bca:	005b      	lsls	r3, r3, #1
- 8000bcc:	4413      	add	r3, r2
- 8000bce:	440b      	add	r3, r1
- 8000bd0:	3339      	adds	r3, #57	@ 0x39
- 8000bd2:	781b      	ldrb	r3, [r3, #0]
- 8000bd4:	019b      	lsls	r3, r3, #6
- 8000bd6:	697a      	ldr	r2, [r7, #20]
- 8000bd8:	4313      	orrs	r3, r2
- 8000bda:	617b      	str	r3, [r7, #20]
-		bitMask |= !((d->dotsFrameArray[horizontalXShift]) << 7); // segment g
- 8000bdc:	687b      	ldr	r3, [r7, #4]
- 8000bde:	693a      	ldr	r2, [r7, #16]
- 8000be0:	321c      	adds	r2, #28
- 8000be2:	f853 3022 	ldr.w	r3, [r3, r2, lsl #2]
- 8000be6:	01db      	lsls	r3, r3, #7
- 8000be8:	2b00      	cmp	r3, #0
- 8000bea:	bf0c      	ite	eq
- 8000bec:	2301      	moveq	r3, #1
- 8000bee:	2300      	movne	r3, #0
- 8000bf0:	b2db      	uxtb	r3, r3
- 8000bf2:	461a      	mov	r2, r3
- 8000bf4:	697b      	ldr	r3, [r7, #20]
+ 8000bd0:	6879      	ldr	r1, [r7, #4]
+ 8000bd2:	693a      	ldr	r2, [r7, #16]
+ 8000bd4:	4613      	mov	r3, r2
+ 8000bd6:	005b      	lsls	r3, r3, #1
+ 8000bd8:	4413      	add	r3, r2
+ 8000bda:	440b      	add	r3, r1
+ 8000bdc:	3339      	adds	r3, #57	@ 0x39
+ 8000bde:	781b      	ldrb	r3, [r3, #0]
+ 8000be0:	019b      	lsls	r3, r3, #6
+ 8000be2:	697a      	ldr	r2, [r7, #20]
+ 8000be4:	4313      	orrs	r3, r2
+ 8000be6:	617b      	str	r3, [r7, #20]
+		bitMask |= (d->dotsFrameArray[horizontalXShift] << 7); // segment g
+ 8000be8:	687b      	ldr	r3, [r7, #4]
+ 8000bea:	693a      	ldr	r2, [r7, #16]
+ 8000bec:	321c      	adds	r2, #28
+ 8000bee:	f853 3022 	ldr.w	r3, [r3, r2, lsl #2]
+ 8000bf2:	01db      	lsls	r3, r3, #7
+ 8000bf4:	697a      	ldr	r2, [r7, #20]
  8000bf6:	4313      	orrs	r3, r2
  8000bf8:	617b      	str	r3, [r7, #20]
 	    return bitMask; // return code for seven segment value, now with all of the segments set appropriately, and correct select line on
@@ -3067,7 +3069,7 @@ void PlayerInit(Player *p) {
 08001736 <InitPot>:
 #include "GameConstAndEnums.h"
 
-#define MAX_VALUE 2400
+#define MAX_VALUE 4800
 
 //init
 void InitPot(Potentiometer *p, Cursor *c, int channel, Axis a, ADC_TypeDef *adc) {
@@ -3211,7 +3213,7 @@ void UpdateCursor(Potentiometer *p) {
  8001808:	68db      	ldr	r3, [r3, #12]
  800180a:	4a2d      	ldr	r2, [pc, #180]	@ (80018c0 <UpdateCursor+0xdc>)
  800180c:	fb82 1203 	smull	r1, r2, r2, r3
- 8001810:	1152      	asrs	r2, r2, #5
+ 8001810:	1192      	asrs	r2, r2, #6
  8001812:	17db      	asrs	r3, r3, #31
  8001814:	1ad2      	subs	r2, r2, r3
  8001816:	68fb      	ldr	r3, [r7, #12]
@@ -3227,7 +3229,7 @@ void UpdateCursor(Potentiometer *p) {
  8001826:	68db      	ldr	r3, [r3, #12]
  8001828:	4a26      	ldr	r2, [pc, #152]	@ (80018c4 <UpdateCursor+0xe0>)
  800182a:	fb82 1203 	smull	r1, r2, r2, r3
- 800182e:	1212      	asrs	r2, r2, #8
+ 800182e:	1252      	asrs	r2, r2, #9
  8001830:	17db      	asrs	r3, r3, #31
  8001832:	1ad2      	subs	r2, r2, r3
  8001834:	68fb      	ldr	r3, [r7, #12]
@@ -3262,7 +3264,7 @@ void UpdateCursor(Potentiometer *p) {
  8001860:	68db      	ldr	r3, [r3, #12]
  8001862:	4a17      	ldr	r2, [pc, #92]	@ (80018c0 <UpdateCursor+0xdc>)
  8001864:	fb82 1203 	smull	r1, r2, r2, r3
- 8001868:	1112      	asrs	r2, r2, #4
+ 8001868:	1152      	asrs	r2, r2, #5
  800186a:	17db      	asrs	r3, r3, #31
  800186c:	1ad2      	subs	r2, r2, r3
  800186e:	68fb      	ldr	r3, [r7, #12]
@@ -3278,7 +3280,7 @@ void UpdateCursor(Potentiometer *p) {
  800187e:	68db      	ldr	r3, [r3, #12]
  8001880:	4a0f      	ldr	r2, [pc, #60]	@ (80018c0 <UpdateCursor+0xdc>)
  8001882:	fb82 1203 	smull	r1, r2, r2, r3
- 8001886:	11d2      	asrs	r2, r2, #7
+ 8001886:	1212      	asrs	r2, r2, #8
  8001888:	17db      	asrs	r3, r3, #31
  800188a:	1ad2      	subs	r2, r2, r3
  800188c:	68fb      	ldr	r3, [r7, #12]
