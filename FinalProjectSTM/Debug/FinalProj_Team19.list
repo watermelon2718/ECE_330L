@@ -3208,12 +3208,12 @@ void UpdateCursor(Potentiometer *p) {
  8001800:	7c1b      	ldrb	r3, [r3, #16]
  8001802:	2b00      	cmp	r3, #0
  8001804:	d10a      	bne.n	800181c <UpdateCursor+0x38>
-                c->xPos = ((p->raw)*(H_WIDTH))/MAX_VALUE;
+                c->xPos = ((p->raw)*(V_WIDTH))/MAX_VALUE;
  8001806:	687b      	ldr	r3, [r7, #4]
  8001808:	68db      	ldr	r3, [r3, #12]
  800180a:	4a34      	ldr	r2, [pc, #208]	@ (80018dc <UpdateCursor+0xf8>)
  800180c:	fb82 1203 	smull	r1, r2, r2, r3
- 8001810:	1192      	asrs	r2, r2, #6
+ 8001810:	1152      	asrs	r2, r2, #5
  8001812:	17db      	asrs	r3, r3, #31
  8001814:	1ad2      	subs	r2, r2, r3
  8001816:	68fb      	ldr	r3, [r7, #12]
@@ -3224,12 +3224,12 @@ void UpdateCursor(Potentiometer *p) {
  800181e:	7c1b      	ldrb	r3, [r3, #16]
  8001820:	2b01      	cmp	r3, #1
  8001822:	d109      	bne.n	8001838 <UpdateCursor+0x54>
-                c->yPos = ((p->raw)*(H_HEIGHT))/MAX_VALUE;
+                c->yPos = ((p->raw)*(V_HEIGHT))/MAX_VALUE;
  8001824:	687b      	ldr	r3, [r7, #4]
  8001826:	68db      	ldr	r3, [r3, #12]
- 8001828:	4a2d      	ldr	r2, [pc, #180]	@ (80018e0 <UpdateCursor+0xfc>)
+ 8001828:	4a2c      	ldr	r2, [pc, #176]	@ (80018dc <UpdateCursor+0xf8>)
  800182a:	fb82 1203 	smull	r1, r2, r2, r3
- 800182e:	1252      	asrs	r2, r2, #9
+ 800182e:	1212      	asrs	r2, r2, #8
  8001830:	17db      	asrs	r3, r3, #31
  8001832:	1ad2      	subs	r2, r2, r3
  8001834:	68fb      	ldr	r3, [r7, #12]
@@ -3266,12 +3266,12 @@ void UpdateCursor(Potentiometer *p) {
  8001866:	7c1b      	ldrb	r3, [r3, #16]
  8001868:	2b00      	cmp	r3, #0
  800186a:	d10a      	bne.n	8001882 <UpdateCursor+0x9e>
-                c->xPos = ((p->raw)*(V_WIDTH))/MAX_VALUE;
+                c->xPos = ((p->raw)*(H_WIDTH))/MAX_VALUE;
  800186c:	687b      	ldr	r3, [r7, #4]
  800186e:	68db      	ldr	r3, [r3, #12]
  8001870:	4a1a      	ldr	r2, [pc, #104]	@ (80018dc <UpdateCursor+0xf8>)
  8001872:	fb82 1203 	smull	r1, r2, r2, r3
- 8001876:	1152      	asrs	r2, r2, #5
+ 8001876:	1192      	asrs	r2, r2, #6
  8001878:	17db      	asrs	r3, r3, #31
  800187a:	1ad2      	subs	r2, r2, r3
  800187c:	68fb      	ldr	r3, [r7, #12]
@@ -3282,12 +3282,12 @@ void UpdateCursor(Potentiometer *p) {
  8001884:	7c1b      	ldrb	r3, [r3, #16]
  8001886:	2b01      	cmp	r3, #1
  8001888:	d109      	bne.n	800189e <UpdateCursor+0xba>
-                c->yPos = ((p->raw)*(V_HEIGHT))/MAX_VALUE;
+                c->yPos = ((p->raw)*(H_HEIGHT))/MAX_VALUE;
  800188a:	687b      	ldr	r3, [r7, #4]
  800188c:	68db      	ldr	r3, [r3, #12]
- 800188e:	4a13      	ldr	r2, [pc, #76]	@ (80018dc <UpdateCursor+0xf8>)
+ 800188e:	4a14      	ldr	r2, [pc, #80]	@ (80018e0 <UpdateCursor+0xfc>)
  8001890:	fb82 1203 	smull	r1, r2, r2, r3
- 8001894:	1212      	asrs	r2, r2, #8
+ 8001894:	1252      	asrs	r2, r2, #9
  8001896:	17db      	asrs	r3, r3, #31
  8001898:	1ad2      	subs	r2, r2, r3
  800189a:	68fb      	ldr	r3, [r7, #12]
