@@ -36,9 +36,9 @@ void UpdateCursor(Potentiometer *p) {
     switch(c->cursorMode) {
         case VERTICAL:
             if(p->axis == X_AXIS) {
-                c->xPos = ((p->raw)*(H_WIDTH))/MAX_VALUE;
+                c->xPos = ((p->raw)*(V_WIDTH))/MAX_VALUE;
             } else if(p->axis == Y_AXIS) {
-                c->yPos = ((p->raw)*(H_HEIGHT))/MAX_VALUE;
+                c->yPos = ((p->raw)*(V_HEIGHT))/MAX_VALUE;
             }
             //bound cursor
             if(c->yPos > (V_HEIGHT-c->cursorLength-1)){c->yPos = V_HEIGHT-c->cursorLength;}
@@ -47,9 +47,9 @@ void UpdateCursor(Potentiometer *p) {
 
         case HORIZONTAL:
             if(p->axis == X_AXIS) {
-                c->xPos = ((p->raw)*(V_WIDTH))/MAX_VALUE;
+                c->xPos = ((p->raw)*(H_WIDTH))/MAX_VALUE;
             } else if(p->axis == Y_AXIS) {
-                c->yPos = ((p->raw)*(V_HEIGHT))/MAX_VALUE;
+                c->yPos = ((p->raw)*(H_HEIGHT))/MAX_VALUE;
             }
             //bound cursor
             if(c->xPos > (H_WIDTH-c->cursorLength-1)){c->xPos = H_WIDTH-c->cursorLength;}
