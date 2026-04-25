@@ -97,14 +97,14 @@ int main(void)
 
 
 
-  Game game; // initialize main game
+  volatile Game game; // initialize main game
   InitGame(&game);
 
   while (1)
   {
     //poll game
     GamePoll(&game);
-    
+
     GameRun(&game);
   }
 }

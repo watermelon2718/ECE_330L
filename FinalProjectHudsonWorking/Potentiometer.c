@@ -1,5 +1,5 @@
 #include "Potentiometer.h"
-#include "GameConstAndEnumbs.h"
+#include "GameConstAndEnums.h"
 
 //init
 void InitPot(Potentiometer *p, Cursor *c, int channel, Axis a) {
@@ -28,26 +28,19 @@ void ReadADC(Potentiometer *p) {
     p->raw = (uint8_t)(ADC1->DR & 0xFF); // return 8-bit result [betwe
 }
 
-//output the mapped x or y from raw values
-int ConvertRawADC(char cursorRaw, int range) {
-    
-    coord = ((raw) * (range))/256;
-
-}
-
 void UpdateCursor(Potentiometer *p) {
     switch(p->cursor->cursorMode) {
         case VERTICAL:
-            if(p->axis == HORIZONTAL) {
+            if(p->axis == X_AXIS) {
                 p->cursor->xPos = ((p->raw)*(H_WIDTH -(p->cursor->cursorLength)))/256;
-            } else if(p->axis == VERTICAL) {
+            } else if(p->axis == Y_AXIS) {
                 p->cursor->yPos = ((p->raw)*(H_HEIGHT -(p->cursor->cursorLength)))/256;
             }
             break;
         case HORIZONTAL:
-            if(p->axis == HORIZONTAL) {
+            if(p->axis == X_AXIS) {
                 p->cursor->xPos = ((p->raw)*(V_WIDTH -(p->cursor->cursorLength)))/256;
-            } else if(p->axis == VERTICAL) {
+            } else if(p->axis == Y_AXIS) {
                 p->cursor->yPos = ((p->raw)*(V_HEIGHT -(p->cursor->cursorLength)))/256;
             }
             break;    

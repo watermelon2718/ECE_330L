@@ -33,7 +33,7 @@ void GameRun(Game *g) {
 
     case PHASE_TITLE:
         //do not move on to the next phase until confirm button pressed
-        if(WasPressed(&(g->confirmButton))){
+        if(Confirm(g)){
             //change to placing phase
             g->gamePhase = PHASE_PLACE;
             //set message to placing phase banner
@@ -45,18 +45,18 @@ void GameRun(Game *g) {
         //don't progress until button pressed to clear message
         if(g->displayMode == MESSAGE) {
             //if confirm pressed, continue the program flow
-            if(WasPressed(&(g->confirmButton))){
+            if(Confirm(g)){
                 g->displayMode = BOARD; // start displaying theboard
             }
         } else { // when no longer instructed to halt
 
             //if confirm pressed, place ship
-            if(WasPressed(&(g->confirmButton))) {
+            if(Confirm(g)) {
                 PlaceShip(g);
             }
 
             //if mode placed, toggle vert/horiz
-            if(WasPressed(&(g->modeButton))) {
+            if(Mode(g)) {
                 CursorHorizVertToggle(&(g->cursor));
             }
 
@@ -73,7 +73,7 @@ void GameRun(Game *g) {
                     // Player 2 is done, move to guessing phase
                     g->gamePhase = PHASE_TURN;
                     TogglePlayer(g); // Set back to P1 for the first turn
-                    Cutscene(g, "P1_GUESS_TILE ");
+                    Cutscene(g, "P1_GUESS_TITLE ");
                     g->displayMode = MESSAGE;
                 }
             }
@@ -82,7 +82,7 @@ void GameRun(Game *g) {
         break;
     case PHASE_TURN:
         //if confirm is pressed
-        if(WasPressed(&(g->confirmButton))) {
+        if(Confirm(g)) {
             if(GuessTile(g) == 0) {
 
             }
@@ -90,11 +90,6 @@ void GameRun(Game *g) {
         }
 
     }
-}
-
-void Cutscene(Game *g, char *c) {
-    g->displayMode = MESSAGE;
-    SetMessage(&(g->scrollMessage), c, 150, 1);
 }
 
 // function to attempt to place ship, returns 0 for success, 1 for fail
@@ -122,7 +117,33 @@ int PlaceShip(Game *g) {
             break;        
     }
 }
-int GuessTile(Game *g); // function for guessing at cursor location, returns 0 for success, 1 for fail
+int GuessTile(Game *g) {
+    //guess a tile
+    switch(g->cursor.cursorMode) {
+        case VERTICAL:
+
+            //if tile at cursor hasn't been guessed yet
+            if(g->players[g->activePlayer].vertGuessArray[g->cursor.xPos][g->cursor.yPos] == NONE){
+                //set the tile in the guess array as a hit if the corresponding tile is placed in the opponent's placement array, otherwise miss
+                g->players[g->activePlayer].vertGuessArray[g->cursor.xPos][g->cursor.yPos] = (g->players[1-g->activePlayer].vertPlacementArray[g->cursor.xPos][g->cursor.yPos]==PLACED) ? HIT : MISS;
+                return 0; //success
+            } else {
+                return -1; // guess invalid
+            }
+            break;
+
+        case HORIZONTAL:
+            //if tile at cursor hasn't been guessed yet, set it to match opponent's placement array
+            if(g->players[g->activePlayer].horizPlacementArray[g->cursor.xPos][g->cursor.yPos] == NONE){
+               //set the tile in the guess array as a hit if the corresponding tile is placed in the opponent's placement array
+                g->players[g->activePlayer].horizGuessArray[g->cursor.xPos][g->cursor.yPos] = (g->players[1-g->activePlayer].horizPlacementArray[g->cursor.xPos][g->cursor.yPos]==PLACED) ? HIT : MISS;
+                return 0; //success
+            } else {
+                return -1; // guess invalid
+            }
+            break;        
+    }
+} // function for guessing at cursor location, returns 0 for success, -1 for fail
 
 
 //switches player elegantly
@@ -151,4 +172,22 @@ void GamePoll(Game *g) {
     //update potentiometers
     PotUpdate(&(g->xPot));
     PotUpdate(&(g->yPot));
+}
+
+//helper functions
+
+//confirm button press
+int Confirm(Game *g) {
+    return WasPressed(&(g->confirmButton));
+}
+
+//mode button press
+int Mode(Game *g){
+    return WasPressed(&(g->modeButton));
+}
+
+//trigger next text phase
+void Cutscene(Game *g, char *c) {
+    g->displayMode = MESSAGE;
+    SetMessage(&(g->scrollMessage), c, 150, 1);
 }

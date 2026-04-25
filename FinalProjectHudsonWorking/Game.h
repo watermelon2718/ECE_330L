@@ -41,11 +41,14 @@ void InitGame(Game *g); // initialization function
 
 //game flow functions
 void GameRun(Game *g); // run game control
-void Cutscene(Game *g, char *c); // trigger cutscene
 int PlaceShip(Game *g); // function to attempt to place ship, returns 0 for success, 1 for fail
 int GuessTile(Game *g); // function for guessing at cursor location, returns 0 for success, 1 for fail
 void TogglePlayer(Game *g); // toggle player
 void DisplayOutput(Game *g); // display to displays
 void GamePoll(Game *g); // poll inputs
+
+void Cutscene(Game *g, char *c); // trigger cutscene
+int Confirm(Game *g);
+int Mode(Game *g);
 
 #endif /* GAME_H_ */
