@@ -7,6 +7,7 @@
 #include "Player.h" // player structures and data
 #include "Cursor.h" // cursor data 
 #include "Button.h" // button
+#include "Potentiometer.h" // potentiometer
 #include "Display.h" // display data
 #include "ScrollMessage.h"
 #include "Music.h" // music

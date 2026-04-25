@@ -20,7 +20,7 @@ typedef struct Potentiometer {
 void InitPot(Potentiometer *p, Cursor *c, int channel, Axis a);
 void UpdatePot(Potentiometer *p);
 void ReadADC(Potentiometer *p);
-void UpdateCursor(Cursor *c);
+void UpdateCursor(Potentiometer *p);
 
 
 #endif

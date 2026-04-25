@@ -1,5 +1,6 @@
 
 #include "ScrollMessage.h"
+#include <string.h>
 
 void SetMessage(ScrollMessage *m, char *str, int delay, int isAnimated) {
     m->text = str;

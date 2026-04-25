@@ -1,5 +1,6 @@
 #include "Potentiometer.h"
 #include "GameConstAndEnums.h"
+#include "main.h"
 
 //init
 void InitPot(Potentiometer *p, Cursor *c, int channel, Axis a) {

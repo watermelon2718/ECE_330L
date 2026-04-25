@@ -35,8 +35,9 @@ Core/Src/Display.o: ../Core/Src/Display.c ../Core/Inc/Display.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_hcd.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
- ../Core/Inc/Display.h ../Core/Inc/ScrollMessage.h ../Core/Inc/seg7.h \
- ../Core/Inc/Music.h ../Core/Inc/SoundArrays.h
+ ../Core/Inc/Potentiometer.h ../Core/Inc/Display.h \
+ ../Core/Inc/ScrollMessage.h ../Core/Inc/seg7.h ../Core/Inc/Music.h \
+ ../Core/Inc/SoundArrays.h
 ../Core/Inc/Display.h:
 ../Core/Inc/GameConstAndEnums.h:
 ../Core/Inc/Game.h:
@@ -77,6 +78,7 @@ Core/Src/Display.o: ../Core/Src/Display.c ../Core/Inc/Display.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_hcd.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
+../Core/Inc/Potentiometer.h:
 ../Core/Inc/Display.h:
 ../Core/Inc/ScrollMessage.h:
 ../Core/Inc/seg7.h:

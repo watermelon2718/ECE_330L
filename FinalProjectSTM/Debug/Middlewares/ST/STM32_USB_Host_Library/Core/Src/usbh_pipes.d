@@ -38,9 +38,9 @@ Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.o: \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_hcd.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  ../Core/Inc/Game.h ../Core/Inc/GameConstAndEnums.h ../Core/Inc/Player.h \
- ../Core/Inc/Cursor.h ../Core/Inc/Button.h ../Core/Inc/Display.h \
- ../Core/Inc/ScrollMessage.h ../Core/Inc/seg7.h ../Core/Inc/Music.h \
- ../Core/Inc/SoundArrays.h \
+ ../Core/Inc/Cursor.h ../Core/Inc/Button.h ../Core/Inc/Potentiometer.h \
+ ../Core/Inc/Display.h ../Core/Inc/ScrollMessage.h ../Core/Inc/seg7.h \
+ ../Core/Inc/Music.h ../Core/Inc/SoundArrays.h \
  ../Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_def.h \
  ../Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_ioreq.h \
  ../Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_pipes.h \
@@ -88,6 +88,7 @@ Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.o: \
 ../Core/Inc/Player.h:
 ../Core/Inc/Cursor.h:
 ../Core/Inc/Button.h:
+../Core/Inc/Potentiometer.h:
 ../Core/Inc/Display.h:
 ../Core/Inc/ScrollMessage.h:
 ../Core/Inc/seg7.h:
