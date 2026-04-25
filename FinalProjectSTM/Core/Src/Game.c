@@ -90,6 +90,10 @@ void GameRun(Game *g) {
                 g->displayMode = BOARD; // start displaying theboard
             }
         } else {
+            //if mode placed, toggle vert/horiz
+            if(Mode(g)) {
+                CursorHorizVertToggle(&(g->cursor));
+            }
             //if confirm is pressed
             if(Confirm(g)) {
                 int guess = GuessTile(g);
