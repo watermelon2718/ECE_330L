@@ -21,6 +21,11 @@ void InitGame(Game *g) {
     //init buttons
     ButtonInit(&(g->modeButton), GPIOC, GPIO_PIN_10);
     ButtonInit(&(g->confirmButton), GPIOC, GPIO_PIN_11);
+
+    //init pots
+    InitPot(&(g->xPot), &(g->cursor), 1, X_AXIS);// on channel 1
+    InitPot(&(g->yPot), &(g->cursor), 2, Y_AXIS);// on channel 2
+
 }
 
 void GameRun(Game *g) {

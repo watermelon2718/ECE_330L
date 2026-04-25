@@ -30,10 +30,10 @@ typedef struct Game {
 	DisplayMode displayMode;
 	//song
 	Music music;
-
 	Button modeButton; // for switching modes 
-
 	Button confirmButton; // for selecting/confirming an option
+	Potentiometer xPot; // potentiometer for x axis
+	Potentiometer yPot; // potentiometer for y axis
 } Game;
 
 //init
