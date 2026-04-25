@@ -14,7 +14,7 @@ void ButtonInit(Button *b, GPIO_TypeDef* port, uint16_t pin) {
 void ButtonUpdate(Button *b) {
     // Read current physical state (assuming Active High)
     // If your buttons are Active Low (Internal Pull-up), use !HAL_GPIO_ReadPin
-    int reading = HAL_GPIO_ReadPin(b->port, b->pin);
+    int reading = !HAL_GPIO_ReadPin(b->port, b->pin);
 
     if (reading != b->rawState) {
         // State is changing, reset the debounce counter
