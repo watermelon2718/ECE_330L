@@ -15,8 +15,7 @@ typedef struct Player {
     TileState horizGuessArray[H_WIDTH][H_HEIGHT]; 
     TileState vertGuessArray[V_WIDTH][V_HEIGHT];
 
-    int singleSegmentShipsLeftToPlace; // tracks how many ships are left to place
-    int doubleSegmentShipsLeftToPlace;
+    int shipsToPlace;
 
     int hitCount;
 

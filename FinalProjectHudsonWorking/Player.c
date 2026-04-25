@@ -7,8 +7,7 @@ void PlayerInit(Player *p) {
     memset(p->horizGuessArray,     0, sizeof(p->horizGuessArray));
     memset(p->vertGuessArray,      0, sizeof(p->vertGuessArray));
 
-    p->singleSegmentShipsLeftToPlace = 3; // tracks how many ships are left to place
-    p->doubleSegmentShipsLeftToPlace = 2;
+    p->shipsToPlace = 5; // you start with 5 ships
 
-    p->hitCount = 0;
+    p->hitCount = 0; // no ships hit yet
 }

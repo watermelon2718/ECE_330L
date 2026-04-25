@@ -64,8 +64,9 @@ void GameRun(Game *g) {
             Player *p = &(g->players[g->activePlayer]);
 
             // If current player is done placing
-            if (p->doubleSegmentShipsLeftToPlace == 0 && p->singleSegmentShipsLeftToPlace == 0) {
+            if (p->shipsToPlace == 0) {
                 if (g->activePlayer == PLAYER1) {
+                    g->cursor.cursorLength = DOUBLE_SEG;
                     TogglePlayer(g);
                     Cutscene(g, "P2_PLACE_SHIPS ");
                     g->displayMode = MESSAGE;
@@ -76,6 +77,8 @@ void GameRun(Game *g) {
                     Cutscene(g, "P1_GUESS_TILE ");
                     g->displayMode = MESSAGE;
                 }
+            } else if (p->shipsToPlace == 3) {
+                g->cursor.cursorLength = SINGLE_SEG;
             }
         }
 
@@ -124,7 +127,9 @@ int PlaceShip(Game *g) {
         case VERTICAL:
             //if nothing is placed in the placement array of the player placing right now, place there
             if(g->players[g->activePlayer].vertPlacementArray[g->cursor.xPos][g->cursor.yPos] == NONE){
-                g->players[g->activePlayer].vertPlacementArray[g->cursor.xPos][g->cursor.yPos] = PLACED; 
+                g->players[g->activePlayer].vertPlacementArray[g->cursor.xPos][g->cursor.yPos] = PLACED;
+                if(g->cursor.cursorLength == DOUBLE) { g->players[g->activePlayer].vertPlacementArray[g->cursor.xPos][g->cursor.yPos+1] = PLACED;} 
+                g->players[g->activePlayer].shipsToPlace--;
                 return 0; //success
             } else {
                 return -1; // placement failed
@@ -135,6 +140,8 @@ int PlaceShip(Game *g) {
             //if nothing is placed in the placement array of the player placing right now, place there
             if(g->players[g->activePlayer].horizPlacementArray[g->cursor.xPos][g->cursor.yPos] == NONE){
                 g->players[g->activePlayer].horizPlacementArray[g->cursor.xPos][g->cursor.yPos] = PLACED; 
+                if(g->cursor.cursorLength == DOUBLE) { g->players[g->activePlayer].horizPlacementArray[g->cursor.xPos+1][g->cursor.yPos] = PLACED;} 
+                g->players[g->activePlayer].shipsToPlace--;
                 return 0; //success
             } else {
                 return -1; // placement failed

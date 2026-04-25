@@ -69,7 +69,9 @@ int main(void)
   GPIOE->MODER |= 0x55555555; // Port E mode register - make E0 to E15 outputs
   GPIOC->MODER |= 0x0; // Port C mode register - all inputs
   GPIOE->ODR = 0xFFFF; // Set all Port E pins high
-
+  
+  GPIOC->PUPDR |= (0x5 << 20); //pull up the Port C buttons
+  
   /*** Configure ADC1 ***/
   RCC->APB2ENR |= 1<<8;  // Turn on ADC1 clock by forcing bit 8 to 1 while keeping other bits unchanged
   ADC1->SMPR2 |= 1; // 15 clock cycles per sample
