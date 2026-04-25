@@ -559,7 +559,7 @@ void CursorInit(Cursor *c) {
  80005f8:	687b      	ldr	r3, [r7, #4]
  80005fa:	2200      	movs	r2, #0
  80005fc:	721a      	strb	r2, [r3, #8]
-	c->cursorLength = TRIPLE_SEG;
+	c->cursorLength = DOUBLE_SEG;
  80005fe:	687b      	ldr	r3, [r7, #4]
  8000600:	2203      	movs	r2, #3
  8000602:	725a      	strb	r2, [r3, #9]
@@ -572,57 +572,57 @@ void CursorInit(Cursor *c) {
 
 08000610 <CursorHorizVertToggle>:
 
-//updates cursor to move from vertical to horizontal and vice versa
-void CursorHorizVertToggle(Cursor *c) {
+//updates cursor to move from vertical to {rest,      quarter,  3000,  40,    0},
+    
  8000610:	b480      	push	{r7}
  8000612:	b083      	sub	sp, #12
  8000614:	af00      	add	r7, sp, #0
  8000616:	6078      	str	r0, [r7, #4]
-
-	if(c->cursorMode == HORIZONTAL){
+    {E3,        _8th,  4000,  10,    0}, // 0
+    {C3,        _8th,  4000,  10,    0}, // 0
  8000618:	687b      	ldr	r3, [r7, #4]
  800061a:	7a1b      	ldrb	r3, [r3, #8]
  800061c:	2b00      	cmp	r3, #0
  800061e:	d10f      	bne.n	8000640 <CursorHorizVertToggle+0x30>
-		c->cursorMode = VERTICAL; //toggle cursorMode value
+    {E3,        _8th,  4000,  10,    0}, // 0
  8000620:	687b      	ldr	r3, [r7, #4]
  8000622:	2201      	movs	r2, #1
  8000624:	721a      	strb	r2, [r3, #8]
-
-		if(c->yPos >= V_HEIGHT) { // cap the y index at 1
+    {C3,     quarter,  4000,  10,    0},
+ horizontal and vice versa
  8000626:	687b      	ldr	r3, [r7, #4]
  8000628:	685b      	ldr	r3, [r3, #4]
  800062a:	2b01      	cmp	r3, #1
  800062c:	dd02      	ble.n	8000634 <CursorHorizVertToggle+0x24>
-			c->yPos = (V_HEIGHT -1);
+void CursorHorizVertToggle(Cursor *c) {
  800062e:	687b      	ldr	r3, [r7, #4]
  8000630:	2201      	movs	r2, #1
  8000632:	605a      	str	r2, [r3, #4]
-		}
 
-		c->xPos = (c->xPos)*2; // map the x index to the appropriate location
+	if(c->cursorMode == HORIZONTAL){
+		c->cursorMode = VERTICAL; //toggle cursorMode value
  8000634:	687b      	ldr	r3, [r7, #4]
  8000636:	681b      	ldr	r3, [r3, #0]
  8000638:	005a      	lsls	r2, r3, #1
  800063a:	687b      	ldr	r3, [r7, #4]
  800063c:	601a      	str	r2, [r3, #0]
-		//y index is unchanged
 
-		//map the x position by dividing by 2 (integer division drops the decimal)
-		c->xPos /= 2;
-	}
-}
- 800063e:	e00e      	b.n	800065e <CursorHorizVertToggle+0x4e>
+
+
 	} else if(c->cursorMode == VERTICAL) {
+		c->cursorMode = HORIZONTAL; //toggle cursorMode value
+
+ 800063e:	e00e      	b.n	800065e <CursorHorizVertToggle+0x4e>
+		}
  8000640:	687b      	ldr	r3, [r7, #4]
  8000642:	7a1b      	ldrb	r3, [r3, #8]
  8000644:	2b01      	cmp	r3, #1
  8000646:	d10a      	bne.n	800065e <CursorHorizVertToggle+0x4e>
-		c->cursorMode = HORIZONTAL; //toggle cursorMode value
+
  8000648:	687b      	ldr	r3, [r7, #4]
  800064a:	2200      	movs	r2, #0
  800064c:	721a      	strb	r2, [r3, #8]
-		c->xPos /= 2;
+	} else if(c->cursorMode == VERTICAL) {
  800064e:	687b      	ldr	r3, [r7, #4]
  8000650:	681b      	ldr	r3, [r3, #0]
  8000652:	0fda      	lsrs	r2, r3, #31
@@ -631,7 +631,7 @@ void CursorHorizVertToggle(Cursor *c) {
  8000658:	461a      	mov	r2, r3
  800065a:	687b      	ldr	r3, [r7, #4]
  800065c:	601a      	str	r2, [r3, #0]
-}
+
  800065e:	bf00      	nop
  8000660:	370c      	adds	r7, #12
  8000662:	46bd      	mov	sp, r7

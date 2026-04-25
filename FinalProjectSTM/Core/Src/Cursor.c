@@ -8,13 +8,7 @@ void CursorInit(Cursor *c) {
 	c->cursorLength = DOUBLE_SEG;
 }
 
-//updates cursor to move from vertical to {rest,      quarter,  3000,  40,    0},
-    
-    {E3,        _8th,  4000,  10,    0}, // 0
-    {C3,        _8th,  4000,  10,    0}, // 0
-    {E3,        _8th,  4000,  10,    0}, // 0
-    {C3,     quarter,  4000,  10,    0},
- horizontal and vice versa
+//updates cursor to move from vertical to  horizontal and vice versa
 void CursorHorizVertToggle(Cursor *c) {
 
 	if(c->cursorMode == HORIZONTAL){
