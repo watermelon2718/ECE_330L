@@ -14,6 +14,8 @@
 
 	} Display;
 
+	void DisplayInit(Display *d); // init
+
 	// master function, calculates all display and frame data and outputs to displays
 	void DisplayBoard(Game *game); 
 
