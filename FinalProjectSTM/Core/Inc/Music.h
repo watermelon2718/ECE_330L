@@ -14,7 +14,7 @@ typedef struct Note {
 //structure for a song
 typedef struct Music {
     int doPlay; // init to true
-    Note *notes; // pointer to notes array
+    const Note *notes; // pointer to notes array
     
     int tone; // tone counter
     int counter; // counter for note timing
@@ -31,7 +31,7 @@ typedef struct Music {
     int vibratoDir; // init to 1
 } Music;
 
-void MusicInit(Music *m, Note *n, int vibratoRate, int vibratoDepth); //init
+void MusicInit(Music *m, const Note *n, int vibratoRate, int vibratoDepth); //init
 void MusicSystick(Music *m); // rhythm updater on systick
 void MusicTIM7Tick(Music *m); // tone generator on tim7
 

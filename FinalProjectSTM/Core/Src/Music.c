@@ -1,7 +1,7 @@
 #include "Music.h"
 #include "stm32f4xx_hal.h"
 
-void MusicInit(Music *m, Note *n, int vibratoRate, int vibratoDepth) {
+void MusicInit(Music *m, const Note *n, int vibratoRate, int vibratoDepth) {
  	// Set play state and starting position
     m->doPlay = 1;       // Start playing immediately
     m->notes = n;

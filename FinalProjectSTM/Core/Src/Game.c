@@ -128,7 +128,7 @@ int PlaceShip(Game *g) {
             //if nothing is placed in the placement array of the player placing right now, place there
             if(g->players[g->activePlayer].vertPlacementArray[g->cursor.xPos][g->cursor.yPos] == NONE){
                 g->players[g->activePlayer].vertPlacementArray[g->cursor.xPos][g->cursor.yPos] = PLACED;
-                if(g->cursor.cursorLength == DOUBLE) { g->players[g->activePlayer].vertPlacementArray[g->cursor.xPos][g->cursor.yPos+1] = PLACED;} 
+                if(g->cursor.cursorLength == DOUBLE_SEG) { g->players[g->activePlayer].vertPlacementArray[g->cursor.xPos][g->cursor.yPos+1] = PLACED;} 
                 g->players[g->activePlayer].shipsToPlace--;
                 return 0; //success
             } else {
@@ -140,7 +140,7 @@ int PlaceShip(Game *g) {
             //if nothing is placed in the placement array of the player placing right now, place there
             if(g->players[g->activePlayer].horizPlacementArray[g->cursor.xPos][g->cursor.yPos] == NONE){
                 g->players[g->activePlayer].horizPlacementArray[g->cursor.xPos][g->cursor.yPos] = PLACED; 
-                if(g->cursor.cursorLength == DOUBLE) { g->players[g->activePlayer].horizPlacementArray[g->cursor.xPos+1][g->cursor.yPos] = PLACED;} 
+                if(g->cursor.cursorLength == DOUBLE_SEG) { g->players[g->activePlayer].horizPlacementArray[g->cursor.xPos+1][g->cursor.yPos] = PLACED;} 
                 g->players[g->activePlayer].shipsToPlace--;
                 return 0; //success
             } else {
