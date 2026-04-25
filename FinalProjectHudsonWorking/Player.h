@@ -18,6 +18,8 @@ typedef struct Player {
     int singleSegmentShipsLeftToPlace; // tracks how many ships are left to place
     int doubleSegmentShipsLeftToPlace;
 
+    int hitCount;
+
 } Player;
 
 void PlayerInit(Player *p);

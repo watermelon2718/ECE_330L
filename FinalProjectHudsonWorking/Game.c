@@ -13,7 +13,7 @@ void InitGame(Game *g) {
     CursorInit(&(g->cursor));
     DisplayInit(&(g->display));
 
-    MessageInit(&(g->scrollMessage), "BATTLESHIP ", 150, 1);
+    MessageInit(&(g->scrollMessage), "BATTLESHIP________PRESS_TO_PLAY________ ", 150, 1);
     g->displayMode = MESSAGE;
 
     // Initialize song to main theme
@@ -73,7 +73,7 @@ void GameRun(Game *g) {
                     // Player 2 is done, move to guessing phase
                     g->gamePhase = PHASE_TURN;
                     TogglePlayer(g); // Set back to P1 for the first turn
-                    Cutscene(g, "P1_GUESS_TITLE ");
+                    Cutscene(g, "P1_GUESS_TILE ");
                     g->displayMode = MESSAGE;
                 }
             }
@@ -81,14 +81,39 @@ void GameRun(Game *g) {
 
         break;
     case PHASE_TURN:
-        //if confirm is pressed
-        if(Confirm(g)) {
-            if(GuessTile(g) == 0) {
-
+        if(g->displayMode == MESSAGE) {
+            //if confirm pressed, continue the program flow
+            if(Confirm(g)){
+                g->displayMode = BOARD; // start displaying theboard
             }
-            
+        } else {
+            //if confirm is pressed
+            if(Confirm(g)) {
+                int guess = GuessTile(g);
+                if(guess == 0) {
+                    TogglePlayer(g);
+                    Cutscene(g, (g->activePlayer == PLAYER1) ? "P1_GUESS_TILE " : "P2_GUESS_TILE ");
+                } else if (guess == 1) { // if guess is a hit, increase a player's hitcounter
+                    Cutscene(g, (g->activePlayer == PLAYER1) ? "P2_SHIP_HIT_________GUESS_AGAIN_____________ " : "P1_SHIP_HIT_________GUESS_AGAIN_____________ ");
+                    g->players[g->activePlayer].hitCount++;
+                    //if all ships are sunk, active player wins
+                    if(g->players[g->activePlayer].hitCount >= 7){
+                        g->gamePhase = PHASE_END;
+                        Cutscene(g, (g->activePlayer == PLAYER1) ? "P1_WINS_____________P1_WINS_____________PLAY_AGAIN? " : "P2_WINS_____________P2_WINS_____________PLAY_AGAIN?");
+                    } 
+                }
+                
+            }
         }
-
+        break;
+    case PHASE_END:
+        if(Confirm(g)){
+            //change to placing phase
+            g->gamePhase = PHASE_TITLE;
+            InitGame(g);
+            //set message to placing phase banner
+            Cutscene(g, "BATTLESHIP________PRESS_TO_PLAY________ ");
+        }
     }
 }
 
@@ -125,8 +150,10 @@ int GuessTile(Game *g) {
             //if tile at cursor hasn't been guessed yet
             if(g->players[g->activePlayer].vertGuessArray[g->cursor.xPos][g->cursor.yPos] == NONE){
                 //set the tile in the guess array as a hit if the corresponding tile is placed in the opponent's placement array, otherwise miss
-                g->players[g->activePlayer].vertGuessArray[g->cursor.xPos][g->cursor.yPos] = (g->players[1-g->activePlayer].vertPlacementArray[g->cursor.xPos][g->cursor.yPos]==PLACED) ? HIT : MISS;
-                return 0; //success
+                int isHit = (g->players[1-g->activePlayer].vertPlacementArray[g->cursor.xPos][g->cursor.yPos]==PLACED);
+                g->players[g->activePlayer].vertGuessArray[g->cursor.xPos][g->cursor.yPos] = (isHit) ? HIT : MISS;
+               
+                return isHit; //returns 1 for hit, 0 for miss
             } else {
                 return -1; // guess invalid
             }
@@ -134,15 +161,19 @@ int GuessTile(Game *g) {
 
         case HORIZONTAL:
             //if tile at cursor hasn't been guessed yet, set it to match opponent's placement array
-            if(g->players[g->activePlayer].horizPlacementArray[g->cursor.xPos][g->cursor.yPos] == NONE){
+            if(g->players[g->activePlayer].horizGuessArray[g->cursor.xPos][g->cursor.yPos] == NONE){
                //set the tile in the guess array as a hit if the corresponding tile is placed in the opponent's placement array
-                g->players[g->activePlayer].horizGuessArray[g->cursor.xPos][g->cursor.yPos] = (g->players[1-g->activePlayer].horizPlacementArray[g->cursor.xPos][g->cursor.yPos]==PLACED) ? HIT : MISS;
-                return 0; //success
+                int isHit = (g->players[1-g->activePlayer].horizPlacementArray[g->cursor.xPos][g->cursor.yPos]==PLACED);
+                g->players[g->activePlayer].horizGuessArray[g->cursor.xPos][g->cursor.yPos] = (isHit) ? HIT : MISS;
+                
+                return isHit; //returns 1 for hit, 0 for miss
             } else {
                 return -1; // guess invalid
             }
             break;        
     }
+
+    return -1;
 } // function for guessing at cursor location, returns 0 for success, -1 for fail
 
 
