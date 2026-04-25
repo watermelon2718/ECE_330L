@@ -1,6 +1,7 @@
 #include "Button.h"
 
-void Button_Init(Button *b, GPIO_TypeDef* port, uint16_t pin) {
+//initializer
+void ButtonInit(Button *b, GPIO_TypeDef* port, uint16_t pin) {
     b->port = port;
     b->pin = pin;
     b->currentState = 0;
@@ -9,7 +10,8 @@ void Button_Init(Button *b, GPIO_TypeDef* port, uint16_t pin) {
     b->hasBeenPressed = 0;
 }
 
-void Button_Update(Button *b) {
+//poll this
+void ButtonUpdate(Button *b) {
     // Read current physical state (assuming Active High)
     // If your buttons are Active Low (Internal Pull-up), use !HAL_GPIO_ReadPin
     int reading = HAL_GPIO_ReadPin(b->port, b->pin);
@@ -35,7 +37,8 @@ void Button_Update(Button *b) {
     }
 }
 
-int Button_WasPressed(Button *b) {
+//tells you if the button was pressed
+int WasPressed(Button *b) {
     if (b->hasBeenPressed) {
         b->hasBeenPressed = 0; // Reset the flag (consume the event)
         return 1;
