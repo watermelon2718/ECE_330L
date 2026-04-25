@@ -1,9 +1,13 @@
 #include "Display.h"
 #include "Game.h"
 
+void DisplayInit(Display *d) {
+	memset(d, 0, sizeof(Display)); //init to 0
+}
+
 //used by systick to update the representational array to be displayed
 //(based upon game phase and state)
-void RefreshDisplay(Game *game) {
+void DisplayBoard(Game *game) {
 	UpdateDisplayArrays(game);
 	UpdateFrameArrays(game);
 	OutputFrame(&(game->display));
