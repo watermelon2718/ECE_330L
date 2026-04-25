@@ -149,7 +149,7 @@ int Get7SegBitMask(Display *d, int displayIndex) {
 	    bitMask |= ((d->vertFrameArray[verticalXShift][0]) << 4); // segment e
 	    bitMask |= ((d->vertFrameArray[verticalXShift][1]) << 5); // segment f
 	    bitMask |= ((d->horizFrameArray[horizontalXShift][1]) << 6);
-		bitMask |= (d->dotsFrameArray[horizontalXShift] << 7); // segment g
+		bitMask |= !((d->dotsFrameArray[horizontalXShift]) << 7); // segment g
 	    return bitMask; // return code for seven segment value, now with all of the segments set appropriately, and correct select line on
 }
 void AddCursor (Game *game) {
