@@ -71,7 +71,7 @@ void UpdateFrameArrays(Game *game) {
 	//determine duty cycles for each tileState
 	int noneBright = 0; // none will always be off
 	int hitBright = 1; //hit ships are at 100% brightness
-	int missBright = (displayTimer % 5 == 0); // miss gets 20% duty cycle
+	int missBright =(displayTimer % 5 == 0); // miss gets 20% duty cycle
     int placedBright = 1; // placed ships are displayed at 100% brightness
 	int cursorBright = (displayTimer % 1500 < 750); //cursor blinks, toggle the blink state every 750 counts
 
@@ -131,7 +131,7 @@ void UpdateFrameArrays(Game *game) {
 
 void OutputFrame(Display *d) {
 	for(int i = 0; i < H_WIDTH; i++) {
-		int bitMask = Get7SegBitMask(d,i); // get the mask for the character
+		int bitMask = !Get7SegBitMask(d,i); // get the mask for the character
 		GPIOE->ODR = (0xFF00 | bitMask) & ~(1<<(i+8));
 		// Set all selects high to latch-in character
 		GPIOE->ODR |= 0xFF00;

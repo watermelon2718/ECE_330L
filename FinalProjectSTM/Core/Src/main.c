@@ -73,13 +73,14 @@ int main(void)
   
   GPIOC->PUPDR |= (0x5 << 20); //pull up the Port C buttons
   
-  /*** Configure ADC1 ***/
+  /*** Configure ADC ***/
   RCC->APB2ENR |= 1<<8;  // Turn on ADC1 clock by forcing bit 8 to 1 while keeping other bits unchanged
   ADC1->SMPR2 |= 1; // 15 clock cycles per sample
   ADC1->CR2 |= 1;        // Turn on ADC1 by forcing bit 0 to 1 while keeping other bits unchanged
 
-  /*** Turn on CRC Clock in AHB1ENR to enable CRC hardware ***/
-
+  RCC->APB2ENR |= 1<<9;  // Turn on ADC2 clock by forcing bit 8 to 1 while keeping other bits unchanged
+  ADC2->SMPR2 |= 1; // 15 clock cycles per sample
+  ADC2->CR2 |= 1;    
 
   /*****************************************************************************************************
   These commands are handled as part of the MX_TIM7_Init() function and don't need to be enabled
