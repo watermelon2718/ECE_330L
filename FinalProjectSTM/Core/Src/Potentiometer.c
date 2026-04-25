@@ -41,7 +41,7 @@ void UpdateCursor(Potentiometer *p) {
                 c->yPos = ((p->raw)*(V_HEIGHT))/MAX_VALUE;
             }
             //bound cursor
-            if(c->yPos > (V_HEIGHT-c->cursorLength-1)){c->yPos = V_HEIGHT-c->cursorLength-1;}
+            if(c->yPos > (V_HEIGHT-c->cursorLength)){c->yPos = V_HEIGHT-c->cursorLength;}
             if(c->xPos > (V_WIDTH-1)){c->xPos = V_WIDTH-1;}
             break;
 
@@ -52,7 +52,7 @@ void UpdateCursor(Potentiometer *p) {
                 c->yPos = ((p->raw)*(H_HEIGHT))/MAX_VALUE;
             }
             //bound cursor
-            if(c->xPos > (H_WIDTH-c->cursorLength-1)){c->xPos = H_WIDTH-c->cursorLength -1;}
+            if(c->xPos > (H_WIDTH-c->cursorLength)){c->xPos = H_WIDTH-c->cursorLength;}
             if(c->yPos > (H_HEIGHT-1)){c->yPos = H_HEIGHT-1;}
             break;    
     }

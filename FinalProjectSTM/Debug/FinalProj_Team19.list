@@ -29,9 +29,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  12 .ARM.attributes 00000030  00000000  00000000  0000800c  2**0
                   CONTENTS, READONLY
- 13 .debug_info   0001433b  00000000  00000000  0000803c  2**0
+ 13 .debug_info   00014335  00000000  00000000  0000803c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 000032d9  00000000  00000000  0001c377  2**0
+ 14 .debug_abbrev 000032d9  00000000  00000000  0001c371  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  15 .debug_aranges 00001038  00000000  00000000  0001f650  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -41,13 +41,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  18 .debug_line   000159ef  00000000  00000000  00045600  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000d2ac7  00000000  00000000  0005afef  2**0
+ 19 .debug_str    000d2abc  00000000  00000000  0005afef  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  0012dab6  2**0
+ 20 .comment      00000043  00000000  00000000  0012daab  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00003f58  00000000  00000000  0012dafc  2**2
+ 21 .debug_frame  00003f58  00000000  00000000  0012daf0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 000000a8  00000000  00000000  00131a54  2**0
+ 22 .debug_line_str 000000a8  00000000  00000000  00131a48  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -3447,12 +3447,12 @@ void UpdateCursor(Potentiometer *p) {
  80019b2:	605a      	str	r2, [r3, #4]
             }
             //bound cursor
-            if(c->yPos > (V_HEIGHT-c->cursorLength-1)){c->yPos = V_HEIGHT-c->cursorLength;}
+            if(c->yPos > (V_HEIGHT-c->cursorLength)){c->yPos = V_HEIGHT-c->cursorLength;}
  80019b4:	68fb      	ldr	r3, [r7, #12]
  80019b6:	685a      	ldr	r2, [r3, #4]
  80019b8:	68fb      	ldr	r3, [r7, #12]
  80019ba:	7a5b      	ldrb	r3, [r3, #9]
- 80019bc:	f1c3 0301 	rsb	r3, r3, #1
+ 80019bc:	f1c3 0302 	rsb	r3, r3, #2
  80019c0:	429a      	cmp	r2, r3
  80019c2:	dd05      	ble.n	80019d0 <UpdateCursor+0x70>
  80019c4:	68fb      	ldr	r3, [r7, #12]
@@ -3508,12 +3508,12 @@ void UpdateCursor(Potentiometer *p) {
  8001a1e:	605a      	str	r2, [r3, #4]
             }
             //bound cursor
-            if(c->xPos > (H_WIDTH-c->cursorLength-1)){c->xPos = H_WIDTH-c->cursorLength;}
+            if(c->xPos > (H_WIDTH-c->cursorLength)){c->xPos = H_WIDTH-c->cursorLength;}
  8001a20:	68fb      	ldr	r3, [r7, #12]
  8001a22:	681a      	ldr	r2, [r3, #0]
  8001a24:	68fb      	ldr	r3, [r7, #12]
  8001a26:	7a5b      	ldrb	r3, [r3, #9]
- 8001a28:	f1c3 0307 	rsb	r3, r3, #7
+ 8001a28:	f1c3 0308 	rsb	r3, r3, #8
  8001a2c:	429a      	cmp	r2, r3
  8001a2e:	dd05      	ble.n	8001a3c <UpdateCursor+0xdc>
  8001a30:	68fb      	ldr	r3, [r7, #12]
