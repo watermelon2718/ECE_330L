@@ -29,25 +29,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  12 .ARM.attributes 00000030  00000000  00000000  0000800c  2**0
                   CONTENTS, READONLY
- 13 .debug_info   0001434b  00000000  00000000  0000803c  2**0
+ 13 .debug_info   00014345  00000000  00000000  0000803c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 000032db  00000000  00000000  0001c387  2**0
+ 14 .debug_abbrev 000032db  00000000  00000000  0001c381  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00001038  00000000  00000000  0001f668  2**3
+ 15 .debug_aranges 00001038  00000000  00000000  0001f660  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 00000c68  00000000  00000000  000206a0  2**0
+ 16 .debug_rnglists 00000c68  00000000  00000000  00020698  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  000242c0  00000000  00000000  00021308  2**0
+ 17 .debug_macro  000242c0  00000000  00000000  00021300  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0001595f  00000000  00000000  000455c8  2**0
+ 18 .debug_line   0001595f  00000000  00000000  000455c0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000d2ab7  00000000  00000000  0005af27  2**0
+ 19 .debug_str    000d2ab7  00000000  00000000  0005af1f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  0012d9de  2**0
+ 20 .comment      00000043  00000000  00000000  0012d9d6  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00003f58  00000000  00000000  0012da24  2**2
+ 21 .debug_frame  00003f58  00000000  00000000  0012da1c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 000000a8  00000000  00000000  0013197c  2**0
+ 22 .debug_line_str 000000a8  00000000  00000000  00131974  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -561,7 +561,7 @@ void CursorInit(Cursor *c) {
  80005fc:	721a      	strb	r2, [r3, #8]
 	c->cursorLength = DOUBLE_SEG;
  80005fe:	687b      	ldr	r3, [r7, #4]
- 8000600:	2203      	movs	r2, #3
+ 8000600:	2202      	movs	r2, #2
  8000602:	725a      	strb	r2, [r3, #9]
 }
  8000604:	bf00      	nop
@@ -572,57 +572,57 @@ void CursorInit(Cursor *c) {
 
 08000610 <CursorHorizVertToggle>:
 
-//updates cursor to move from vertical to {rest,      quarter,  3000,  40,    0},
-    
+//updates cursor to move from vertical to  horizontal and vice versa
+void CursorHorizVertToggle(Cursor *c) {
  8000610:	b480      	push	{r7}
  8000612:	b083      	sub	sp, #12
  8000614:	af00      	add	r7, sp, #0
  8000616:	6078      	str	r0, [r7, #4]
-    {E3,        _8th,  4000,  10,    0}, // 0
-    {C3,        _8th,  4000,  10,    0}, // 0
+
+	if(c->cursorMode == HORIZONTAL){
  8000618:	687b      	ldr	r3, [r7, #4]
  800061a:	7a1b      	ldrb	r3, [r3, #8]
  800061c:	2b00      	cmp	r3, #0
  800061e:	d10f      	bne.n	8000640 <CursorHorizVertToggle+0x30>
-    {E3,        _8th,  4000,  10,    0}, // 0
+		c->cursorMode = VERTICAL; //toggle cursorMode value
  8000620:	687b      	ldr	r3, [r7, #4]
  8000622:	2201      	movs	r2, #1
  8000624:	721a      	strb	r2, [r3, #8]
-    {C3,     quarter,  4000,  10,    0},
- horizontal and vice versa
+
+		if(c->yPos >= V_HEIGHT) { // cap the y index at 1
  8000626:	687b      	ldr	r3, [r7, #4]
  8000628:	685b      	ldr	r3, [r3, #4]
  800062a:	2b01      	cmp	r3, #1
  800062c:	dd02      	ble.n	8000634 <CursorHorizVertToggle+0x24>
-void CursorHorizVertToggle(Cursor *c) {
+			c->yPos = (V_HEIGHT -1);
  800062e:	687b      	ldr	r3, [r7, #4]
  8000630:	2201      	movs	r2, #1
  8000632:	605a      	str	r2, [r3, #4]
+		}
 
-	if(c->cursorMode == HORIZONTAL){
-		c->cursorMode = VERTICAL; //toggle cursorMode value
+		c->xPos = (c->xPos)*2; // map the x index to the appropriate location
  8000634:	687b      	ldr	r3, [r7, #4]
  8000636:	681b      	ldr	r3, [r3, #0]
  8000638:	005a      	lsls	r2, r3, #1
  800063a:	687b      	ldr	r3, [r7, #4]
  800063c:	601a      	str	r2, [r3, #0]
+		//y index is unchanged
 
-
-
-	} else if(c->cursorMode == VERTICAL) {
-		c->cursorMode = HORIZONTAL; //toggle cursorMode value
-
+		//map the x position by dividing by 2 (integer division drops the decimal)
+		c->xPos /= 2;
+	}
+}
  800063e:	e00e      	b.n	800065e <CursorHorizVertToggle+0x4e>
-		}
+	} else if(c->cursorMode == VERTICAL) {
  8000640:	687b      	ldr	r3, [r7, #4]
  8000642:	7a1b      	ldrb	r3, [r3, #8]
  8000644:	2b01      	cmp	r3, #1
  8000646:	d10a      	bne.n	800065e <CursorHorizVertToggle+0x4e>
-
+		c->cursorMode = HORIZONTAL; //toggle cursorMode value
  8000648:	687b      	ldr	r3, [r7, #4]
  800064a:	2200      	movs	r2, #0
  800064c:	721a      	strb	r2, [r3, #8]
-	} else if(c->cursorMode == VERTICAL) {
+		c->xPos /= 2;
  800064e:	687b      	ldr	r3, [r7, #4]
  8000650:	681b      	ldr	r3, [r3, #0]
  8000652:	0fda      	lsrs	r2, r3, #31
@@ -631,7 +631,7 @@ void CursorHorizVertToggle(Cursor *c) {
  8000658:	461a      	mov	r2, r3
  800065a:	687b      	ldr	r3, [r7, #4]
  800065c:	601a      	str	r2, [r3, #0]
-
+}
  800065e:	bf00      	nop
  8000660:	370c      	adds	r7, #12
  8000662:	46bd      	mov	sp, r7
