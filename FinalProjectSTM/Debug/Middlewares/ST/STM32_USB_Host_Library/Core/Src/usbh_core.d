@@ -39,7 +39,7 @@ Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.o: \
  ../Core/Inc/Game.h ../Core/Inc/GameConstAndEnums.h ../Core/Inc/Player.h \
  ../Core/Inc/Cursor.h ../Core/Inc/Button.h ../Core/Inc/Potentiometer.h \
  ../Core/Inc/Display.h ../Core/Inc/ScrollMessage.h ../Core/Inc/seg7.h \
- ../Core/Inc/Music.h ../Core/Inc/SoundArrays.h \
+ ../Core/Inc/Music.h ../Core/Inc/SoundArrays.h ../Core/Inc/SoundEffects.h \
  ../Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_def.h \
  ../Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_ioreq.h \
  ../Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_core.h \
@@ -93,6 +93,7 @@ Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.o: \
 ../Core/Inc/seg7.h:
 ../Core/Inc/Music.h:
 ../Core/Inc/SoundArrays.h:
+../Core/Inc/SoundEffects.h:
 ../Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_def.h:
 ../Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_ioreq.h:
 ../Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_core.h:
