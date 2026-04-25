@@ -64,6 +64,9 @@ void UpdateDisplayArrays(Game *game) {
 //used by the systick to get the data that will be output to the segments on a given 'frame'
 //(includes dimming and effects)
 void UpdateFrameArrays(Game *game) {
+	//turn dots off
+	memset(game->display.dotsFrameArray, 1, sizeof(game->display.dotsFrameArray));
+	
     // Static counters persist between function calls
     static int displayTimer = 0;
     displayTimer++;
@@ -149,7 +152,7 @@ int Get7SegBitMask(Display *d, int displayIndex) {
 	    bitMask |= ((d->vertFrameArray[verticalXShift][0]) << 4); // segment e
 	    bitMask |= ((d->vertFrameArray[verticalXShift][1]) << 5); // segment f
 	    bitMask |= ((d->horizFrameArray[horizontalXShift][1]) << 6);
-		bitMask |= !((d->dotsFrameArray[horizontalXShift]) << 7); // segment g
+		bitMask |= (d->dotsFrameArray[horizontalXShift] << 7); // segment g
 	    return bitMask; // return code for seven segment value, now with all of the segments set appropriately, and correct select line on
 }
 void AddCursor (Game *game) {
