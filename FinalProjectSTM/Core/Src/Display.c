@@ -46,7 +46,7 @@ void UpdateDisplayArrays(Game *game) {
 
 		for(int i = 0; i < V_WIDTH; i++) {
 			for(int j = 0; j < V_HEIGHT; j++) {
-				game->display.vertDisplayArray[i][j] = game->players[game->activePlayer].vertPlacementArray[i][j];
+				game->display.vertDisplayArray[i][j] = game->players[game->activePlayer].vertGuessArray[i][j];
 			}
 		}
 		//here, cursor overrides whatever would be in the slot
