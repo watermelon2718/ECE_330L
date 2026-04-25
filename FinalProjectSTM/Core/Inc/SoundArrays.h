@@ -1,7 +1,7 @@
 #ifndef SOUND_ARRAYS_
 #define SOUND_ARRAYS_
 #include "Music.h"
-static const Note main_theme[] = {
+static Note main_theme[] = {
     // Pitch,   Length,   Tempo, Space, End
     {A4,        quarter,  1400,  10,    0}, // 0
     {D5,        quarter,  1400,  10,    0}, // 1
