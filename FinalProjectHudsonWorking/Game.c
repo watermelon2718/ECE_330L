@@ -29,29 +29,94 @@ void GameRun(Game *g) {
     case PHASE_TITLE:
         //do not move on to the next phase until confirm button pressed
         if(WasPressed(&(g->confirmButton))){
+            //change to placing phase
             g->gamePhase = PHASE_PLACE;
+            //set message to placing phase banner
+            Cutscene(g, "P1_PLACE_SHIPS ");
         }
         break;
+
     case PHASE_PLACE:
+        //don't progress until button pressed to clear message
+        if(g->displayMode == MESSAGE) {
+            //if confirm pressed, continue the program flow
+            if(WasPressed(&(g->confirmButton))){
+                g->displayMode = BOARD; // start displaying theboard
+            }
+        } else { // when no longer instructed to halt
+
+            //if confirm pressed, place ship
+            if(WasPressed(&(g->confirmButton))) {
+                PlaceShip(g);
+            }
+
+            //if mode placed, toggle vert/horiz
+            if(WasPressed(&(g->modeButton))) {
+                CursorHorizVertToggle(&(g->cursor));
+            }
+
+            // Get a pointer to the current player
+            Player *p = &(g->players[g->activePlayer]);
+
+            // If current player is done placing
+            if (p->doubleSegmentShipsLeftToPlace == 0 && p->singleSegmentShipsLeftToPlace == 0) {
+                if (g->activePlayer == PLAYER1) {
+                    TogglePlayer(g);
+                    Cutscene(g, "P2_PLACE_SHIPS ");
+                    g->displayMode = MESSAGE;
+                } else {
+                    // Player 2 is done, move to guessing phase
+                    g->gamePhase = PHASE_TURN;
+                    TogglePlayer(g); // Set back to P1 for the first turn
+                    Cutscene(g, "P1_GUESS_TILE ");
+                    g->displayMode = MESSAGE;
+                }
+            }
+        }
 
         break;
+    case PHASE_TURN:
+        //if confirm is pressed
+        if(WasPressed(&(g->confirmButton))) {
+            if(GuessTile(g) == 0) {
+
+            }
+            
+        }
 
     }
 }
 
-//this function will run during the placing phase
-int PlacePhase(Game *g) {
-    for(player = 0; player < 1; player++)     {
-        while(g->players[1].doubleSegmentShipsLeftToPlace > 0) {
-            PlaceShip(g);
-        }
-        
+void Cutscene(Game *g, char *c) {
+    g->displayMode = MESSAGE;
+    SetMessage(&(g->scrollMessage), c, 150, 1);
+}
+
+// function to attempt to place ship, returns 0 for success, 1 for fail
+int PlaceShip(Game *g) {
+    //checking for horizontal or vertical validity
+    switch(g->cursor.cursorMode) {
+        case VERTICAL:
+            //if nothing is placed in the placement array of the player placing right now, place there
+            if(g->players[g->activePlayer].vertPlacementArray[g->cursor.xPos][g->cursor.yPos] == NONE){
+                g->players[g->activePlayer].vertPlacementArray[g->cursor.xPos][g->cursor.yPos] = PLACED; 
+                return 0; //success
+            } else {
+                return -1; // placement failed
+            }
+            break;
+
+        case HORIZONTAL:
+            //if nothing is placed in the placement array of the player placing right now, place there
+            if(g->players[g->activePlayer].horizPlacementArray[g->cursor.xPos][g->cursor.yPos] == NONE){
+                g->players[g->activePlayer].horizPlacementArray[g->cursor.xPos][g->cursor.yPos] = PLACED; 
+                return 0; //success
+            } else {
+                return -1; // placement failed
+            }
+            break;        
     }
-
-}; // ship placing phase
-int GuessPhase(Game *g); // ship guessing phase
-
-int PlaceShip(Game *g); // function to attempt to place ship, returns 0 for success, 1 for fail
+}
 int GuessTile(Game *g); // function for guessing at cursor location, returns 0 for success, 1 for fail
 
 
@@ -77,7 +142,7 @@ void DisplayOutput(Game *g) {
 void GamePoll(Game *g) {
     //update buttons
     ButtonUpdate(&(g->modeButton));
-    ButtonUpdate(&(g->confirmButton))
+    ButtonUpdate(&(g->confirmButton));
     //update potentiometers
     PotUpdate(&(g->xPot));
     PotUpdate(&(g->yPot));

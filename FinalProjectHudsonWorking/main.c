@@ -102,7 +102,9 @@ int main(void)
 
   while (1)
   {
+    //poll game
     GamePoll(&game);
+    
     GameRun(&game);
   }
 }
