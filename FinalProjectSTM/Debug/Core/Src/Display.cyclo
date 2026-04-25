@@ -4,4 +4,4 @@
 ../Core/Src/Display.c:66:6:UpdateFrameArrays	16
 ../Core/Src/Display.c:132:6:OutputFrame	2
 ../Core/Src/Display.c:141:5:Get7SegBitMask	1
-../Core/Src/Display.c:154:6:AddCursor	5
+../Core/Src/Display.c:155:6:AddCursor	5

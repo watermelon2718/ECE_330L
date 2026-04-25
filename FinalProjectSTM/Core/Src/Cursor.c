@@ -4,7 +4,7 @@
 void CursorInit(Cursor *c) {
 	c->xPos = 0;
 	c->yPos = 0;
-	c->cursorMode = VERTICAL;
+	c->cursorMode = HORIZONTAL;
 	c->cursorLength = DOUBLE_SEG;
 }
 

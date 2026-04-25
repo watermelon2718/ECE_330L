@@ -69,11 +69,11 @@ void UpdateFrameArrays(Game *game) {
     displayTimer++;
 
 	//determine duty cycles for each tileState
-	int noneBright = 0; // none will always be off
-	int hitBright = 1; //hit ships are at 100% brightness
-	int missBright =(displayTimer % 5 == 0); // miss gets 20% duty cycle
-    int placedBright = 1; // placed ships are displayed at 100% brightness
-	int cursorBright = (displayTimer % 1500 < 750); //cursor blinks, toggle the blink state every 750 counts
+	int noneBright = 1; // none will always be off
+	int hitBright = 0; //hit ships are at 100% brightness
+	int missBright = !(displayTimer % 5 == 0); // miss gets 20% duty cycle
+    int placedBright = 0; // placed ships are displayed at 100% brightness
+	int cursorBright = !(displayTimer % 1500 < 750); //cursor blinks, toggle the blink state every 750 counts
 
     //Process Horizontal Array
     for (int i = 0; i < H_WIDTH; i++) {
@@ -131,7 +131,7 @@ void UpdateFrameArrays(Game *game) {
 
 void OutputFrame(Display *d) {
 	for(int i = 0; i < H_WIDTH; i++) {
-		int bitMask = !Get7SegBitMask(d,i); // get the mask for the character
+		int bitMask = Get7SegBitMask(d,i); // get the mask for the character
 		GPIOE->ODR = (0xFF00 | bitMask) & ~(1<<(i+8));
 		// Set all selects high to latch-in character
 		GPIOE->ODR |= 0xFF00;
@@ -148,7 +148,8 @@ int Get7SegBitMask(Display *d, int displayIndex) {
 	    bitMask |= ((d->horizFrameArray[horizontalXShift][0]) << 3); // segment d
 	    bitMask |= ((d->vertFrameArray[verticalXShift][0]) << 4); // segment e
 	    bitMask |= ((d->vertFrameArray[verticalXShift][1]) << 5); // segment f
-	    bitMask |= ((d->horizFrameArray[horizontalXShift][1]) << 6); // segment g
+	    bitMask |= ((d->horizFrameArray[horizontalXShift][1]) << 6);
+		bitMask |= (d->dotsFrameArray[horizontalXShift] << 7); // segment g
 	    return bitMask; // return code for seven segment value, now with all of the segments set appropriately, and correct select line on
 }
 void AddCursor (Game *game) {

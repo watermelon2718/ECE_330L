@@ -2,7 +2,7 @@
 #define CURSOR_H_
 
 typedef enum CursorMode {HORIZONTAL, VERTICAL} CursorMode; // horizontal or vertical mode
-typedef enum CursorLength {SINGLE_SEG, DOUBLE_SEG} CursorLength; // single or double segment mode
+typedef enum CursorLength {ZERO_SEG, SINGLE_SEG, DOUBLE_SEG} CursorLength; // single or double segment mode
 
 typedef struct Cursor {
 	int xPos; // cursor x position

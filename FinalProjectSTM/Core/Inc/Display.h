@@ -11,7 +11,7 @@
 
 		TileState horizFrameArray[H_WIDTH][H_HEIGHT]; //arrays for individual frame contents
 		TileState vertFrameArray[V_WIDTH][V_HEIGHT];
-
+		int dotsFrameArray[H_WIDTH];
 	} Display;
 
 	void DisplayInit(Display *d); // init
