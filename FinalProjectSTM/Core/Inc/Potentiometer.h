@@ -18,7 +18,7 @@ typedef struct Potentiometer {
 
 } Potentiometer;
 
-void InitPot(Potentiometer *p, Cursor *c, int channel, Axis a, ADC_TypeDef adc);
+void InitPot(Potentiometer *p, Cursor *c, int channel, Axis a, ADC_TypeDef *adc);
 void UpdatePot(Potentiometer *p);
 void ReadADC(Potentiometer *p);
 void UpdateCursor(Potentiometer *p);

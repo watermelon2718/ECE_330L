@@ -1,0 +1,10 @@
+../Core/Src/Game.c:3:6:InitGame	24	static
+../Core/Src/Game.c:31:6:GameRun	24	static
+../Core/Src/Game.c:124:5:PlaceShip	16	static
+../Core/Src/Game.c:154:5:GuessTile	32	static
+../Core/Src/Game.c:190:6:TogglePlayer	16	static
+../Core/Src/Game.c:199:6:DisplayOutput	16	static
+../Core/Src/Game.c:208:6:GamePoll	16	static
+../Core/Src/Game.c:220:5:Confirm	16	static
+../Core/Src/Game.c:225:5:Mode	16	static
+../Core/Src/Game.c:230:6:Cutscene	16	static

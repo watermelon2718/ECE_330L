@@ -1,0 +1,4 @@
+../Core/Src/Potentiometer.c:5:6:InitPot	1
+../Core/Src/Potentiometer.c:14:6:UpdatePot	1
+../Core/Src/Potentiometer.c:20:6:ReadADC	2
+../Core/Src/Potentiometer.c:32:6:UpdateCursor	13
