@@ -18,42 +18,12 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "seg7.h"
-
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-
-
-
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
-
 I2S_HandleTypeDef hi2s3;
-
 SPI_HandleTypeDef hspi1;
-
 TIM_HandleTypeDef htim7;
-
-/* USER CODE BEGIN PV */
-int DelayValue = 50;
-/* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -61,58 +31,6 @@ static void MX_GPIO_Init(void);
 static void MX_TIM7_Init(void);
 void MX_USB_HOST_Process(void);
 
-/* USER CODE BEGIN PFP */
-void Play_Note(int note,int size,int tempo,int space);
-extern void Seven_Segment_Digit (unsigned char digit, unsigned char hex_char, unsigned char dot);
-extern void Seven_Segment(unsigned int HexValue);
-
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-Game game; // initialize main game
-InitGame(&game);
-
-char ramp = 0;
-char RED_BRT = 0;
-char GREEN_BRT = 0;
-char BLUE_BRT = 0;
-char RED_STEP = 1;
-char GREEN_STEP = 2;
-char BLUE_STEP = 3;
-char DIM_Enable = 0;
-char Music_ON = 0;
-int TONE = 0;
-int COUNT = 0;
-int INDEX = 0;
-int Note = 0;
-int Save_Note = 0;
-int Vibrato_Depth = 1;
-int Vibrato_Rate = 40;
-int Vibrato_Count = 0;
-char Animate_On = 0;
-char Message_Length = 0;
-char *Message_Pointer;
-char *Save_Pointer;
-
-
-/* HELLO ECE-330L */
-char Message[] =
-		{SPACE,SPACE,SPACE,SPACE,SPACE,SPACE,SPACE,SPACE,SPACE,SPACE,
-		CHAR_H,CHAR_E,CHAR_L,CHAR_L,CHAR_O,SPACE,CHAR_E,CHAR_C,CHAR_E,DASH,CHAR_3,CHAR_3,CHAR_0,CHAR_L,
-		SPACE,SPACE,SPACE,SPACE,SPACE,SPACE,SPACE,SPACE,SPACE,SPACE};
-
-/* Declare array for Song */
-Music Song[100];
-
-
-/* USER CODE END 0 */
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
 int main(void)
 {
 
@@ -179,34 +97,14 @@ int main(void)
 
 
 
-
+  Game game; // initialize main game
   InitGame(&game);
+
   while (1)
   {
-	  //perform relevant polling
-
-	  //poll for cursor input
-
-	  int i,j;
-
-	  Message_Pointer = &Message[0];
-	  Save_Pointer = &Message[0];
-	  Message_Length = sizeof(Message)/sizeof(Message[0]);
-	  Delay_msec = 200;
-	  Animate_On = 1;
-
-
-	  HAL_Delay(5000);           // Delay 5 seconds to allow message to scroll
-
-	  Animate_On = 0;            // Stop scrolling message
-
-
-	  Seven_Segment(CRC_Rx);    // Display CRC calculated from received messag
-
-
-    /* USER CODE BEGIN 3 */
+    GamePoll(&game);
+    GameRun(&game);
   }
-  /* USER CODE END 3 */
 }
 
 

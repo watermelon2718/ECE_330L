@@ -15,29 +15,9 @@ void DebugMon_Handler(void){}
 void PendSV_Handler(void){}
 
 void SysTick_Handler(void){
-  HAL_IncTick();
-  MusicSystick(&(game.music));
-  RefreshDisplay(&game);
-
-  if (Animate_On > 0)
-  {
-    Delay_counter++;
-    if (Delay_counter > Delay_msec)
-    {
-      Delay_counter = 0;
-      Seven_Segment_Digit(7,*(Message_Pointer),0);
-      Seven_Segment_Digit(6,*(Message_Pointer+1),0);
-      Seven_Segment_Digit(5,*(Message_Pointer+2),0);
-      Seven_Segment_Digit(4,*(Message_Pointer+3),0);
-      Seven_Segment_Digit(3,*(Message_Pointer+4),0);
-      Seven_Segment_Digit(2,*(Message_Pointer+5),0);
-      Seven_Segment_Digit(1,*(Message_Pointer+6),0);
-      Seven_Segment_Digit(0,*(Message_Pointer+7),0);
-      Message_Pointer++;
-      if ((Message_Pointer - Save_Pointer) >= (Message_Length-8)) Message_Pointer = Save_Pointer;
-
-    }
-  }
+    HAL_IncTick();
+    MusicSystick(&(game.music));
+    DisplayOutput(&game);
 }
 void TIM7_IRQHandler(void) {
   HAL_TIM_IRQHandler(&htim7);
