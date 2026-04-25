@@ -15,7 +15,7 @@
 	} Display;
 
 	// master function, calculates all display and frame data and outputs to displays
-	void RefreshDisplay(Game *game); 
+	void DisplayBoard(Game *game); 
 
 	// map current appropriate display data into the arrays, add cursor on top
 	void UpdateDisplayArrays(Game *game);

@@ -1,11 +1,13 @@
 #include "Music.h"
 
-void MusicInit(Music *m, int vibratoRate, int vibratoDepth) {
+void MusicInit(Music *m, Note *n, int vibratoRate, int vibratoDepth) {
  	// Set play state and starting position
     m->doPlay = 1;       // Start playing immediately
-    m->index = 0;        // Start at the first note
+    m->notes = n;
+
+	m->tone = 0;         // Reset frequency counter
+	m->index = 0;        // Start at the first note
     m->counter = 0;      // Reset duration counter
-    m->tone = 0;         // Reset frequency counter
     
 	// Initialize Pitch and Vibrato
     // We load the first note's pitch into our working variables

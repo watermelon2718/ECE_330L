@@ -20,4 +20,6 @@ typedef struct Player {
 
 } Player;
 
+void PlayerInit(Player *p);
+
 #endif /* PLAYER_H_ */

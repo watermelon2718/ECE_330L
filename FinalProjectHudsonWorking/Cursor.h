@@ -13,6 +13,8 @@ typedef struct Cursor {
 
 } Cursor;
 
+void CursorInit(Cursor *c);
+
 void CursorHorizVertToggle(Cursor *c);
 
 void CursorSingleDoubleToggle(Cursor *c);

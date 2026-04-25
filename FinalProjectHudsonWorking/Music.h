@@ -30,9 +30,10 @@ typedef struct Music {
     int vibratoCounter;
     int vibratoDir; // init to 1
 } Music;
-void MusicInit(Music *m, int vibratoRate, int vibratoDepth);
-void MusicSystick(Music *m);
-void MusicTIM7Tick(Music *m);
+
+void MusicInit(Music *m, Note *n, int vibratoRate, int vibratoDepth); //init
+void MusicSystick(Music *m); // rhythm updater on systick
+void MusicTIM7Tick(Music *m); // tone generator on tim7
 
 
 /* music notes by name, 125Khz (250Khz/2) frequency will be divided by these constants for 1/2 period  *
