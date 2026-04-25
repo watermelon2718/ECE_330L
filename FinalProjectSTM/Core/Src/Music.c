@@ -2,6 +2,7 @@
 #include "stm32f4xx_hal.h"
 
 void MusicInit(Music *m, const Note *n, int vibratoRate, int vibratoDepth) {
+    m->effectIsOn = 0;
  	// Set play state and starting position
     m->doPlay = 1;       // Start playing immediately
     m->notes = n;
@@ -29,12 +30,15 @@ void PlayTrack (Music *m, const Note *t) {
 }
 //puts on a temporary effect
 void PlayEffect(Music *m, const Note *effect) {
-    if(m->returnIndex != m->index) {m->index = m->returnIndex;} //return to track if effect is already playing
-    if(m->returnNotes != m->notes) {m->notes = m->returnNotes;} //return to track if effect is already playing
-
+    //avoid playing an effect on top of an  effect
+    if(m->effectIsOn == 1) {
+        if(m->returnIndex != m->index) {m->index = m->returnIndex;} //return to track if effect is already playing
+        if(m->returnNotes != m->notes) {m->notes = m->returnNotes;} //return to track if effect is already playing
+    }
     m->returnIndex = m->index; // leave return address
     m->returnNotes = m->notes;
     MusicInit(m, effect, m->vibratoRate, m->vibratoDepth);
+    m->effectIsOn = 1;
 }
 
 void MusicSystick(Music *m) {

@@ -13,6 +13,8 @@ typedef struct Note {
 
 //structure for a song
 typedef struct Music {
+    int effectIsOn;
+
     int doPlay; // init to true
     const Note *notes; // pointer to notes array
     const Note *returnNotes; // pointer to store notes array to return to
