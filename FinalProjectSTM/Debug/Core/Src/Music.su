@@ -1,0 +1,3 @@
+../Core/Src/Music.c:4:6:MusicInit	24	static
+../Core/Src/Music.c:25:6:MusicSystick	16	static
+../Core/Src/Music.c:49:6:MusicTIM7Tick	16	static
