@@ -10,7 +10,7 @@
 #if COMMON_ANODE == 1
 
 // Characters assigned numerically based on 0-9, A-Z, plus special characters
-char _7SEG[] =
+const unsigned char _7SEG[] =
 		{~(0x3F),~(0x06),~(0x5B),~(0x4F),~(0x66),~(0x6D),~(0x7D),
 		~(0x07),~(0x7F),~(0x6F),~(0x77),~(0x7C),~(0x39),~(0x5E),
 		~(0x79),~(0x71),~(0x3D),~(0x76),~(0x06),~(0x1E),~(0x7A),
@@ -20,7 +20,7 @@ char _7SEG[] =
 		~(0x10),~(0x20),~(0x40),~(0x00)};
 		
 // Characters assigned based on ASCII character codes		
-unsigned char _7SEG_ASCII[]=
+const unsigned char _7SEG_ASCII[]=
 {
 	['0'] = ~(0x3F),
 	['1'] = ~(0x06),
@@ -88,7 +88,7 @@ unsigned char _7SEG_ASCII[]=
 	['='] = ~(0x48),
 	[' '] = ~(0x00),
 	['-'] = ~(0x20),
-	['_'] = ~(0x04),
+	['_'] = ~(0x08),
 	[127] = 0,
 };
 
@@ -96,7 +96,7 @@ unsigned char _7SEG_ASCII[]=
 #else
 
 // Characters assigned numerically based on 0-9, A-Z, plus special characters
-char _7SEG[] =
+const unsigned char _7SEG[] =
 		{(0x3F),(0x06),(0x5B),(0x4F),(0x66),(0x6D),(0x7D),
 		(0x07),(0x7F),(0x6F),(0x77),(0x7C),(0x39),(0x5E),
 		(0x79),(0x71),(0x3D),(0x76),(0x06),(0x1E),(0x7A),
@@ -106,7 +106,7 @@ char _7SEG[] =
 		(0x10),(0x20),(0x40),(0x00)};
 		
 // Characters assigned based on ASCII character codes		
-unsigned char _7SEG_ASCII[]=
+const unsigned char _7SEG_ASCII[]=
 {
 	['0'] = (0x3F),
 	['1'] = (0x06),
@@ -174,7 +174,7 @@ unsigned char _7SEG_ASCII[]=
 	['='] = (0x48),
 	[' '] = (0x00),
 	['-'] = (0x20),
-	['_'] = (0x04),
+	['_'] = (0x08),
 	[127] = 0,
 };
 #endif

@@ -42,7 +42,7 @@ void UpdateCursor(Potentiometer *p) {
             }
             //bound cursor
             if(c->yPos > (V_HEIGHT-c->cursorLength-1)){c->yPos = V_HEIGHT-c->cursorLength;}
-            
+            if(c->xPos > (V_WIDTH-1)){c->xPos = V_WIDTH;}
             break;
 
         case HORIZONTAL:
@@ -53,6 +53,7 @@ void UpdateCursor(Potentiometer *p) {
             }
             //bound cursor
             if(c->xPos > (H_WIDTH-c->cursorLength-1)){c->xPos = H_WIDTH-c->cursorLength;}
+            if(c->yPos > (H_HEIGHT-1)){c->yPos = H_HEIGHT;}
             break;    
     }
 

@@ -13,7 +13,7 @@ void InitGame(Game *g) {
     CursorInit(&(g->cursor));
     DisplayInit(&(g->display));
 
-    MessageInit(&(g->scrollMessage), "BATTLESHIP________PRESS_TO_PLAY________ ", 150, 1);
+    MessageInit(&(g->scrollMessage), "        BATTLESHIP             PRESS TO PLAY              ", 150, 1);
     g->displayMode = MESSAGE;
 
     // Initialize song to main theme
@@ -37,7 +37,7 @@ void GameRun(Game *g) {
             //change to placing phase
             g->gamePhase = PHASE_PLACE;
             //set message to placing phase banner
-            Cutscene(g, "P1_PLACE_SHIPS ");
+            Cutscene(g, "        PLAYER 1 PLACE SHIPS ");
         }
         break;
 
@@ -68,13 +68,13 @@ void GameRun(Game *g) {
                 if (g->activePlayer == PLAYER1) {
                     g->cursor.cursorLength = DOUBLE_SEG;
                     TogglePlayer(g);
-                    Cutscene(g, "P2_PLACE_SHIPS ");
+                    Cutscene(g, "        PLAYER 2 PLACE SHIPS ");
                     g->displayMode = MESSAGE;
                 } else {
                     // Player 2 is done, move to guessing phase
                     g->gamePhase = PHASE_TURN;
                     TogglePlayer(g); // Set back to P1 for the first turn
-                    Cutscene(g, "P1_GUESS_TILE ");
+                    Cutscene(g, "        PLAYER 1 GUESS TILE ");
                     g->displayMode = MESSAGE;
                 }
             } else if (p->shipsToPlace == 3) {
@@ -95,14 +95,14 @@ void GameRun(Game *g) {
                 int guess = GuessTile(g);
                 if(guess == 0) {
                     TogglePlayer(g);
-                    Cutscene(g, (g->activePlayer == PLAYER1) ? "P1_GUESS_TILE " : "P2_GUESS_TILE ");
+                    Cutscene(g, (g->activePlayer == PLAYER1) ? "        PLAYER 1 GUESS TILE " : "        PLAYER 2 GUESS TILE ");
                 } else if (guess == 1) { // if guess is a hit, increase a player's hitcounter
-                    Cutscene(g, (g->activePlayer == PLAYER1) ? "P2_SHIP_HIT_________GUESS_AGAIN_____________ " : "P1_SHIP_HIT_________GUESS_AGAIN_____________ ");
+                    Cutscene(g, (g->activePlayer == PLAYER1) ? "        HIT PLAYER 2 SHIP         GUESS AGAIN " : "        HIT PLAYER 1 SHIP         GUESS AGAIN ");
                     g->players[g->activePlayer].hitCount++;
                     //if all ships are sunk, active player wins
                     if(g->players[g->activePlayer].hitCount >= 7){
                         g->gamePhase = PHASE_END;
-                        Cutscene(g, (g->activePlayer == PLAYER1) ? "P1_WINS_____________P1_WINS_____________PLAY_AGAIN? " : "P2_WINS_____________P2_WINS_____________PLAY_AGAIN?");
+                        Cutscene(g, (g->activePlayer == PLAYER1) ? "        PLAYER 1 WINS        PRESS TO PLAY AGAIN " : "        PLAYER 2 WINS        PRESS TO PLAY AGAIN ");
                     } 
                 }
                 
@@ -115,7 +115,7 @@ void GameRun(Game *g) {
             g->gamePhase = PHASE_TITLE;
             InitGame(g);
             //set message to placing phase banner
-            Cutscene(g, "BATTLESHIP________PRESS_TO_PLAY________ ");
+            Cutscene(g, "        BATTLESHIP             PRESS TO PLAY              ");
         }
     }
 }

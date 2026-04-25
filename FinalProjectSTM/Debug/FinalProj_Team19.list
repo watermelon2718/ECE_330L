@@ -7,19 +7,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   1 .text         00005840  08000188  08000188  00001188  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000888  080059c8  080059c8  000069c8  2**2
+  2 .rodata       00000854  080059c8  080059c8  000069c8  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  08006250  08006250  0000800c  2**0
+  3 .ARM.extab    00000000  0800621c  0800621c  0000800c  2**0
                   CONTENTS, READONLY
-  4 .ARM          00000008  08006250  08006250  00007250  2**2
+  4 .ARM          00000008  0800621c  0800621c  0000721c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  5 .preinit_array 00000000  08006258  08006258  0000800c  2**0
+  5 .preinit_array 00000000  08006224  08006224  0000800c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08006258  08006258  00007258  2**2
+  6 .init_array   00000004  08006224  08006224  00007224  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  7 .fini_array   00000004  0800625c  0800625c  0000725c  2**2
+  7 .fini_array   00000004  08006228  08006228  00007228  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  8 .data         0000000c  20000000  08006260  00008000  2**2
+  8 .data         0000000c  20000000  0800622c  00008000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
   9 .ccmram       00000000  10000000  10000000  0000800c  2**0
                   CONTENTS
@@ -37,17 +37,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_rnglists 00000c56  00000000  00000000  0001fef0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  000242b3  00000000  00000000  00020b46  2**0
+ 17 .debug_macro  000242b9  00000000  00000000  00020b46  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00015875  00000000  00000000  00044df9  2**0
+ 18 .debug_line   00015875  00000000  00000000  00044dff  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000d2a11  00000000  00000000  0005a66e  2**0
+ 19 .debug_str    000d2a11  00000000  00000000  0005a674  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  0012d07f  2**0
+ 20 .comment      00000043  00000000  00000000  0012d085  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00003eec  00000000  00000000  0012d0c4  2**2
+ 21 .debug_frame  00003eec  00000000  00000000  0012d0c8  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 000000a8  00000000  00000000  00130fb0  2**0
+ 22 .debug_line_str 000000a8  00000000  00000000  00130fb4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1611,7 +1611,7 @@ void InitGame(Game *g) {
  8000d0a:	4618      	mov	r0, r3
  8000d0c:	f7ff fcad 	bl	800066a <DisplayInit>
 
-    MessageInit(&(g->scrollMessage), "BATTLESHIP________PRESS_TO_PLAY________ ", 150, 1);
+    MessageInit(&(g->scrollMessage), "        BATTLESHIP             PRESS TO PLAY              ", 150, 1);
  8000d10:	687b      	ldr	r3, [r7, #4]
  8000d12:	f503 70c8 	add.w	r0, r3, #400	@ 0x190
  8000d16:	2301      	movs	r3, #1
@@ -1675,7 +1675,7 @@ void InitGame(Game *g) {
  8000d90:	46bd      	mov	sp, r7
  8000d92:	bd80      	pop	{r7, pc}
  8000d94:	080059c8 	.word	0x080059c8
- 8000d98:	08005b00 	.word	0x08005b00
+ 8000d98:	08005b4c 	.word	0x08005b4c
  8000d9c:	40020800 	.word	0x40020800
  8000da0:	40012000 	.word	0x40012000
  8000da4:	40012100 	.word	0x40012100
@@ -1714,7 +1714,7 @@ void GameRun(Game *g) {
  8000de4:	2201      	movs	r2, #1
  8000de6:	f883 20f0 	strb.w	r2, [r3, #240]	@ 0xf0
             //set message to placing phase banner
-            Cutscene(g, "P1_PLACE_SHIPS ");
+            Cutscene(g, "        PLAYER 1 PLACE SHIPS ");
  8000dea:	4979      	ldr	r1, [pc, #484]	@ (8000fd0 <GameRun+0x228>)
  8000dec:	6878      	ldr	r0, [r7, #4]
  8000dee:	f000 fb14 	bl	800141a <Cutscene>
@@ -1795,7 +1795,7 @@ void GameRun(Game *g) {
                     TogglePlayer(g);
  8000e6e:	6878      	ldr	r0, [r7, #4]
  8000e70:	f000 fa5c 	bl	800132c <TogglePlayer>
-                    Cutscene(g, "P2_PLACE_SHIPS ");
+                    Cutscene(g, "        PLAYER 2 PLACE SHIPS ");
  8000e74:	4957      	ldr	r1, [pc, #348]	@ (8000fd4 <GameRun+0x22c>)
  8000e76:	6878      	ldr	r0, [r7, #4]
  8000e78:	f000 facf 	bl	800141a <Cutscene>
@@ -1812,7 +1812,7 @@ void GameRun(Game *g) {
                     TogglePlayer(g); // Set back to P1 for the first turn
  8000e8e:	6878      	ldr	r0, [r7, #4]
  8000e90:	f000 fa4c 	bl	800132c <TogglePlayer>
-                    Cutscene(g, "P1_GUESS_TILE ");
+                    Cutscene(g, "        PLAYER 1 GUESS TILE ");
  8000e94:	4950      	ldr	r1, [pc, #320]	@ (8000fd8 <GameRun+0x230>)
  8000e96:	6878      	ldr	r0, [r7, #4]
  8000e98:	f000 fabf 	bl	800141a <Cutscene>
@@ -1874,7 +1874,7 @@ void GameRun(Game *g) {
                     TogglePlayer(g);
  8000ef4:	6878      	ldr	r0, [r7, #4]
  8000ef6:	f000 fa19 	bl	800132c <TogglePlayer>
-                    Cutscene(g, (g->activePlayer == PLAYER1) ? "P1_GUESS_TILE " : "P2_GUESS_TILE ");
+                    Cutscene(g, (g->activePlayer == PLAYER1) ? "        PLAYER 1 GUESS TILE " : "        PLAYER 2 GUESS TILE ");
  8000efa:	687b      	ldr	r3, [r7, #4]
  8000efc:	f893 30f1 	ldrb.w	r3, [r3, #241]	@ 0xf1
  8000f00:	2b00      	cmp	r3, #0
@@ -1891,7 +1891,7 @@ void GameRun(Game *g) {
  8000f14:	68fb      	ldr	r3, [r7, #12]
  8000f16:	2b01      	cmp	r3, #1
  8000f18:	d155      	bne.n	8000fc6 <GameRun+0x21e>
-                    Cutscene(g, (g->activePlayer == PLAYER1) ? "P2_SHIP_HIT_________GUESS_AGAIN_____________ " : "P1_SHIP_HIT_________GUESS_AGAIN_____________ ");
+                    Cutscene(g, (g->activePlayer == PLAYER1) ? "        HIT PLAYER 2 SHIP         GUESS AGAIN " : "        HIT PLAYER 1 SHIP         GUESS AGAIN ");
  8000f1a:	687b      	ldr	r3, [r7, #4]
  8000f1c:	f893 30f1 	ldrb.w	r3, [r3, #241]	@ 0xf1
  8000f20:	2b00      	cmp	r3, #0
@@ -1941,7 +1941,7 @@ void GameRun(Game *g) {
  8000f78:	687b      	ldr	r3, [r7, #4]
  8000f7a:	2203      	movs	r2, #3
  8000f7c:	f883 20f0 	strb.w	r2, [r3, #240]	@ 0xf0
-                        Cutscene(g, (g->activePlayer == PLAYER1) ? "P1_WINS_____________P1_WINS_____________PLAY_AGAIN? " : "P2_WINS_____________P2_WINS_____________PLAY_AGAIN?");
+                        Cutscene(g, (g->activePlayer == PLAYER1) ? "        PLAYER 1 WINS        PRESS TO PLAY AGAIN " : "        PLAYER 2 WINS        PRESS TO PLAY AGAIN ");
  8000f80:	687b      	ldr	r3, [r7, #4]
  8000f82:	f893 30f1 	ldrb.w	r3, [r3, #241]	@ 0xf1
  8000f86:	2b00      	cmp	r3, #0
@@ -1970,7 +1970,7 @@ void GameRun(Game *g) {
  8000fae:	6878      	ldr	r0, [r7, #4]
  8000fb0:	f7ff fe88 	bl	8000cc4 <InitGame>
             //set message to placing phase banner
-            Cutscene(g, "BATTLESHIP________PRESS_TO_PLAY________ ");
+            Cutscene(g, "        BATTLESHIP             PRESS TO PLAY              ");
  8000fb4:	490e      	ldr	r1, [pc, #56]	@ (8000ff0 <GameRun+0x248>)
  8000fb6:	6878      	ldr	r0, [r7, #4]
  8000fb8:	f000 fa2f 	bl	800141a <Cutscene>
@@ -1991,14 +1991,14 @@ void GameRun(Game *g) {
  8000fca:	3710      	adds	r7, #16
  8000fcc:	46bd      	mov	sp, r7
  8000fce:	bd80      	pop	{r7, pc}
- 8000fd0:	080059f4 	.word	0x080059f4
- 8000fd4:	08005a04 	.word	0x08005a04
- 8000fd8:	08005a14 	.word	0x08005a14
- 8000fdc:	08005a24 	.word	0x08005a24
- 8000fe0:	08005a34 	.word	0x08005a34
- 8000fe4:	08005a64 	.word	0x08005a64
- 8000fe8:	08005a94 	.word	0x08005a94
- 8000fec:	08005acc 	.word	0x08005acc
+ 8000fd0:	08005a04 	.word	0x08005a04
+ 8000fd4:	08005a24 	.word	0x08005a24
+ 8000fd8:	08005a44 	.word	0x08005a44
+ 8000fdc:	08005a64 	.word	0x08005a64
+ 8000fe0:	08005a84 	.word	0x08005a84
+ 8000fe4:	08005ab4 	.word	0x08005ab4
+ 8000fe8:	08005ae4 	.word	0x08005ae4
+ 8000fec:	08005b18 	.word	0x08005b18
  8000ff0:	080059c8 	.word	0x080059c8
 
 08000ff4 <PlaceShip>:
@@ -4336,7 +4336,7 @@ void Seven_Segment_ASCII(unsigned char digit, unsigned char ascii_char, unsigned
  8001ed0:	46bd      	mov	sp, r7
  8001ed2:	f85d 7b04 	ldr.w	r7, [sp], #4
  8001ed6:	4770      	bx	lr
- 8001ed8:	08006140 	.word	0x08006140
+ 8001ed8:	0800618c 	.word	0x0800618c
  8001edc:	40021000 	.word	0x40021000
 
 08001ee0 <HAL_MspInit>:
@@ -4697,7 +4697,7 @@ LoopFillZerobss:
   ldr r1, =_edata
  8002088:	2000000c 	.word	0x2000000c
   ldr r2, =_sidata
- 800208c:	08006260 	.word	0x08006260
+ 800208c:	0800622c 	.word	0x0800622c
   ldr r2, =_sbss
  8002090:	2000000c 	.word	0x2000000c
   ldr r4, =_ebss
@@ -11125,7 +11125,7 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(const RCC_ClkInitTypeDef  *RCC_ClkInitStru
  8004932:	bf00      	nop
  8004934:	40023c00 	.word	0x40023c00
  8004938:	40023800 	.word	0x40023800
- 800493c:	08006240 	.word	0x08006240
+ 800493c:	0800620c 	.word	0x0800620c
  8004940:	20000000 	.word	0x20000000
  8004944:	20000004 	.word	0x20000004
 
@@ -13981,10 +13981,10 @@ USBH_StatusTypeDef USBH_Get_USB_Status(HAL_StatusTypeDef hal_status)
  800599a:	4798      	blx	r3
  800599c:	3601      	adds	r6, #1
  800599e:	e7f2      	b.n	8005986 <__libc_init_array+0x1e>
- 80059a0:	08006258 	.word	0x08006258
- 80059a4:	08006258 	.word	0x08006258
- 80059a8:	08006258 	.word	0x08006258
- 80059ac:	0800625c 	.word	0x0800625c
+ 80059a0:	08006224 	.word	0x08006224
+ 80059a4:	08006224 	.word	0x08006224
+ 80059a8:	08006224 	.word	0x08006224
+ 80059ac:	08006228 	.word	0x08006228
 
 080059b0 <_init>:
  80059b0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
