@@ -1,13 +1,32 @@
 #include "Music.h"
 
+void MusicInit(Music *m, int vibratoRate, int vibratoDepth) {
+ 	// Set play state and starting position
+    m->doPlay = 1;       // Start playing immediately
+    m->index = 0;        // Start at the first note
+    m->counter = 0;      // Reset duration counter
+    m->tone = 0;         // Reset frequency counter
+    
+	// Initialize Pitch and Vibrato
+    // We load the first note's pitch into our working variables
+    m->saveNote = m->notes[0].pitch;
+    m->currentNote = m->saveNote;
+
+	// Configure Vibrato Settings
+	m->vibratoCounter = 0;
+    m->vibratoRate = vibratoRate;  // Adjust this for speed (lower = faster)
+    m->vibratoDepth = vibratoDepth;  // Adjust this for intensity (how many frequency units it shifts)
+    m->vibratoDir = 1;
+}
+
 void MusicSystick(Music *m) {
     if (m->doPlay == 0) return;
 
     m->counter++; 
-    m->vibratoCount++; 
+    m->vibratoCounter++; 
 
-    if (m->vibratoCount >= m->vibratoRate) {
-        m->vibratoCount = 0; 
+    if (m->vibratoCounter >= m->vibratoRate) {
+        m->vibratoCounter = 0; 
         
         if (m->saveNote > 0) { // Don't apply vibrato to rests
             // Move pitch in the current direction

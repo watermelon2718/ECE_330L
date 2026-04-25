@@ -27,10 +27,10 @@ typedef struct Music {
     //vibrato
     int vibratoDepth;
     int vibratoRate;
-    int vibratoCount;
+    int vibratoCounter;
     int vibratoDir; // init to 1
 } Music;
-
+void MusicInit(Music *m, int vibratoRate, int vibratoDepth);
 void MusicSystick(Music *m);
 void MusicTIM7Tick(Music *m);
 
