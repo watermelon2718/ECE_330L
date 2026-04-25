@@ -1,3 +1,0 @@
-../Core/Src/ScrollMessage.c:5:6:SetMessage	24	static
-../Core/Src/ScrollMessage.c:15:6:MessageInit	24	static
-../Core/Src/ScrollMessage.c:19:6:DisplayScrollMessage	32	static

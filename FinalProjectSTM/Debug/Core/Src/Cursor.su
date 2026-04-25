@@ -1,3 +1,0 @@
-../Core/Src/Cursor.c:4:6:CursorInit	16	static
-../Core/Src/Cursor.c:12:6:CursorHorizVertToggle	16	static
-../Core/Src/Cursor.c:36:6:CursorSingleDoubleToggle	16	static

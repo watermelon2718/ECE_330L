@@ -156,7 +156,7 @@ void AddCursor (Game *game) {
 	if(game->cursor.cursorMode == HORIZONTAL) {
 		game->display.horizDisplayArray[game->cursor.xPos][game->cursor.yPos] = CURSOR;
 		if(game->cursor.cursorLength == DOUBLE_SEG) {
-			game->display.horizDisplayArray[game->cursor.xPos + 1][game->cursor.yPos] = CURSOR;
+			game->display.horizDisplayArray[game->cursor.xPos+1][game->cursor.yPos] = CURSOR;
 		}
 	}
 	//add vertical cursor if present
