@@ -29,7 +29,10 @@ void PlayTrack (Music *m, const Note *t) {
 }
 //puts on a temporary effect
 void PlayEffect(Music *m, const Note *effect) {
-    m->returnIndex = m->index;
+    if(m->returnIndex != m->index) {m->index = m->returnIndex;} //return to track if effect is already playing
+    if(m->returnNotes != m->notes) {m->notes = m->returnNotes;} //return to track if effect is already playing
+
+    m->returnIndex = m->index; // leave return address
     m->returnNotes = m->notes;
     MusicInit(m, effect, m->vibratoRate, m->vibratoDepth);
 }
@@ -86,9 +89,13 @@ void MusicTIM7Tick(Music *m) {
     //loop if on last note
     if(m->notes[m->index].end) {
         //returns to the return song array, loops for songs, jumps back from effects
-        MusicInit(m, m->notes, m->vibratoRate, m->vibratoDepth);
-        m->notes = m->returnNotes;
-        m->index = m->returnIndex;
-        m->returnIndex = 0;
+        MusicReturn(m);
     }
+}
+
+void MusicReturn(Music *m) {
+    MusicInit(m, m->notes, m->vibratoRate, m->vibratoDepth);
+    m->notes = m->returnNotes;
+    m->index = m->returnIndex;
+    m->returnIndex = 0;
 }

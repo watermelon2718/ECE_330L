@@ -1,5 +1,6 @@
 ../Core/Src/Music.c:4:6:MusicInit	1
 ../Core/Src/Music.c:25:6:PlayTrack	1
-../Core/Src/Music.c:31:6:PlayEffect	1
-../Core/Src/Music.c:37:6:MusicSystick	6
-../Core/Src/Music.c:61:6:MusicTIM7Tick	12
+../Core/Src/Music.c:31:6:PlayEffect	3
+../Core/Src/Music.c:40:6:MusicSystick	6
+../Core/Src/Music.c:64:6:MusicTIM7Tick	12
+../Core/Src/Music.c:96:6:MusicReturn	1

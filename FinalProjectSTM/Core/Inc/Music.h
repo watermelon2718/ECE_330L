@@ -34,6 +34,7 @@ typedef struct Music {
 } Music;
 
 void MusicInit(Music *m, const Note *n, int vibratoRate, int vibratoDepth); //init
+void MusicReturn(Music *m);
 void PlayTrack (Music *m, const Note *t); // switch the track
 void PlayEffect(Music *m, const Note *effect);
 void MusicSystick(Music *m); // rhythm updater on systick

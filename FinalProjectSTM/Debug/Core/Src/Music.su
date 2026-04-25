@@ -1,5 +1,6 @@
 ../Core/Src/Music.c:4:6:MusicInit	24	static
 ../Core/Src/Music.c:25:6:PlayTrack	16	static
 ../Core/Src/Music.c:31:6:PlayEffect	16	static
-../Core/Src/Music.c:37:6:MusicSystick	16	static
-../Core/Src/Music.c:61:6:MusicTIM7Tick	16	static
+../Core/Src/Music.c:40:6:MusicSystick	16	static
+../Core/Src/Music.c:64:6:MusicTIM7Tick	16	static
+../Core/Src/Music.c:96:6:MusicReturn	16	static

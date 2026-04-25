@@ -54,7 +54,7 @@ void GameRun(Game *g) {
             //if confirm pressed, place ship
             if(Confirm(g)) {
                 PlaceShip(g);
-                PlayEffect(&g->music, effect_placed);
+                PlayEffect(&g->music, effect_place);
             }
 
             //if mode placed, toggle vert/horiz
@@ -77,6 +77,7 @@ void GameRun(Game *g) {
                     g->gamePhase = PHASE_TURN;
                     TogglePlayer(g); // Set back to P1 for the first turn
                     Cutscene(g, "        PLAYER 1 GUESS TILE ");
+                    PlayEffect(&g->music, effect_switch);
                     g->displayMode = MESSAGE;
                 }
             } else if (p->shipsToPlace == 3) {
