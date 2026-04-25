@@ -23,8 +23,8 @@ void InitGame(Game *g) {
     ButtonInit(&(g->confirmButton), GPIOC, GPIO_PIN_11);
 
     //init pots
-    InitPot(&(g->xPot), &(g->cursor), 1, X_AXIS);// on channel 1
-    InitPot(&(g->yPot), &(g->cursor), 2, Y_AXIS);// on channel 2
+    InitPot(&(g->xPot), &(g->cursor), 1, X_AXIS, ADC1);// on channel 1
+    InitPot(&(g->yPot), &(g->cursor), 2, Y_AXIS, ADC2);// on channel 2
 
 }
 

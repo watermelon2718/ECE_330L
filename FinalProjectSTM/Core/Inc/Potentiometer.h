@@ -5,8 +5,7 @@
 #include "Cursor.h"
 #include "math.h"
 #include "GameConstAndEnums.h"
-typedef struct ADC_TypeDef ADC_TypeDef;//placeholder for ADC
-
+#include "stm32f4xx.h"
 typedef enum Axis {X_AXIS, Y_AXIS} Axis; 
 
 //struct
