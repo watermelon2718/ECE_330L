@@ -1,6 +1,7 @@
 #include "Display.h"
 #include "Game.h"
 
+//initializer
 void DisplayInit(Display *d) {
 	memset(d, 0, sizeof(Display)); //init to 0
 }
@@ -8,11 +9,12 @@ void DisplayInit(Display *d) {
 //used by systick to update the representational array to be displayed
 //(based upon game phase and state)
 void DisplayBoard(Game *game) {
-	UpdateDisplayArrays(game);
-	UpdateFrameArrays(game);
-	OutputFrame(&(game->display));
+	UpdateDisplayArrays(game); // update display arrays
+	UpdateFrameArrays(game); // update frame arrays based on logical state from display arrays
+	OutputFrame(&(game->display)); // output the frame data via gpio
 }
 
+//updates the logical state stored in the display arrays, based upon current game phase
 void UpdateDisplayArrays(Game *game) {
 	switch (game->gamePhase) {
 	case PHASE_TITLE:
@@ -37,7 +39,7 @@ void UpdateDisplayArrays(Game *game) {
 		break;
 
 	case PHASE_TURN:
-		//placement phase needs to display ships already placed and the cursor
+		//guessing phase needs to show what has been guessed already
 		for(int i = 0; i < H_WIDTH; i++) {
 			for(int j = 0; j < H_HEIGHT; j++) {
 				game->display.horizDisplayArray[i][j] = game->players[game->activePlayer].horizGuessArray[i][j];
@@ -61,7 +63,7 @@ void UpdateDisplayArrays(Game *game) {
 }
 
 
-//used by the systick to get the data that will be output to the segments on a given 'frame'
+//used by the systick to get the data that will be output to the segments on a given 'frame', based on logical state from display arrays
 //(includes dimming and effects)
 void UpdateFrameArrays(Game *game) {
 	//turn dots off
@@ -69,20 +71,21 @@ void UpdateFrameArrays(Game *game) {
 	
     // Static counters persist between function calls
     static int displayTimer = 0;
-    displayTimer++;
+    displayTimer++; // increment display timer which is used for PWM
 
 	//determine duty cycles for each tileState
 	int noneBright = 1; // none will always be off
 	int hitBright = 0; //hit ships are at 100% brightness
 	int missBright = !(displayTimer % 6 == 0); // miss gets 20% duty cycle
     int placedBright = 0; // placed ships are displayed at 100% brightness
-	int cursorBright = !(displayTimer % 500 < 250); //cursor blinks, toggle the blink state every 750 counts
+	int cursorBright = !(displayTimer % 500 < 250); //cursor blinks, toggle the blink state every 250 counts
 
-    //Process Horizontal Array
+    //Process Horizontal Array by looping through all tiles within it
     for (int i = 0; i < H_WIDTH; i++) {
         for (int j = 0; j < H_HEIGHT; j++) {
-            TileState tileState = game->display.horizDisplayArray[i][j];
+            TileState tileState = game->display.horizDisplayArray[i][j]; // the state of the current tile
             
+			//set the frame data array on/off based on the pwm values for the logical state of the display array
             switch (tileState) {
                 case NONE:
                     game->display.horizFrameArray[i][j] = noneBright;
@@ -106,8 +109,9 @@ void UpdateFrameArrays(Game *game) {
     // Process Vertical Array
     for (int i = 0; i < V_WIDTH; i++) {
         for (int j = 0; j < V_HEIGHT; j++) {
-            TileState currentState = game->display.vertDisplayArray[i][j];
+            TileState currentState = game->display.vertDisplayArray[i][j]; // state of the current tile
             
+			//set the frame data array on/off based on the pwm values for the logical state of the display array
             switch (currentState) {
                 case NONE:
                     game->display.vertFrameArray[i][j] = noneBright;
@@ -128,19 +132,22 @@ void UpdateFrameArrays(Game *game) {
         }
     }
     
-    // Reset displayTimer eventually to prevent overflo
+    // Reset displayTimer eventually to prevent overflow
     if (displayTimer >= 15000) displayTimer = 0; 
 }
 
+//outputs frame data to seven segment displays via gpio
 void OutputFrame(Display *d) {
+	//for each of the 8 displays
 	for(int i = 0; i < H_WIDTH; i++) {
-		int bitMask = Get7SegBitMask(d,i); // get the mask for the character
+		int bitMask = Get7SegBitMask(d,i); // get the bitmask for the code to output to the seven segment display
 		GPIOE->ODR = (0xFF00 | bitMask) & ~(1<<(i+8));
 		// Set all selects high to latch-in character
 		GPIOE->ODR |= 0xFF00;
 	}
 }
 
+//generate bitmask to be sent to seven segment display based upon balues in the frame data arrays
 int Get7SegBitMask(Display *d, int displayIndex) {
 	    int bitMask = 0x0; // initialize seven segment code to 0
 	    int horizontalXShift = (H_WIDTH-1)-displayIndex; // find offset for x value for indexing horizontal matrix
@@ -151,23 +158,27 @@ int Get7SegBitMask(Display *d, int displayIndex) {
 	    bitMask |= ((d->horizFrameArray[horizontalXShift][0]) << 3); // segment d
 	    bitMask |= ((d->vertFrameArray[verticalXShift][0]) << 4); // segment e
 	    bitMask |= ((d->vertFrameArray[verticalXShift][1]) << 5); // segment f
-	    bitMask |= ((d->horizFrameArray[horizontalXShift][1]) << 6);
-		bitMask |= (d->dotsFrameArray[horizontalXShift] << 7); // segment g
-	    return bitMask; // return code for seven segment value, now with all of the segments set appropriately, and correct select line on
+	    bitMask |= ((d->horizFrameArray[horizontalXShift][1]) << 6); // segment g
+		bitMask |= (d->dotsFrameArray[horizontalXShift] << 7); // the dot
+	    return bitMask; // return code for seven segment value, now with all of the segments set appropriately
 }
+
+//helper function to change the display array to account for the cursor
 void AddCursor (Game *game) {
 	//add cursor if horizontal
 	if(game->cursor.cursorMode == HORIZONTAL) {
-		game->display.horizDisplayArray[game->cursor.xPos][game->cursor.yPos] = CURSOR;
+		game->display.horizDisplayArray[game->cursor.xPos][game->cursor.yPos] = CURSOR; // add at the cursor location
+		//if cursor is two segments long
 		if(game->cursor.cursorLength == DOUBLE_SEG) {
-			game->display.horizDisplayArray[game->cursor.xPos+1][game->cursor.yPos] = CURSOR;
+			game->display.horizDisplayArray[game->cursor.xPos+1][game->cursor.yPos] = CURSOR; // add cursor value to display arrays at one tile over from cursor position
 		}
 	}
 	//add vertical cursor if present
 	else if(game->cursor.cursorMode == VERTICAL) {
-		game->display.vertDisplayArray[game->cursor.xPos][game->cursor.yPos] = CURSOR;
+		game->display.vertDisplayArray[game->cursor.xPos][game->cursor.yPos] = CURSOR; // set cursor tile
+		//if two segment long cursor
 		if(game->cursor.cursorLength == DOUBLE_SEG) {
-			game->display.vertDisplayArray[game->cursor.xPos][game->cursor.yPos+1] = CURSOR;
+			game->display.vertDisplayArray[game->cursor.xPos][game->cursor.yPos+1] = CURSOR; // set second cursor tile
 		}
 	}
 }

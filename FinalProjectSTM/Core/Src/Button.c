@@ -2,12 +2,12 @@
 
 //initializer
 void ButtonInit(Button *b, GPIO_TypeDef* port, uint16_t pin) {
-    b->port = port;
-    b->pin = pin;
-    b->currentState = 0;
-    b->rawState = 0;
-    b->counter = 0;
-    b->hasBeenPressed = 0;
+    b->port = port; // init to specified port
+    b->pin = pin; // init to specified pin
+    b->currentState = 0; // current state is 0
+    b->rawState = 0; // raw state is 0
+    b->counter = 0; // counter is 0 
+    b->hasBeenPressed = 0; // has not been pressed
 }
 
 //poll this
@@ -41,7 +41,7 @@ void ButtonUpdate(Button *b) {
 int WasPressed(Button *b) {
     if (b->hasBeenPressed) {
         b->hasBeenPressed = 0; // Reset the flag (consume the event)
-        return 1;
+        return 1; // return 1 if has been
     }
-    return 0;
+    return 0; // otherwise return 0
 }

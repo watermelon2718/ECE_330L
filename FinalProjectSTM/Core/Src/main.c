@@ -24,7 +24,8 @@ I2C_HandleTypeDef hi2c1;
 I2S_HandleTypeDef hi2s3;
 SPI_HandleTypeDef hspi1;
 TIM_HandleTypeDef htim7;
-volatile Game game;
+
+volatile Game game; // main game engine
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -80,7 +81,7 @@ int main(void)
 
   RCC->APB2ENR |= 1<<9;  // Turn on ADC2 clock by forcing bit 8 to 1 while keeping other bits unchanged
   ADC2->SMPR2 |= 1; // 15 clock cycles per sample
-  ADC2->CR2 |= 1;    
+  ADC2->CR2 |= 1;    // Turn on ADC2 by forcing bit 0 to 1 while keeping other bits unchanged
 
   /*****************************************************************************************************
   These commands are handled as part of the MX_TIM7_Init() function and don't need to be enabled
@@ -98,15 +99,15 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  // initialize main game
+
+  // initialize main game engine
   InitGame((void *)&game);
 
   while (1)
   {
-    //poll game
-    GamePoll((void *)&game);
+    GamePoll((void *)&game); // poll all game inputs for update
 
-    GameRun((void *)&game);
+    GameRun((void *)&game); // run game functions
   }
 }
 

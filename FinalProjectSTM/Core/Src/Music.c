@@ -7,8 +7,9 @@ void MusicInit(Music *m, const Note *n, int vibratoRate, int vibratoDepth) {
  	// Set play state and starting position
     m->notes = n; // notes array
     m->index = 0;        // Start at the first note
-    m->returnNotes = n;
-    m->returnIndex = 0; // return values to jump back to song after effect is played
+    // return values to jump back to song after effect is played
+    m->returnNotes = n; 
+    m->returnIndex = 0; 
 
 	m->tone = 0;         // Reset frequency counter
     m->counter = 0;      // Reset duration counter
@@ -31,8 +32,9 @@ void SetNotesArray(Music *m, const Note *n) {
 void ResetPlayer(Music *m){
     m->tone = 0;         // Reset frequency counter
     m->counter = 0;      // Reset duration counter
-    m->vibratoCounter = 0;
-    m->saveNote = m->notes[m->index].pitch;
+    m->vibratoCounter = 0; // reset vibrato counter
+    // set the current and saved note pitches to the ones of the note at current index
+    m->saveNote = m->notes[m->index].pitch; 
     m->currentNote = m->saveNote;
 }
 
@@ -63,13 +65,13 @@ void PlayEffect(Music *m, const Note *effect) {
 }
 
 void MusicSystick(Music *m) {
-    if (m->doPlay == 0 && m->effectIsOn == 0) return;
+    if (m->doPlay == 0 && m->effectIsOn == 0) return; // don't do anything if music is turned off and no effect is playing
 
-    m->counter++; 
-    m->vibratoCounter++; 
+    m->counter++;  // increment counter
+    m->vibratoCounter++; // increment vibrato counter
 
     if (m->vibratoCounter >= m->vibratoRate) {
-        m->vibratoCounter = 0; 
+        m->vibratoCounter = 0; //reset vibrato counter if it reaches the threshold for the rate
         
         if (m->saveNote > 0) { // Don't apply vibrato to rests
             // Move pitch in the current direction
@@ -101,12 +103,12 @@ void MusicTIM7Tick(Music *m) {
 	} else if ((m->doPlay > 0 ||m->effectIsOn > 0) && (m->notes[m->index].tempo)/(m->notes[m->index].length) == m->counter) {
 		m->counter = 0; // zero out for a new note
 		m->tone = 0;
-		if (!(m->notes[m->index].end)) { //set to new note if present
+		if (!(m->notes[m->index].end)) { //set to next note if present
 			m->index++;
 			m->saveNote = m->notes[m->index].pitch;
 			m->currentNote = m->notes[m->index].pitch;
 		}
-	} else if (m->doPlay == 0 &&m->effectIsOn == 0) { 
+	} else if (m->doPlay == 0 &&m->effectIsOn == 0) { // zero out the counters if music is off and no effect is suppsoed to play
 			m->tone = 0;
 			m->counter = 0;
 	}
@@ -119,9 +121,9 @@ void MusicTIM7Tick(Music *m) {
 }
 
 void MusicReturn(Music *m) {
-    m->effectIsOn = 0;
-    m->notes = m->returnNotes;
-    m->index = m->returnIndex;
+    m->effectIsOn = 0; // no effect is on, as we are returning to track
+    m->notes = m->returnNotes; // return to the return array of notes
+    m->index = m->returnIndex; // return to return index
 
-    ResetPlayer(m); // play from where we left off
+    ResetPlayer(m); // kick music player to play from where we left off
 }

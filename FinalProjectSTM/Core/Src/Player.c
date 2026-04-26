@@ -1,5 +1,6 @@
 #include "Player.h"
 
+//player struct initializer
 void PlayerInit(Player *p) {
     //initialize all arrays to 0
     memset(p->horizPlacementArray, 0, sizeof(p->horizPlacementArray));
