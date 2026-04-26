@@ -6,6 +6,13 @@
 #include "SoundEffects.h" // include sound effect arrays
 #include "SoundTracks.h" // include soundtrack arrays
 
+
+//ending track
+static const Note track_end[] = {
+    {rest,      _6tup,  2100,  40,    1}
+};
+
+
 //arrangement of track from castlevania
 static const Note track_castlevania[] = {
 //measure 1

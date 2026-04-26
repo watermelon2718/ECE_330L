@@ -1,4 +1,4 @@
 ../Core/Src/Potentiometer.c:7:6:InitPot	24	static
 ../Core/Src/Potentiometer.c:16:6:UpdatePot	16	static
 ../Core/Src/Potentiometer.c:22:6:ReadADC	16	static
-../Core/Src/Potentiometer.c:34:6:UpdateCursor	24	static
+../Core/Src/Potentiometer.c:35:6:UpdateCursor	24	static
