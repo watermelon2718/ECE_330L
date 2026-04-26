@@ -76,7 +76,7 @@ void UpdateFrameArrays(Game *game) {
 	int hitBright = 0; //hit ships are at 100% brightness
 	int missBright = !(displayTimer % 6 == 0); // miss gets 20% duty cycle
     int placedBright = 0; // placed ships are displayed at 100% brightness
-	int cursorBright = !(displayTimer % 1500 < 750); //cursor blinks, toggle the blink state every 750 counts
+	int cursorBright = !(displayTimer % 500 < 250); //cursor blinks, toggle the blink state every 750 counts
 
     //Process Horizontal Array
     for (int i = 0; i < H_WIDTH; i++) {
