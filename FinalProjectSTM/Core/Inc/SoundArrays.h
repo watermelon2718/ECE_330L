@@ -1,11 +1,12 @@
 #ifndef SOUND_ARRAYS_
 #define SOUND_ARRAYS_
-#include "Music.h"
+#include "Music.h" // include music definitions
 
 //sound includes
-#include "SoundEffects.h"
-#include "SoundTracks.h"
+#include "SoundEffects.h" // include sound effect arrays
+#include "SoundTracks.h" // include soundtrack arrays
 
+//arrangement of track from castlevania
 static const Note track_castlevania[] = {
 //measure 1
     {As5_Bb5,   _16th,  2100,  10,    0},
@@ -258,7 +259,7 @@ static const Note track_castlevania[] = {
     {Cs6_Db6    ,   _16th,  1990,  50,    0},
 
 
-//extra
+//extra -- unused bridge before loop
 // {F1    ,   _8th,  2300,  0,    0},
 // {F1    ,   _16th,  2300,  20,    0},
 // {F5    ,   _16th,  2300,  20,    0},
@@ -284,6 +285,8 @@ static const Note track_castlevania[] = {
 
 };
 
+
+//megalovania (with a little flair)
 static const Note track_megalovania[] = {
     //A
     {D3,        _8th,  1000,  40,    0}, // 0
@@ -509,6 +512,8 @@ static const Note track_megalovania[] = {
     //end
     {rest,      _8th,  1400,  40,    1}
 };
+
+//jeopardy theme
 static const Note track_title[] = {
     // Pitch,   Length,   Tempo, Space, End
     {A4,        quarter,  1400,  10,    0}, // 0

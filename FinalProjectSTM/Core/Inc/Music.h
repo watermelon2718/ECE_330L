@@ -8,14 +8,14 @@ typedef struct Note {
 	int length; //quarter, half
 	int tempo; // base speed 
 	int space; // silence between notes
-	char end; 
+	char end; // signals if at the end
 } Note;
 
 //structure for a song
 typedef struct Music {
-    int effectIsOn;
+    int effectIsOn; // indicates if an effect is currently playing, used to avoid interference between effects and music
 
-    int doPlay; // init to true
+    int doPlay; // turns music on or off
     const Note *notes; // pointer to notes array
     const Note *returnNotes; // pointer to store notes array to return to
     int returnIndex; // index in last song to return to
@@ -25,24 +25,24 @@ typedef struct Music {
     int index; // what note in the song we're on
 
     //note pitch
-    int currentNote;
-    int saveNote;
+    int currentNote; // current pitch
+    int saveNote; // saved pitch for current note
 
     //vibrato
-    int vibratoDepth;
-    int vibratoRate;
-    int vibratoCounter;
+    int vibratoDepth; // how much vibrato
+    int vibratoRate; // vibrato speed
+    int vibratoCounter; // counter for vibrato functionality
     int vibratoDir; // init to 1
 } Music;
 
 void MusicInit(Music *m, const Note *n, int vibratoRate, int vibratoDepth); //init
 void SetNotesArray(Music *m, const Note *n); // setter for notes array
 void ResetPlayer(Music *m); // kicks player to reset it when given a new note array
-void MusicReturn(Music *m);
+void MusicReturn(Music *m); // return to playing music (used to return from effects, and to return to the start of a track once finished)
 void PlayTrack (Music *m, const Note *t); // switch the track
-void PlayEffect(Music *m, const Note *effect);
-void MusicSystick(Music *m); // rhythm updater on systick
-void MusicTIM7Tick(Music *m); // tone generator on tim7
+void PlayEffect(Music *m, const Note *effect); // play effect
+void MusicSystick(Music *m); // rhythm updater for systick
+void MusicTIM7Tick(Music *m); // tone generator for tim7
 
 
 /* music notes by name, 125Khz (250Khz/2) frequency will be divided by these constants for 1/2 period  *
@@ -146,8 +146,8 @@ void MusicTIM7Tick(Music *m); // tone generator on tim7
 #define _8th 8
 #define _16th 16
 #define _32nd 32
-#define _3tup 12
-#define _6tup 24
+#define _3tup 12 // add triplets per crochet
+#define _6tup 24 // triplets per quaver
 #define rest 0
 
 

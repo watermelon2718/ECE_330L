@@ -1,7 +1,7 @@
 #ifndef SCROLL_MESSAGE_H_
 #define SCROLL_MESSAGE_H_
 
-#include "seg7.h"
+#include "seg7.h" // include seven segment display functionalities
 
 typedef struct ScrollMessage {
     char *text;           // Pointer to the actual string (e.g., "PLAYER 1 WINS")

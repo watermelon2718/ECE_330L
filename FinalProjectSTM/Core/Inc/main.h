@@ -5,12 +5,13 @@
 //includes
 #include "stm32f4xx_hal.h" // hardware
 #include "Game.h" // game structures
-#include <string.h> // strings for some reason
+#include <string.h> // strings
 
-extern volatile Game game; // make the main game visible globally
+extern volatile Game game; // make the main game engine visible globally
 
 void Error_Handler(void);
 
+//defines for GPIO
 #define CS_I2C_SPI_Pin GPIO_PIN_3
 #define CS_I2C_SPI_GPIO_Port GPIOE
 #define PC14_OSC32_IN_Pin GPIO_PIN_14

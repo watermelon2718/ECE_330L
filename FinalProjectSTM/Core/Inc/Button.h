@@ -1,9 +1,9 @@
 #ifndef BUTTON_H_
 #define BUTTON_H_
 
-#include "stm32f4xx_hal.h" // Replace with your specific HAL if different
+#include "stm32f4xx_hal.h" // include HAL
 
-#define DEBOUNCE_THRESHOLD 20 // Number of consecutive polls required to confirm state
+#define DEBOUNCE_THRESHOLD 20 // Number of consecutive polls required to confirm state for a button
 
 typedef struct Button {
     GPIO_TypeDef* port;     // e.g., GPIOA

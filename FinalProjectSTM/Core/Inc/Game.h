@@ -9,7 +9,7 @@
 #include "Button.h" // button
 #include "Potentiometer.h" // potentiometer
 #include "Display.h" // display data
-#include "ScrollMessage.h"
+#include "ScrollMessage.h" // message display functionalities
 #include "Music.h" // music
 #include "SoundArrays.h" // sound files
 
@@ -30,7 +30,7 @@ typedef struct Game {
 	//displaymode
 	DisplayMode displayMode;
 	//song
-	Music music;
+	Music music; // music engine
 	Button modeButton; // for switching modes 
 	Button confirmButton; // for selecting/confirming an option
 	Potentiometer xPot; // potentiometer for x axis
@@ -50,7 +50,7 @@ void DisplayOutput(Game *g); // display to displays
 void GamePoll(Game *g); // poll inputs
 
 void Cutscene(Game *g, char *c); // trigger cutscene
-int Confirm(Game *g);
-int Mode(Game *g);
+int Confirm(Game *g); // helper function to check if the confirm button has been pressed
+int Mode(Game *g); // helper function to check if the confirm button has been pressed
 
 #endif /* GAME_H_ */

@@ -6,7 +6,7 @@
 
 	//Display data structure
 	typedef struct Display {
-		TileState horizDisplayArray[H_WIDTH][H_HEIGHT]; //arrays for display contents
+		TileState horizDisplayArray[H_WIDTH][H_HEIGHT]; //arrays for logical display contents
 		TileState vertDisplayArray[V_WIDTH][V_HEIGHT];
 
 		TileState horizFrameArray[H_WIDTH][H_HEIGHT]; //arrays for individual frame contents

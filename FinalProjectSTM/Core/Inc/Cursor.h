@@ -13,10 +13,10 @@ typedef struct Cursor {
 
 } Cursor;
 
-void CursorInit(Cursor *c);
+void CursorInit(Cursor *c); // initializer for the struct
 
-void CursorHorizVertToggle(Cursor *c);
+void CursorHorizVertToggle(Cursor *c); // toggles cursor between horizontal and vertical modes
 
-void CursorSingleDoubleToggle(Cursor *c);
+void CursorSingleDoubleToggle(Cursor *c); //switches between double and single segement modes
 
 #endif
