@@ -36,6 +36,8 @@ typedef struct Music {
 } Music;
 
 void MusicInit(Music *m, const Note *n, int vibratoRate, int vibratoDepth); //init
+void SetNotesArray(Music *m, const Note *n); // setter for notes array
+void ResetPlayer(Music *m); // kicks player to reset it when given a new note array
 void MusicReturn(Music *m);
 void PlayTrack (Music *m, const Note *t); // switch the track
 void PlayEffect(Music *m, const Note *effect);
@@ -144,6 +146,8 @@ void MusicTIM7Tick(Music *m); // tone generator on tim7
 #define _8th 8
 #define _16th 16
 #define _32nd 32
+#define _3tup 12
+#define _6tup 24
 #define rest 0
 
 

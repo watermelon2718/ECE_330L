@@ -39,6 +39,7 @@ USB_HOST/Target/usbh_conf.o: ../USB_HOST/Target/usbh_conf.c \
  ../Core/Inc/Cursor.h ../Core/Inc/Button.h ../Core/Inc/Potentiometer.h \
  ../Core/Inc/Display.h ../Core/Inc/ScrollMessage.h ../Core/Inc/seg7.h \
  ../Core/Inc/Music.h ../Core/Inc/SoundArrays.h ../Core/Inc/SoundEffects.h \
+ ../Core/Inc/SoundTracks.h \
  ../Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_def.h \
  ../Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_ioreq.h \
  ../Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_core.h \
@@ -94,6 +95,7 @@ USB_HOST/Target/usbh_conf.o: ../USB_HOST/Target/usbh_conf.c \
 ../Core/Inc/Music.h:
 ../Core/Inc/SoundArrays.h:
 ../Core/Inc/SoundEffects.h:
+../Core/Inc/SoundTracks.h:
 ../Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_def.h:
 ../Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_ioreq.h:
 ../Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_core.h:

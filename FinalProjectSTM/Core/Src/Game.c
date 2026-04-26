@@ -1,6 +1,7 @@
 #include "Game.h" // include all necessary constants and things
 
 void InitGame(Game *g) {
+
     // CLEAR ALL MEMORY
     memset(g, 0, sizeof(Game));
     //initialize players
@@ -17,10 +18,12 @@ void InitGame(Game *g) {
     g->displayMode = MESSAGE;
 
     // Initialize song to main theme
-    MusicInit(&(g->music), track_title, 40, 1);
+    MusicInit(&(g->music), track_title, 100, 1);
+    PlayTrack(&(g->music), track_title);
     //init buttons
     ButtonInit(&(g->modeButton), GPIOC, GPIO_PIN_10);
     ButtonInit(&(g->confirmButton), GPIOC, GPIO_PIN_11);
+    ButtonInit(&(g->musicSwitch), GPIOC, GPIO_PIN_15);
 
     //init pots
     InitPot(&(g->xPot), &(g->cursor), 1, X_AXIS, ADC1);// on channel 1
@@ -38,7 +41,7 @@ void GameRun(Game *g) {
             g->gamePhase = PHASE_PLACE;
             //set message to placing phase banner
             Cutscene(g, "        PLAYER 1 PLACE SHIPS ");
-            PlayTrack(&g->music, track_megalovania);
+            PlayTrack(&g->music, track_castlevania);
         }
         break;
 
@@ -77,6 +80,7 @@ void GameRun(Game *g) {
                     g->gamePhase = PHASE_TURN;
                     TogglePlayer(g); // Set back to P1 for the first turn
                     Cutscene(g, "        PLAYER 1 GUESS TILE ");
+                    PlayTrack(&g->music, track_megalovania);
                     PlayEffect(&g->music, effect_switch);
                     g->displayMode = MESSAGE;
                 }
@@ -219,6 +223,10 @@ void GamePoll(Game *g) {
     //update buttons
     ButtonUpdate(&(g->modeButton));
     ButtonUpdate(&(g->confirmButton));
+    ButtonUpdate(&g->musicSwitch);
+
+    if(WasPressed(&g->musicSwitch)) {g->music.doPlay = (g->music.doPlay) ? 0 : 1;} //toggle music to on or off if switch has been toggled
+
     //update potentiometers
     UpdatePot(&(g->xPot));
     UpdatePot(&(g->yPot));

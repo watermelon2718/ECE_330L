@@ -1,7 +1,7 @@
 #include "Potentiometer.h"
 #include "GameConstAndEnums.h"
 
-#define MAX_VALUE 4000
+#define MAX_VALUE 4100
 
 //init
 void InitPot(Potentiometer *p, Cursor *c, int channel, Axis a, ADC_TypeDef *adc) {

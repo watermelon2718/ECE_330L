@@ -36,7 +36,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Inc/Game.h ../Core/Inc/GameConstAndEnums.h ../Core/Inc/Player.h \
  ../Core/Inc/Cursor.h ../Core/Inc/Button.h ../Core/Inc/Potentiometer.h \
  ../Core/Inc/Display.h ../Core/Inc/ScrollMessage.h ../Core/Inc/seg7.h \
- ../Core/Inc/Music.h ../Core/Inc/SoundArrays.h ../Core/Inc/SoundEffects.h
+ ../Core/Inc/Music.h ../Core/Inc/SoundArrays.h ../Core/Inc/SoundEffects.h \
+ ../Core/Inc/SoundTracks.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -84,3 +85,4 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/Music.h:
 ../Core/Inc/SoundArrays.h:
 ../Core/Inc/SoundEffects.h:
+../Core/Inc/SoundTracks.h:

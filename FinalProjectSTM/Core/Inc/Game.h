@@ -35,6 +35,7 @@ typedef struct Game {
 	Button confirmButton; // for selecting/confirming an option
 	Potentiometer xPot; // potentiometer for x axis
 	Potentiometer yPot; // potentiometer for y axis
+	Button musicSwitch; // for turning music on or off
 } Game;
 
 //init

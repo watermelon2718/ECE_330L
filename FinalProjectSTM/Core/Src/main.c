@@ -71,7 +71,7 @@ int main(void)
   GPIOC->MODER |= 0x0; // Port C mode register - all inputs
   GPIOE->ODR = 0xFFFF; // Set all Port E pins high
   
-  GPIOC->PUPDR |= (0x5 << 20); //pull up the Port C buttons
+  GPIOC->PUPDR |= 0x55555555; //pull up the Port C buttons (and switches)
   
   /*** Configure ADC ***/
   RCC->APB2ENR |= 1<<8;  // Turn on ADC1 clock by forcing bit 8 to 1 while keeping other bits unchanged
