@@ -1,0 +1,10 @@
+../Core/Src/Game.c:3:6:InitGame	1
+../Core/Src/Game.c:35:6:GameRun	24
+../Core/Src/Game.c:145:5:PlaceShip	7
+../Core/Src/Game.c:177:5:GuessTile	7
+../Core/Src/Game.c:212:6:TogglePlayer	3
+../Core/Src/Game.c:222:6:DisplayOutput	3
+../Core/Src/Game.c:231:6:GamePoll	2
+../Core/Src/Game.c:247:5:Confirm	1
+../Core/Src/Game.c:252:5:Mode	1
+../Core/Src/Game.c:257:6:Cutscene	1

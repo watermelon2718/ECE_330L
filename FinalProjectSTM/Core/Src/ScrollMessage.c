@@ -2,6 +2,7 @@
 #include "ScrollMessage.h"
 #include <string.h>
 
+//sets new message
 void SetMessage(ScrollMessage *m, char *str, int delay, int isAnimated) {
     m->text = str;
     m->startPtr = str;
@@ -12,6 +13,7 @@ void SetMessage(ScrollMessage *m, char *str, int delay, int isAnimated) {
     m->animateOn = isAnimated;
 }
 
+//initialize message
 void MessageInit(ScrollMessage *m, char *str, int delay, int isAnimated) {
     SetMessage(m, str, delay, isAnimated);
 }
