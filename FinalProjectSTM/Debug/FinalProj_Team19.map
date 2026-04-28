@@ -201,6 +201,8 @@ Discarded input sections
                 0x00000000       0x64 ./Core/Src/Display.o
  .rodata.effect_hit
                 0x00000000       0x78 ./Core/Src/Display.o
+ .rodata.track_jollySailor
+                0x00000000      0xa50 ./Core/Src/Display.o
  .rodata.track_end
                 0x00000000       0x14 ./Core/Src/Display.o
  .rodata.track_castlevania
@@ -324,6 +326,8 @@ Discarded input sections
  .text          0x00000000        0x0 ./Core/Src/Game.o
  .data          0x00000000        0x0 ./Core/Src/Game.o
  .bss           0x00000000        0x0 ./Core/Src/Game.o
+ .rodata.track_title
+                0x00000000      0x640 ./Core/Src/Game.o
  .debug_macro   0x00000000      0xad8 ./Core/Src/Game.o
  .debug_macro   0x00000000       0x22 ./Core/Src/Game.o
  .debug_macro   0x00000000       0x5b ./Core/Src/Game.o
@@ -842,6 +846,8 @@ Discarded input sections
                 0x00000000       0x64 ./Core/Src/main.o
  .rodata.effect_hit
                 0x00000000       0x78 ./Core/Src/main.o
+ .rodata.track_jollySailor
+                0x00000000      0xa50 ./Core/Src/main.o
  .rodata.track_end
                 0x00000000       0x14 ./Core/Src/main.o
  .rodata.track_castlevania
@@ -1104,6 +1110,8 @@ Discarded input sections
                 0x00000000       0x64 ./Core/Src/stm32f4xx_hal_msp.o
  .rodata.effect_hit
                 0x00000000       0x78 ./Core/Src/stm32f4xx_hal_msp.o
+ .rodata.track_jollySailor
+                0x00000000      0xa50 ./Core/Src/stm32f4xx_hal_msp.o
  .rodata.track_end
                 0x00000000       0x14 ./Core/Src/stm32f4xx_hal_msp.o
  .rodata.track_castlevania
@@ -1279,6 +1287,8 @@ Discarded input sections
                 0x00000000       0x64 ./Core/Src/stm32f4xx_it.o
  .rodata.effect_hit
                 0x00000000       0x78 ./Core/Src/stm32f4xx_it.o
+ .rodata.track_jollySailor
+                0x00000000      0xa50 ./Core/Src/stm32f4xx_it.o
  .rodata.track_end
                 0x00000000       0x14 ./Core/Src/stm32f4xx_it.o
  .rodata.track_castlevania
@@ -5115,6 +5125,8 @@ Discarded input sections
                 0x00000000       0x64 ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
  .rodata.effect_hit
                 0x00000000       0x78 ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
+ .rodata.track_jollySailor
+                0x00000000      0xa50 ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
  .rodata.track_end
                 0x00000000       0x14 ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
  .rodata.track_castlevania
@@ -5162,7 +5174,7 @@ Discarded input sections
                 0x00000000       0x14 ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
  .text.USBH_CDC_LineCodingChanged
                 0x00000000       0x14 ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
- .debug_info    0x00000000     0x161f ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
+ .debug_info    0x00000000     0x1646 ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
  .debug_abbrev  0x00000000      0x338 ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
  .debug_aranges
                 0x00000000       0xa8 ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
@@ -5252,7 +5264,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x28 ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
  .debug_macro   0x00000000      0x15b ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
  .debug_line    0x00000000      0xfbf ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
- .debug_str     0x00000000    0xce25f ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
+ .debug_str     0x00000000    0xce271 ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
  .comment       0x00000000       0x44 ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
  .debug_frame   0x00000000      0x2a0 ./Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.o
  .ARM.attributes
@@ -5351,6 +5363,8 @@ Discarded input sections
                 0x00000000       0x64 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.o
  .rodata.effect_hit
                 0x00000000       0x78 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.o
+ .rodata.track_jollySailor
+                0x00000000      0xa50 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.o
  .rodata.track_end
                 0x00000000       0x14 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.o
  .rodata.track_castlevania
@@ -5564,6 +5578,8 @@ Discarded input sections
                 0x00000000       0x64 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
  .rodata.effect_hit
                 0x00000000       0x78 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
+ .rodata.track_jollySailor
+                0x00000000      0xa50 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
  .rodata.track_end
                 0x00000000       0x14 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
  .rodata.track_castlevania
@@ -5606,7 +5622,7 @@ Discarded input sections
                 0x00000000       0x7a ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
  .text.USBH_HandleControl
                 0x00000000      0x2ec ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
- .debug_info    0x00000000     0x1169 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
+ .debug_info    0x00000000     0x1190 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
  .debug_abbrev  0x00000000      0x2f9 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
  .debug_aranges
                 0x00000000       0xa0 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
@@ -5695,7 +5711,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x28 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
  .debug_macro   0x00000000       0x28 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
  .debug_line    0x00000000     0x11bd ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
- .debug_str     0x00000000    0xcd71b ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
+ .debug_str     0x00000000    0xcd72d ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
  .comment       0x00000000       0x44 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
  .debug_frame   0x00000000      0x278 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.o
  .ARM.attributes
@@ -5794,6 +5810,8 @@ Discarded input sections
                 0x00000000       0x64 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
  .rodata.effect_hit
                 0x00000000       0x78 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
+ .rodata.track_jollySailor
+                0x00000000      0xa50 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
  .rodata.track_end
                 0x00000000       0x14 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
  .rodata.track_castlevania
@@ -5820,7 +5838,7 @@ Discarded input sections
                 0x00000000       0x36 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
  .text.USBH_IsocSendData
                 0x00000000       0x36 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
- .debug_info    0x00000000      0xdc8 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
+ .debug_info    0x00000000      0xdee ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
  .debug_abbrev  0x00000000      0x266 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
  .debug_aranges
                 0x00000000       0x60 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
@@ -5909,7 +5927,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x28 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
  .debug_macro   0x00000000       0x2e ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
  .debug_line    0x00000000      0xb92 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
- .debug_str     0x00000000    0xcd50e ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
+ .debug_str     0x00000000    0xcd520 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
  .comment       0x00000000       0x44 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
  .debug_frame   0x00000000      0x154 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.o
  .ARM.attributes
@@ -6008,6 +6026,8 @@ Discarded input sections
                 0x00000000       0x64 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.o
  .rodata.effect_hit
                 0x00000000       0x78 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.o
+ .rodata.track_jollySailor
+                0x00000000      0xa50 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.o
  .rodata.track_end
                 0x00000000       0x14 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.o
  .rodata.track_castlevania
@@ -6199,6 +6219,8 @@ Discarded input sections
                 0x00000000       0x64 ./USB_HOST/App/usb_host.o
  .rodata.effect_hit
                 0x00000000       0x78 ./USB_HOST/App/usb_host.o
+ .rodata.track_jollySailor
+                0x00000000      0xa50 ./USB_HOST/App/usb_host.o
  .rodata.track_end
                 0x00000000       0x14 ./USB_HOST/App/usb_host.o
  .rodata.track_castlevania
@@ -6217,7 +6239,7 @@ Discarded input sections
                 0x00000000       0x14 ./USB_HOST/App/usb_host.o
  .text.USBH_UserProcess
                 0x00000000       0x5c ./USB_HOST/App/usb_host.o
- .debug_info    0x00000000      0xbad ./USB_HOST/App/usb_host.o
+ .debug_info    0x00000000      0xbd3 ./USB_HOST/App/usb_host.o
  .debug_abbrev  0x00000000      0x28f ./USB_HOST/App/usb_host.o
  .debug_aranges
                 0x00000000       0x30 ./USB_HOST/App/usb_host.o
@@ -6306,7 +6328,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x28 ./USB_HOST/App/usb_host.o
  .debug_macro   0x00000000      0x161 ./USB_HOST/App/usb_host.o
  .debug_line    0x00000000      0xb32 ./USB_HOST/App/usb_host.o
- .debug_str     0x00000000    0xcdbaf ./USB_HOST/App/usb_host.o
+ .debug_str     0x00000000    0xcdbc1 ./USB_HOST/App/usb_host.o
  .comment       0x00000000       0x44 ./USB_HOST/App/usb_host.o
  .debug_frame   0x00000000       0x6c ./USB_HOST/App/usb_host.o
  .ARM.attributes
@@ -6405,6 +6427,8 @@ Discarded input sections
                 0x00000000       0x64 ./USB_HOST/Target/usbh_conf.o
  .rodata.effect_hit
                 0x00000000       0x78 ./USB_HOST/Target/usbh_conf.o
+ .rodata.track_jollySailor
+                0x00000000      0xa50 ./USB_HOST/Target/usbh_conf.o
  .rodata.track_end
                 0x00000000       0x14 ./USB_HOST/Target/usbh_conf.o
  .rodata.track_castlevania
@@ -7454,7 +7478,7 @@ LOAD /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide
 .iplt           0x08005c40        0x0
  .iplt          0x08005c40        0x0 /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.rodata         0x08005c40     0x294c
+.rodata         0x08005c40     0x2d5c
                 0x08005c40                        . = ALIGN (0x4)
  *(.rodata)
  .rodata        0x08005c40      0x182 ./Core/Src/Game.o
@@ -7470,67 +7494,67 @@ LOAD /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide
                 0x08005edc       0x64 ./Core/Src/Game.o
  .rodata.effect_hit
                 0x08005f40       0x78 ./Core/Src/Game.o
+ .rodata.track_jollySailor
+                0x08005fb8      0xa50 ./Core/Src/Game.o
  .rodata.track_end
-                0x08005fb8       0x14 ./Core/Src/Game.o
+                0x08006a08       0x14 ./Core/Src/Game.o
  .rodata.track_castlevania
-                0x08005fcc      0xfdc ./Core/Src/Game.o
+                0x08006a1c      0xfdc ./Core/Src/Game.o
  .rodata.track_megalovania
-                0x08006fa8      0xf14 ./Core/Src/Game.o
- .rodata.track_title
-                0x08007ebc      0x640 ./Core/Src/Game.o
+                0x080079f8      0xf14 ./Core/Src/Game.o
  .rodata._7SEG_ASCII
-                0x080084fc       0x80 ./Core/Src/seg7.o
-                0x080084fc                _7SEG_ASCII
+                0x0800890c       0x80 ./Core/Src/seg7.o
+                0x0800890c                _7SEG_ASCII
  .rodata.AHBPrescTable
-                0x0800857c       0x10 ./Core/Src/system_stm32f4xx.o
-                0x0800857c                AHBPrescTable
-                0x0800858c                        . = ALIGN (0x4)
+                0x0800898c       0x10 ./Core/Src/system_stm32f4xx.o
+                0x0800898c                AHBPrescTable
+                0x0800899c                        . = ALIGN (0x4)
 
-.ARM.extab      0x0800858c        0x0
-                0x0800858c                        . = ALIGN (0x4)
+.ARM.extab      0x0800899c        0x0
+                0x0800899c                        . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0800858c                        . = ALIGN (0x4)
+                0x0800899c                        . = ALIGN (0x4)
 
-.ARM            0x0800858c        0x8
-                0x0800858c                        . = ALIGN (0x4)
-                0x0800858c                        __exidx_start = .
+.ARM            0x0800899c        0x8
+                0x0800899c                        . = ALIGN (0x4)
+                0x0800899c                        __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x0800858c        0x8 /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-strlen.o)
- .ARM.exidx     0x08008594        0x0 /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/libgcc.a(_udivmoddi4.o)
+ .ARM.exidx     0x0800899c        0x8 /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-strlen.o)
+ .ARM.exidx     0x080089a4        0x0 /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/libgcc.a(_udivmoddi4.o)
                                   0x8 (size before relaxing)
-                0x08008594                        __exidx_end = .
-                0x08008594                        . = ALIGN (0x4)
+                0x080089a4                        __exidx_end = .
+                0x080089a4                        . = ALIGN (0x4)
 
-.preinit_array  0x08008594        0x0
-                0x08008594                        . = ALIGN (0x4)
-                0x08008594                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x080089a4        0x0
+                0x080089a4                        . = ALIGN (0x4)
+                0x080089a4                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x08008594                        PROVIDE (__preinit_array_end = .)
-                0x08008594                        . = ALIGN (0x4)
+                0x080089a4                        PROVIDE (__preinit_array_end = .)
+                0x080089a4                        . = ALIGN (0x4)
 
-.init_array     0x08008594        0x4
-                0x08008594                        . = ALIGN (0x4)
-                0x08008594                        PROVIDE (__init_array_start = .)
+.init_array     0x080089a4        0x4
+                0x080089a4                        . = ALIGN (0x4)
+                0x080089a4                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x08008594        0x4 /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
-                0x08008598                        PROVIDE (__init_array_end = .)
-                0x08008598                        . = ALIGN (0x4)
+ .init_array    0x080089a4        0x4 /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x080089a8                        PROVIDE (__init_array_end = .)
+                0x080089a8                        . = ALIGN (0x4)
 
-.fini_array     0x08008598        0x4
-                0x08008598                        . = ALIGN (0x4)
+.fini_array     0x080089a8        0x4
+                0x080089a8                        . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x08008598        0x4 /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .fini_array    0x080089a8        0x4 /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x0800859c                        . = ALIGN (0x4)
-                0x0800859c                        _sidata = LOADADDR (.data)
+                0x080089ac                        . = ALIGN (0x4)
+                0x080089ac                        _sidata = LOADADDR (.data)
 
-.rel.dyn        0x0800859c        0x0
- .rel.iplt      0x0800859c        0x0 /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+.rel.dyn        0x080089ac        0x0
+ .rel.iplt      0x080089ac        0x0 /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.data           0x20000000        0xc load address 0x0800859c
+.data           0x20000000        0xc load address 0x080089ac
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -7549,12 +7573,12 @@ LOAD /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide
                 0x2000000c                        . = ALIGN (0x4)
  *fill*         0x20000009        0x3 
                 0x2000000c                        _edata = .
-                0x080085a8                        _siccmram = LOADADDR (.ccmram)
+                0x080089b8                        _siccmram = LOADADDR (.ccmram)
 
-.igot.plt       0x2000000c        0x0 load address 0x080085a8
+.igot.plt       0x2000000c        0x0 load address 0x080089b8
  .igot.plt      0x2000000c        0x0 /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.ccmram         0x10000000        0x0 load address 0x080085a8
+.ccmram         0x10000000        0x0 load address 0x080089b8
                 0x10000000                        . = ALIGN (0x4)
                 0x10000000                        _sccmram = .
  *(.ccmram)
@@ -7678,32 +7702,32 @@ LOAD /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide
 LOAD /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a
 LOAD /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard/libgcc.a
 
-.debug_info     0x00000000    0x145ba
+.debug_info     0x00000000    0x146f0
  .debug_info    0x00000000      0x28a ./Core/Src/Button.o
  .debug_info    0x0000028a      0x13b ./Core/Src/Cursor.o
- .debug_info    0x000003c5      0xca8 ./Core/Src/Display.o
- .debug_info    0x0000106d      0xcfb ./Core/Src/Game.o
- .debug_info    0x00001d68      0x3ad ./Core/Src/Music.o
- .debug_info    0x00002115      0x196 ./Core/Src/Player.o
- .debug_info    0x000022ab      0x3a7 ./Core/Src/Potentiometer.o
- .debug_info    0x00002652      0x23d ./Core/Src/ScrollMessage.o
- .debug_info    0x0000288f     0x1ce3 ./Core/Src/main.o
- .debug_info    0x00004572      0x25d ./Core/Src/seg7.o
- .debug_info    0x000047cf     0x1779 ./Core/Src/stm32f4xx_hal_msp.o
- .debug_info    0x00005f48     0x1565 ./Core/Src/stm32f4xx_it.o
- .debug_info    0x000074ad      0x512 ./Core/Src/system_stm32f4xx.o
- .debug_info    0x000079bf       0x30 ./Core/Startup/startup_stm32f407vgtx.o
- .debug_info    0x000079ef      0x944 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
- .debug_info    0x00008333      0xd8c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
- .debug_info    0x000090bf      0x6c3 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
- .debug_info    0x00009782     0x114c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hcd.o
- .debug_info    0x0000a8ce      0x8c3 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
- .debug_info    0x0000b191     0x299d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
- .debug_info    0x0000db2e     0x14db ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
- .debug_info    0x0000f009     0x1993 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o
- .debug_info    0x0001099c     0x1150 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.o
- .debug_info    0x00011aec      0xc32 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.o
- .debug_info    0x0001271e     0x1e9c ./USB_HOST/Target/usbh_conf.o
+ .debug_info    0x000003c5      0xccf ./Core/Src/Display.o
+ .debug_info    0x00001094      0xd22 ./Core/Src/Game.o
+ .debug_info    0x00001db6      0x3ad ./Core/Src/Music.o
+ .debug_info    0x00002163      0x196 ./Core/Src/Player.o
+ .debug_info    0x000022f9      0x3a7 ./Core/Src/Potentiometer.o
+ .debug_info    0x000026a0      0x23d ./Core/Src/ScrollMessage.o
+ .debug_info    0x000028dd     0x1d0a ./Core/Src/main.o
+ .debug_info    0x000045e7      0x25d ./Core/Src/seg7.o
+ .debug_info    0x00004844     0x17a0 ./Core/Src/stm32f4xx_hal_msp.o
+ .debug_info    0x00005fe4     0x158b ./Core/Src/stm32f4xx_it.o
+ .debug_info    0x0000756f      0x512 ./Core/Src/system_stm32f4xx.o
+ .debug_info    0x00007a81       0x30 ./Core/Startup/startup_stm32f407vgtx.o
+ .debug_info    0x00007ab1      0x944 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+ .debug_info    0x000083f5      0xd8c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
+ .debug_info    0x00009181      0x6c3 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
+ .debug_info    0x00009844     0x114c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hcd.o
+ .debug_info    0x0000a990      0x8c3 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
+ .debug_info    0x0000b253     0x299d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
+ .debug_info    0x0000dbf0     0x14db ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
+ .debug_info    0x0000f0cb     0x1993 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o
+ .debug_info    0x00010a5e     0x1176 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.o
+ .debug_info    0x00011bd4      0xc59 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.o
+ .debug_info    0x0001282d     0x1ec3 ./USB_HOST/Target/usbh_conf.o
 
 .debug_abbrev   0x00000000     0x3365
  .debug_abbrev  0x00000000      0x195 ./Core/Src/Button.o
@@ -7964,33 +7988,33 @@ LOAD /home/bobthepotatolaptop/st/stm32cubeide_2.1.1/plugins/com.st.stm32cube.ide
  .debug_line    0x0001402e      0xb3f ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.o
  .debug_line    0x00014b6d      0xe18 ./USB_HOST/Target/usbh_conf.o
 
-.debug_str      0x00000000    0xd2313
- .debug_str     0x00000000    0xd2313 ./Core/Src/Button.o
+.debug_str      0x00000000    0xd2325
+ .debug_str     0x00000000    0xd2325 ./Core/Src/Button.o
                               0xc77bf (size before relaxing)
- .debug_str     0x000d2313     0x2fbc ./Core/Src/Cursor.o
- .debug_str     0x000d2313    0xcb30a ./Core/Src/Display.o
- .debug_str     0x000d2313    0xcb348 ./Core/Src/Game.o
- .debug_str     0x000d2313    0xc7b54 ./Core/Src/Music.o
- .debug_str     0x000d2313     0x6881 ./Core/Src/Player.o
- .debug_str     0x000d2313    0xc784e ./Core/Src/Potentiometer.o
- .debug_str     0x000d2313    0xca914 ./Core/Src/ScrollMessage.o
- .debug_str     0x000d2313    0xcc757 ./Core/Src/main.o
- .debug_str     0x000d2313    0xc776d ./Core/Src/seg7.o
- .debug_str     0x000d2313    0xcc7c7 ./Core/Src/stm32f4xx_hal_msp.o
- .debug_str     0x000d2313    0xcc309 ./Core/Src/stm32f4xx_it.o
- .debug_str     0x000d2313    0xc788d ./Core/Src/system_stm32f4xx.o
- .debug_str     0x000d2313       0xc4 ./Core/Startup/startup_stm32f407vgtx.o
- .debug_str     0x000d2313    0xc8411 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
- .debug_str     0x000d2313    0xc818d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
- .debug_str     0x000d2313    0xc7a08 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
- .debug_str     0x000d2313    0xc8175 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hcd.o
- .debug_str     0x000d2313    0xc7cc1 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
- .debug_str     0x000d2313    0xc8c17 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
- .debug_str     0x000d2313    0xc8423 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
- .debug_str     0x000d2313    0xc8246 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o
- .debug_str     0x000d2313    0xcd76c ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.o
- .debug_str     0x000d2313    0xcd4a4 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.o
- .debug_str     0x000d2313    0xce420 ./USB_HOST/Target/usbh_conf.o
+ .debug_str     0x000d2325     0x2fbc ./Core/Src/Cursor.o
+ .debug_str     0x000d2325    0xcb31c ./Core/Src/Display.o
+ .debug_str     0x000d2325    0xcb35a ./Core/Src/Game.o
+ .debug_str     0x000d2325    0xc7b54 ./Core/Src/Music.o
+ .debug_str     0x000d2325     0x6881 ./Core/Src/Player.o
+ .debug_str     0x000d2325    0xc784e ./Core/Src/Potentiometer.o
+ .debug_str     0x000d2325    0xca914 ./Core/Src/ScrollMessage.o
+ .debug_str     0x000d2325    0xcc769 ./Core/Src/main.o
+ .debug_str     0x000d2325    0xc776d ./Core/Src/seg7.o
+ .debug_str     0x000d2325    0xcc7d9 ./Core/Src/stm32f4xx_hal_msp.o
+ .debug_str     0x000d2325    0xcc31b ./Core/Src/stm32f4xx_it.o
+ .debug_str     0x000d2325    0xc788d ./Core/Src/system_stm32f4xx.o
+ .debug_str     0x000d2325       0xc4 ./Core/Startup/startup_stm32f407vgtx.o
+ .debug_str     0x000d2325    0xc8411 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+ .debug_str     0x000d2325    0xc818d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
+ .debug_str     0x000d2325    0xc7a08 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
+ .debug_str     0x000d2325    0xc8175 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hcd.o
+ .debug_str     0x000d2325    0xc7cc1 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
+ .debug_str     0x000d2325    0xc8c17 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
+ .debug_str     0x000d2325    0xc8423 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
+ .debug_str     0x000d2325    0xc8246 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o
+ .debug_str     0x000d2325    0xcd77e ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.o
+ .debug_str     0x000d2325    0xcd4b6 ./Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.o
+ .debug_str     0x000d2325    0xce432 ./USB_HOST/Target/usbh_conf.o
 
 .comment        0x00000000       0x43
  .comment       0x00000000       0x43 ./Core/Src/Button.o

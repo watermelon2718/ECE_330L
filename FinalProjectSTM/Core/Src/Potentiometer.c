@@ -20,7 +20,7 @@ void UpdatePot(Potentiometer *p) {
 
 //reads raw adc value for potentiometer
 void ReadADC(Potentiometer *p) {
-    p->adc->SQR1 = 0;                // one conversion in sequence
+    
     p->adc->SQR3 = p->channel;       // select which ADC channel to convert
     p->adc->SR = 0;                  // clear ADC status flags
     p->adc->CR2 |= (1 << 30);        // start conversion using SWSTART

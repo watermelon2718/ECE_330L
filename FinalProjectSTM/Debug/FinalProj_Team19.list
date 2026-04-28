@@ -7,19 +7,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   1 .text         00005ab8  08000188  08000188  00001188  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       0000294c  08005c40  08005c40  00006c40  2**2
+  2 .rodata       00002d5c  08005c40  08005c40  00006c40  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  0800858c  0800858c  0000a00c  2**0
+  3 .ARM.extab    00000000  0800899c  0800899c  0000a00c  2**0
                   CONTENTS, READONLY
-  4 .ARM          00000008  0800858c  0800858c  0000958c  2**2
+  4 .ARM          00000008  0800899c  0800899c  0000999c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  5 .preinit_array 00000000  08008594  08008594  0000a00c  2**0
+  5 .preinit_array 00000000  080089a4  080089a4  0000a00c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08008594  08008594  00009594  2**2
+  6 .init_array   00000004  080089a4  080089a4  000099a4  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  7 .fini_array   00000004  08008598  08008598  00009598  2**2
+  7 .fini_array   00000004  080089a8  080089a8  000099a8  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  8 .data         0000000c  20000000  0800859c  0000a000  2**2
+  8 .data         0000000c  20000000  080089ac  0000a000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
   9 .ccmram       00000000  10000000  10000000  0000a00c  2**0
                   CONTENTS
@@ -29,25 +29,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  12 .ARM.attributes 00000030  00000000  00000000  0000a00c  2**0
                   CONTENTS, READONLY
- 13 .debug_info   000145ba  00000000  00000000  0000a03c  2**0
+ 13 .debug_info   000146f0  00000000  00000000  0000a03c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 00003365  00000000  00000000  0001e5f6  2**0
+ 14 .debug_abbrev 00003365  00000000  00000000  0001e72c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00001048  00000000  00000000  00021960  2**3
+ 15 .debug_aranges 00001048  00000000  00000000  00021a98  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 00000c74  00000000  00000000  000229a8  2**0
+ 16 .debug_rnglists 00000c74  00000000  00000000  00022ae0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00024097  00000000  00000000  0002361c  2**0
+ 17 .debug_macro  00024097  00000000  00000000  00023754  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00015985  00000000  00000000  000476b3  2**0
+ 18 .debug_line   00015985  00000000  00000000  000477eb  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000d2313  00000000  00000000  0005d038  2**0
+ 19 .debug_str    000d2325  00000000  00000000  0005d170  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  0012f34b  2**0
+ 20 .comment      00000043  00000000  00000000  0012f495  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00003fa0  00000000  00000000  0012f390  2**2
+ 21 .debug_frame  00003fa0  00000000  00000000  0012f4d8  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 000000a8  00000000  00000000  00133330  2**0
+ 22 .debug_line_str 000000a8  00000000  00000000  00133478  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1635,14 +1635,14 @@ void InitGame(Game *g) {
  8000d20:	f883 21ac 	strb.w	r2, [r3, #428]	@ 0x1ac
 
     // Initialize song to title theme track
-    MusicInit(&(g->music), track_title, 100, 1);
+    MusicInit(&(g->music), track_jollySailor, 100, 1);
  8000d24:	687b      	ldr	r3, [r7, #4]
  8000d26:	f503 70d8 	add.w	r0, r3, #432	@ 0x1b0
  8000d2a:	2301      	movs	r3, #1
  8000d2c:	2264      	movs	r2, #100	@ 0x64
  8000d2e:	4921      	ldr	r1, [pc, #132]	@ (8000db4 <InitGame+0xf4>)
  8000d30:	f000 fbff 	bl	8001532 <MusicInit>
-    PlayTrack(&(g->music), track_title);
+    PlayTrack(&(g->music), track_jollySailor);
  8000d34:	687b      	ldr	r3, [r7, #4]
  8000d36:	f503 73d8 	add.w	r3, r3, #432	@ 0x1b0
  8000d3a:	491e      	ldr	r1, [pc, #120]	@ (8000db4 <InitGame+0xf4>)
@@ -1700,7 +1700,7 @@ void InitGame(Game *g) {
  8000dac:	46bd      	mov	sp, r7
  8000dae:	bd80      	pop	{r7, pc}
  8000db0:	08005c40 	.word	0x08005c40
- 8000db4:	08007ebc 	.word	0x08007ebc
+ 8000db4:	08005fb8 	.word	0x08005fb8
  8000db8:	40020800 	.word	0x40020800
  8000dbc:	40012000 	.word	0x40012000
  8000dc0:	40012100 	.word	0x40012100
@@ -2076,11 +2076,11 @@ void GameRun(Game *g) {
  8001064:	bd80      	pop	{r7, pc}
  8001066:	bf00      	nop
  8001068:	08005c7c 	.word	0x08005c7c
- 800106c:	08005fcc 	.word	0x08005fcc
+ 800106c:	08006a1c 	.word	0x08006a1c
  8001070:	08005e28 	.word	0x08005e28
  8001074:	08005c9c 	.word	0x08005c9c
  8001078:	08005cbc 	.word	0x08005cbc
- 800107c:	08006fa8 	.word	0x08006fa8
+ 800107c:	080079f8 	.word	0x080079f8
  8001080:	08005dc4 	.word	0x08005dc4
  8001084:	08005cdc 	.word	0x08005cdc
  8001088:	08005e64 	.word	0x08005e64
@@ -2089,7 +2089,7 @@ void GameRun(Game *g) {
  8001094:	08005f40 	.word	0x08005f40
  8001098:	08005d5c 	.word	0x08005d5c
  800109c:	08005d90 	.word	0x08005d90
- 80010a0:	08005fb8 	.word	0x08005fb8
+ 80010a0:	08006a08 	.word	0x08006a08
  80010a4:	08005edc 	.word	0x08005edc
  80010a8:	08005c40 	.word	0x08005c40
 
@@ -3703,6 +3703,7 @@ void UpdateCursor(Potentiometer *p) {
 #include "ScrollMessage.h"
 #include <string.h>
 
+//sets new message
 void SetMessage(ScrollMessage *m, char *str, int delay, int isAnimated) {
  8001b40:	b580      	push	{r7, lr}
  8001b42:	b084      	sub	sp, #16
@@ -3750,6 +3751,7 @@ void SetMessage(ScrollMessage *m, char *str, int delay, int isAnimated) {
 
 08001b88 <MessageInit>:
 
+//initialize message
 void MessageInit(ScrollMessage *m, char *str, int delay, int isAnimated) {
  8001b88:	b580      	push	{r7, lr}
  8001b8a:	b084      	sub	sp, #16
@@ -4712,7 +4714,7 @@ void Seven_Segment_ASCII(unsigned char digit, unsigned char ascii_char, unsigned
  8002148:	46bd      	mov	sp, r7
  800214a:	f85d 7b04 	ldr.w	r7, [sp], #4
  800214e:	4770      	bx	lr
- 8002150:	080084fc 	.word	0x080084fc
+ 8002150:	0800890c 	.word	0x0800890c
  8002154:	40021000 	.word	0x40021000
 
 08002158 <HAL_MspInit>:
@@ -5073,7 +5075,7 @@ LoopFillZerobss:
   ldr r1, =_edata
  8002300:	2000000c 	.word	0x2000000c
   ldr r2, =_sidata
- 8002304:	0800859c 	.word	0x0800859c
+ 8002304:	080089ac 	.word	0x080089ac
   ldr r2, =_sbss
  8002308:	2000000c 	.word	0x2000000c
   ldr r4, =_ebss
@@ -11501,7 +11503,7 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(const RCC_ClkInitTypeDef  *RCC_ClkInitStru
  8004baa:	bf00      	nop
  8004bac:	40023c00 	.word	0x40023c00
  8004bb0:	40023800 	.word	0x40023800
- 8004bb4:	0800857c 	.word	0x0800857c
+ 8004bb4:	0800898c 	.word	0x0800898c
  8004bb8:	20000000 	.word	0x20000000
  8004bbc:	20000004 	.word	0x20000004
 
@@ -14357,10 +14359,10 @@ USBH_StatusTypeDef USBH_Get_USB_Status(HAL_StatusTypeDef hal_status)
  8005c12:	4798      	blx	r3
  8005c14:	3601      	adds	r6, #1
  8005c16:	e7f2      	b.n	8005bfe <__libc_init_array+0x1e>
- 8005c18:	08008594 	.word	0x08008594
- 8005c1c:	08008594 	.word	0x08008594
- 8005c20:	08008594 	.word	0x08008594
- 8005c24:	08008598 	.word	0x08008598
+ 8005c18:	080089a4 	.word	0x080089a4
+ 8005c1c:	080089a4 	.word	0x080089a4
+ 8005c20:	080089a4 	.word	0x080089a4
+ 8005c24:	080089a8 	.word	0x080089a8
 
 08005c28 <_init>:
  8005c28:	b5f8      	push	{r3, r4, r5, r6, r7, lr}

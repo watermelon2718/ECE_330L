@@ -18,8 +18,8 @@ void InitGame(Game *g) {
     g->displayMode = MESSAGE; // put display in message mode, not board mode
 
     // Initialize song to title theme track
-    MusicInit(&(g->music), track_title, 100, 1);
-    PlayTrack(&(g->music), track_title);
+    MusicInit(&(g->music), track_jollySailor, 100, 1);
+    PlayTrack(&(g->music), track_jollySailor);
 
     //init buttons
     ButtonInit(&(g->modeButton), GPIOC, GPIO_PIN_10); // mode button
