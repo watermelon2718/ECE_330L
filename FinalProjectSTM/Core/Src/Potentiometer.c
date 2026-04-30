@@ -43,7 +43,7 @@ void UpdateCursor(Potentiometer *p) {
             } else if(p->axis == Y_AXIS) {
                 c->yPos = ((p->raw)*(V_HEIGHT))/MAX_VALUE; // set cursor y based on raw
             }
-            //bound cursor according to map dimensions and cursor length
+            //bound cursor according to map dimensions and cursor l  p->adc->SQR1 = 0;                // one conversion in sequenceength
             if(c->yPos > (V_HEIGHT-c->cursorLength)){c->yPos = V_HEIGHT-c->cursorLength;}
             if(c->xPos > (V_WIDTH-1)){c->xPos = V_WIDTH-1;}
             break;
