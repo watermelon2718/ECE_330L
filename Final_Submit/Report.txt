@@ -1,0 +1,3 @@
+The most challenging aspect of the project was likely getting STMCUBEIDE to work.
+In creating a project for the final assignment, certain configurations/includes for certain drivers were accidentally missed, and it took a long time to figure out what was wrong.
+Ultimately we ended up creating a new project based off an older working one and added in our files to make sure it worked.
